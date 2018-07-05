@@ -1,0 +1,2021 @@
+#AREA Griffon Bank & Travel~
+#AUTHORS Presto~
+#VERSION 3
+#RANGES 1 95 0 99
+#OLC_RANGES 16000 16099
+#FLAGS AFLAG_NOTELEPORT
+
+
+#HELPS
+0 GRIFFON~
+{128}
+                            Griffon Bank & Travel
+{300}
+Griffon Bank & Travel contains two parts: The Bank and the Airline.
+
+  {128}(A) {058}Griffon Bank
+  {128}(B) {058}Griffon Airline
+{a}GRIFFONBANK "GRIFFON BANK" BANK
+{b}GRIFFONAIRLINE AIRLINE
+~
+
+0 GRIFFONBANK "GRIFFON BANK" BANK~
+{128}
+                            Griffon Bank
+{300}
+bank balance
+bank deposit  <amount|all>
+bank withdraw <amount|all>
+bank transfer <amount|all> <character>
+
+Maximum gold you can hold in your account is determined by:
+Your level + 5 times 2, plus your reincarnation times 10 (in Millions)
+
+  {128}(-) {058}Return
+{-}GRIFFON
+~
+
+0 GRIFFONAIRLINE AIRLINE~
+{128}
+                               Griffon Airline
+{300}
+A fast, convenient and frequently expensive method of travel from one major city
+to another. Cost for travel is determined by the level of your character, the
+distance to be traveled, and whether you're a frequent flyer.
+
+  {128}(A) {058}Map of the airways flown by Griffon Airlines.
+  {128}(B) {058}How to use the Griffon Airlines.
+
+  {128}(-) {058}Return
+{a}AIRLINEMAP 'AIRLINE MAP'
+{b}AIRLINEHELP
+{-}GRIFFON
+~
+
+0 AIRLINEMAP 'AIRLINE MAP'~
+{128}                                 Airline Map
+{300}
+{118}                      {178}Mist City{118}--{178}Ocean City
+{118}                    /                 |
+{178}              Kytar{118}-----------------{178}Ofcol{118}------------{178}Sun Dome{118}------
+{118}            /    |                    |                |            \
+{178}Elven City{118}-      |                    |                |              {178}Midgaard
+{118}   |        \    |                    |                |            /
+{118}   |          {178}Mount Kolvir           Entropy{118}-----{178}Roterodamum{118}      /
+{118}   |        /              \        /   |              |        /
+{118}   |      /              {178}City of Ruins{118}  |          {178}Refuge Tribe
+{118}   |    /                               |                       \
+{178}Waterdeep{118}                               |                         {178}Sarglam
+{178}                                    Antarctica
+~
+
+0 AIRLINEHELP~
+{128}
+                       How to use the Griffon Airlines
+{300}
+1.  You need to determine to what area you wish to fly.
+    The Griffon services most of the continents (excluding the Magic Zone and
+    Iosolo), often in more than one area.
+
+2.  First, check the World Map to find the area, and to see what other areas
+    it may be close to by typing HELP ROADS.  Areas containing a griffon
+    airline office are displayed in white instead of purple.
+
+3.  Next, check the airways map of the Griffon with HELP AIRLINE MAP.  This map
+    shows which connections you have to take from one area to get to another.
+
+4.  Finally, look at the Griffon.  This will show you the areas to which this
+    particular Griffon will fly.
+
+5.  Say the name of your destination and the journey begins.
+~
+
+0 $~
+
+
+#MOBILES
+#16000
+banker~
+the Banker~
+The banker is here, ready to assist you.~
+This human wears a pressed robe, which seems to shine with a light golden
+aura.  He's tall, with large muscles from dealing with all the gold.  His
+warm smile and strong physique almost guarantee your gold is safe with him.
+~
+ACT_SENTINEL|ACT_SMART|ACT_RACE
+AFF_DETECT_INVIS|AFF_DETECT_HIDDEN|AFF_UNDERSTAND|AFF_TONGUES
+0 S
+95 0 0 1d1+9999 1d1+99
+0 RACE_HUMAN
+POS_STANDING POS_STANDING SEX_MALE
+>all_greet_prog 100~
+mpforce $n bank balance
+~
+>give_prog i16001~
+mpjunk i16001
+mpmadd $n gold 5000000
+mpechoat $n $I gives you 5,000,000 gold coins.
+mpechoaround $n $I gives $N 5,000,000 gold coins.
+~
+|
+#16001
+griffon mist city~
+the Griffon~
+The griffon relaxes here, basking in the sun.~
+The griffon is humongous.  On his saddle you see the price listing:
+{078}
+  Ocean City:   58,000
+  Kytar:       108,000
+
+~
+ACT_SENTINEL|ACT_SMART|ACT_RACE
+AFF_DETECT_INVIS|AFF_DETECT_HIDDEN|AFF_UNDERSTAND|AFF_TONGUES
+0 S
+95 0 0 1d1+9999 1d1+99
+0 RACE_GRIFFON
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>speech_prog p ocean city~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 14500
+    tell $n You need 14,500 coins.
+    break
+  else
+    mpmadd $n gold -14500
+  endif
+else
+  if gold ($n) < 58000
+    tell $n You need 58,000 coins.
+    break
+  else
+    mpmadd $n gold -58000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Ocean City.
+mpechoat $n You mount a griffon and take off for Ocean City.
+mpechoat $n The flight isn't that long, but all you really see along the way is the mist-covered ocean.
+mptransfer $n 16099
+mpat 16099 connect north 16003
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog p kytar~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 27000
+    tell $n You need 27,000 coins.
+    break
+  else
+    mpmadd $n gold -27000
+  endif
+else
+  if gold ($n) < 108000
+    tell $n You need 108,000 coins.
+    break
+  else
+    mpmadd $n gold -108000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Kytar.
+mpechoat $n You mount a griffon and take off for Kytar.
+mpechoat $n The flight is fairly long, and all you really see along the way is the ocean far below.
+mptransfer $n 16099
+mpat 16099 connect north 16007
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+|
+#16002
+griffon ocean city~
+the Griffon~
+The griffon relaxes here, basking in the sun.~
+The griffon is humongous.  On his saddle you see the price listing:
+{078}
+  Ofcol:     52,000
+  Mist City: 58,000
+
+~
+ACT_SENTINEL|ACT_SMART|ACT_RACE
+AFF_DETECT_INVIS|AFF_DETECT_HIDDEN|AFF_UNDERSTAND|AFF_TONGUES
+0 S
+95 0 0 1d1+9999 1d1+99
+10000 RACE_GRIFFON
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>speech_prog ofcol~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 13000
+    tell $n You need 13,000 coins.
+    break
+  else
+    mpmadd $n gold -13000
+  endif
+else
+  if gold ($n) < 52000
+    tell $n You need 52,000 coins.
+    break
+  else
+    mpmadd $n gold -52000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Ofcol.
+mpechoat $n You mount a griffon and take off for Ofcol.
+mpechoat $n The flight isn't that long, and you soon arrive in Ofcol.
+mptransfer $n 16099
+mpat 16099 connect north 16005
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog p mist city~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 14500
+    tell $n You need 14,500 coins.
+    break
+  else
+    mpmadd $n gold -14500
+  endif
+else
+  if gold ($n) < 58000
+    tell $n You need 58,000 coins.
+    break
+  else
+    mpmadd $n gold -58000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Mist City.
+mpechoat $n You mount a griffon and take off for Mist City.
+mpechoat $n The flight isn't that long, and you soon arrive in Mist City.
+mptransfer $n 16099
+mpat 16099 connect north 16001
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+|
+#16003
+griffon ofcol~
+the Griffon~
+The griffon relaxes here, basking in the sun.~
+The griffon is humongous.  On his saddle you see the price listing:
+{078}
+  Ocean City:       52,000
+  City of Entropy:  88,000
+  Kytar:           129,000
+  Sun Dome:         83,000
+
+~
+ACT_SENTINEL|ACT_SMART
+AFF_DETECT_INVIS|AFF_DETECT_HIDDEN
+0 S
+95 0 0 1d1+9999 1d1+99
+10000 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>speech_prog p ocean city~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 13000
+    tell $n You need 13,000 coins.
+    break
+  else
+    mpmadd $n gold -13000
+  endif
+else
+  if gold ($n) < 52000
+    tell $n You need 52,000 coins.
+    break
+  else
+    mpmadd $n gold -52000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Ocean City.
+mpechoat $n You mount a griffon and take off for Ocean City.
+mpechoat $n The flight isn't that long, and you soon arrive in Ocean City.
+mptransfer $n 16099
+mpat 16099 connect north 16003
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog entropy~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 22000
+    tell $n You need 22,000 coins.
+    break
+  else
+    mpmadd $n gold -22000
+  endif
+else
+  if gold ($n) < 88000
+    tell $n You need 88,000 coins.
+    break
+  else
+    mpmadd $n gold -88000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for the City of Entropy.
+mpechoat $n You mount a griffon and take off for the City of Entropy.
+mpechoat $n The flight isn't too long, and you arrive in the City of Entropy.
+mptransfer $n 16099
+mpat 16099 connect north 16017
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog p kytar~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 32250
+    tell $n You need 32,250 coins.
+    break
+  else
+    mpmadd $n gold -32250
+  endif
+else
+  if gold ($n) < 129000
+    tell $n You need 129,000 coins.
+    break
+  else
+    mpmadd $n gold -129000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Kytar.
+mpechoat $n You mount a griffon and take off for Kytar.
+mpechoat $n The flight is very long, but you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16007
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog p sun dome~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 15750
+    tell $n You need 15,750 coins.
+    break
+  else
+    mpmadd $n gold -15750
+  endif
+else
+  if gold ($n) < 83000
+    tell $n You need 83,000 coins.
+    break
+  else
+    mpmadd $n gold -83000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Sun Dome.
+mpechoat $n You mount a griffon and take off for Sun Dome.
+mpechoat $n The flight isn't that long, and you soon arrive in Sun Dome.
+mptransfer $n 16099
+mpat 16099 connect north 16027
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+|
+#16004
+griffon kytar~
+the Griffon~
+The griffon relaxes here, basking in the sun.~
+The griffon is humongous.  On his saddle you see the price listing:
+{078}
+  Mount Kolvir:  34,000
+  Elven City:    97,000
+  Mist City:    108,000
+  Ofcol:        129,000
+
+~
+ACT_SENTINEL|ACT_SMART
+AFF_DETECT_INVIS|AFF_DETECT_HIDDEN
+0 S
+95 0 0 1d1+9999 1d1+99
+10000 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>speech_prog kolvir~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 8500
+    tell $n You need 8,500 coins.
+    break
+  else
+    mpmadd $n gold -8500
+  endif
+else
+  if gold ($n) < 34000
+    tell $n You need 34,000 coins.
+    break
+  else
+    mpmadd $n gold -34000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Mount Kolvir.
+mpechoat $n You mount a griffon and take off for Mount Kolvir.
+mpechoat $n The flight is very short, and you quickly reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16011
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog p elven city~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 24250
+    tell $n You need 24,250 coins.
+    break
+  else
+    mpmadd $n gold -24250
+  endif
+else
+  if gold ($n) < 97000
+    tell $n You need 97,000 coins.
+    break
+  else
+    mpmadd $n gold -97000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for the Elven City.
+mpechoat $n You mount a griffon and take off for the Elven City.
+mpechoat $n The flight is very long, but you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16009
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog p mist city~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 27000
+    tell $n You need 27,000 coins.
+    break
+  else
+    mpmadd $n gold -27000
+  endif
+else
+  if gold ($n) < 108000
+    tell $n You need 108,000 coins.
+    break
+  else
+    mpmadd $n gold -108000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Mist City.
+mpechoat $n You mount a griffon and take off for Mist City.
+mpechoat $n The flight is very long, but you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16001
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog ofcol~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 32250
+    tell $n You need 32,250 coins.
+    break
+  else
+    mpmadd $n gold -32250
+  endif
+else
+  if gold ($n) < 129000
+    tell $n You need 129,000 coins.
+    break
+  else
+    mpmadd $n gold -129000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Ofcol.
+mpechoat $n You mount a griffon and take off for Ofcol.
+mpechoat $n The flight is very long, but you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16005
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+|
+#16005
+griffon elven city~
+the Griffon~
+The griffon relaxes here, basking in the sun.~
+The griffon is humongous.  On his saddle you see the price listing:
+{078}
+  Mount Kolvir:      91,000
+  Kytar:             97,000
+  Waterdeep:         141,000
+
+~
+ACT_SENTINEL|ACT_SMART
+AFF_DETECT_INVIS|AFF_DETECT_HIDDEN
+0 S
+95 0 0 1d1+9999 1d1+99
+10000 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>speech_prog kolvir~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 22750
+    tell $n You need 22,750 coins.
+    break
+  else
+    mpmadd $n gold -22750
+  endif
+else
+  if gold ($n) < 91000
+    tell $n You need 91,000 coins.
+    break
+  else
+    mpmadd $n gold -91000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Mount Kolvir.
+mpechoat $n You mount a griffon and take off for Mount Kolvir.
+mpechoat $n The flight is very long, but you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16011
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog p kytar~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 24250
+    tell $n You need 24,250 coins.
+    break
+  else
+    mpmadd $n gold -24250
+  endif
+else
+  if gold ($n) < 97000
+    tell $n You need 97,000 coins.
+    break
+  else
+    mpmadd $n gold -97000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Kytar.
+mpechoat $n You mount a griffon and take off for Kytar.
+mpechoat $n The flight is very long, but you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16007
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog p waterdeep~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 35250
+    tell $n You need 35,250coins.
+    break
+  else
+    mpmadd $n gold -35250
+  endif
+else
+  if gold ($n) < 141000
+    tell $n You need 141,000 coins.
+    break
+  else
+    mpmadd $n gold -141000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Waterdeep.
+mpechoat $n You mount a griffon and take off for Waterdeep.
+mpechoat $n The flight is very long, but you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16029
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+|
+#16006
+griffon mount kolvir~
+the Griffon~
+The griffon relaxes here, basking in the sun.~
+The griffon is humongous.  On his saddle you see the price listing:
+{078}
+  Kytar:          34,000
+  City of Ruins:  63,000
+  Elven City:     91,000
+  Waterdeep:     183,000
+
+~
+ACT_SENTINEL|ACT_SMART
+AFF_DETECT_INVIS|AFF_DETECT_HIDDEN
+0 S
+95 0 0 1d1+9999 1d1+99
+10000 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>speech_prog p kytar~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 8500
+    tell $n You need 8,500 coins.
+    break
+  else
+    mpmadd $n gold -8500
+  endif
+else
+  if gold ($n) < 34000
+    tell $n You need 34,000 coins.
+    break
+  else
+    mpmadd $n gold -34000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Kytar.
+mpechoat $n You mount a griffon and take off for Kytar.
+mpechoat $n The flight isn't very long, and you quickly reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16007
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog ruins~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 15750
+    tell $n You need 15,750 coins.
+    break
+  else
+    mpmadd $n gold -15750
+  endif
+else
+  if gold ($n) < 63000
+    tell $n You need 63,000 coins.
+    break
+  else
+    mpmadd $n gold -63000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for the City of Ruins.
+mpechoat $n You mount a griffon and take off for the City of Ruins.
+mpechoat $n The flight isn't very long, and you soon reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16013
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog p elven city~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 22750
+    tell $n You need 22,750 coins.
+    break
+  else
+    mpmadd $n gold -22750
+  endif
+else
+  if gold ($n) < 91000
+    tell $n You need 91,000 coins.
+    break
+  else
+    mpmadd $n gold -91000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for the Elven City.
+mpechoat $n You mount a griffon and take off for the Elven City.
+mpechoat $n The flight is very long, but you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16009
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog p waterdeep~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 65250
+    tell $n You need 65,250coins.
+    break
+  else
+    mpmadd $n gold -65250
+  endif
+else
+  if gold ($n) < 183000
+    tell $n You need 183,000 coins.
+    break
+  else
+    mpmadd $n gold -183000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Waterdeep.
+mpechoat $n You mount a griffon and take off for Waterdeep.
+mpechoat $n The flight is very long, but you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16029
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+|
+#16007
+griffon ruins~
+the Griffon~
+The griffon relaxes here, basking in the sun.~
+The griffon is humongous.  On his saddle you see the price listing:
+{078}
+  City of Entropy: 47,000
+  Mount Kolvir:    63,000
+
+~
+ACT_SENTINEL|ACT_SMART
+AFF_DETECT_INVIS|AFF_DETECT_HIDDEN
+0 S
+95 0 0 1d1+9999 1d1+99
+10000 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>speech_prog entropy~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 11750
+    tell $n You need 11,750 coins.
+    break
+  else
+    mpmadd $n gold -11750
+  endif
+else
+  if gold ($n) < 47000
+    tell $n You need 47,000 coins.
+    break
+  else
+    mpmadd $n gold -47000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for the City of Entropy.
+mpechoat $n You mount a griffon and take off for the City of Entropy.
+mpechoat $n The flight isn't very long, and you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16017
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog kolvir~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 15750
+    tell $n You need 15,750 coins.
+    break
+  else
+    mpmadd $n gold -15750
+  endif
+else
+  if gold ($n) < 63000
+    tell $n You need 63,000 coins.
+    break
+  else
+    mpmadd $n gold -63000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Mount Kolvir.
+mpechoat $n You mount a griffon and take off for Mount Kolvir.
+mpechoat $n The flight isn't very long, and you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16011
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+|
+#16008
+griffon roterodamum~
+the Griffon~
+The griffon relaxes here, basking in the sun.~
+The griffon is humongous.  On his saddle you see the price listing:
+{078}
+  Refuge Tribe:    37,000
+  Sun Dome:        71,000
+  City of Entropy: 84,000
+
+~
+ACT_SENTINEL|ACT_SMART
+AFF_DETECT_INVIS|AFF_DETECT_HIDDEN
+0 S
+95 0 0 1d1+9999 1d1+99
+10000 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>speech_prog p refuge tribe~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 9250
+    tell $n You need 9,250 coins.
+    break
+  else
+    mpmadd $n gold -9250
+  endif
+else
+  if gold ($n) < 37000
+    tell $n You need 37,000 coins.
+    break
+  else
+    mpmadd $n gold -37000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for the Refuge Tribe.
+mpechoat $n You mount a griffon and take off for the Refuge Tribe.
+mpechoat $n The flight isn't very long, and you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16023
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog p sun dome~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 17750
+    tell $n You need 17,750 coins.
+    break
+  else
+    mpmadd $n gold -17750
+  endif
+else
+  if gold ($n) < 71000
+    tell $n You need 71,000 coins.
+    break
+  else
+    mpmadd $n gold -71000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for the Sun Dome.
+mpechoat $n You mount a griffon and take off for the Sun Dome.
+mpechoat $n The flight isn't very long, and you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16027
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog entropy~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 21000
+    tell $n You need 21,000 coins.
+    break
+  else
+    mpmadd $n gold -21000
+  endif
+else
+  if gold ($n) < 84000
+    tell $n You need 84,000 coins.
+    break
+  else
+    mpmadd $n gold -84000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for City of Entropy.
+mpechoat $n You mount a griffon and take off for the City of Entropy.
+mpechoat $n The flight isn't very long, and you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16017
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+|
+#16009
+griffon city entropy~
+the Griffon~
+The griffon relaxes here, basking in the sun.~
+The griffon is humongous.  On his saddle you see the price listing:
+{078}
+  City of Ruins:  47,000
+  Roterodamum:    84,000
+  Ofcol:          88,000
+  Antarctica:    123,000
+
+~
+ACT_SENTINEL|ACT_SMART
+AFF_DETECT_INVIS|AFF_DETECT_HIDDEN
+0 S
+95 0 0 1d1+9999 1d1+99
+10000 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>speech_prog ruins~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 11750
+    tell $n You need 11,750 coins.
+    break
+  else
+    mpmadd $n gold -11750
+  endif
+else
+  if gold ($n) < 47000
+    tell $n You need 47,000 coins.
+    break
+  else
+    mpmadd $n gold -47000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for the City of Ruins.
+mpechoat $n You mount a griffon and take off for the City of Ruins.
+mpechoat $n The flight isn't very long, and you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16013
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog roterodamum~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 21000
+    tell $n You need 21,000 coins.
+    break
+  else
+    mpmadd $n gold -21000
+  endif
+else
+  if gold ($n) < 84000
+    tell $n You need 84,000 coins.
+    break
+  else
+    mpmadd $n gold -84000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Roterodamum.
+mpechoat $n You mount a griffon and take off for Roterodamum.
+mpechoat $n The flight isn't very long, and you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16015
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog ofcol~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 22000
+    tell $n You need 22,000 coins.
+    break
+  else
+    mpmadd $n gold -22000
+  endif
+else
+  if gold ($n) < 88000
+    tell $n You need 88,000 coins.
+    break
+  else
+    mpmadd $n gold -88000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Ofcol.
+mpechoat $n You mount a griffon and take off for Ofcol.
+mpechoat $n The flight isn't very long, and you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16005
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog antarctica~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 30750
+    tell $n You need 30,750 coins.
+    break
+  else
+    mpmadd $n gold -30750
+  endif
+else
+  if gold ($n) < 123000
+    tell $n You need 123,000 coins.
+    break
+  else
+    mpmadd $n gold -123000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Antarctica.
+mpechoat $n You mount a griffon and take off for Antarctica.
+mpechoat $n The flight is extremely long, but you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16019
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+|
+#16010
+griffon antarctica~
+the Griffon~
+The griffon relaxes here, basking in the sun.~
+The griffon is humongous.  On his saddle you see the price listing:
+{078}
+  City of Entropy:      123,000
+
+~
+ACT_SENTINEL|ACT_SMART
+AFF_DETECT_INVIS|AFF_DETECT_HIDDEN
+0 S
+95 0 0 1d1+9999 1d1+99
+10000 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>speech_prog entropy~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 30750
+    tell $n You need 30,750 coins.
+    break
+  else
+    mpmadd $n gold -30750
+  endif
+else
+  if gold ($n) < 123000
+    tell $n You need 123,000 coins.
+    break
+  else
+    mpmadd $n gold -123000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for the City of Entropy.
+mpechoat $n You mount a griffon and take off for the City of Entopy.
+mpechoat $n The flight is very long, but you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16017
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+|
+#16011
+griffon sarglam~
+the Griffon~
+The griffon relaxes here, basking in the sun.~
+The griffon is humongous.  On his saddle you see the price listing:
+{078}
+  Refuge Tribe: 119,000
+
+~
+ACT_SENTINEL|ACT_SMART
+AFF_DETECT_INVIS|AFF_DETECT_HIDDEN
+0 S
+95 0 0 1d1+9999 1d1+99
+10000 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>speech_prog p refuge tribe~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 29750
+    tell $n You need 29,750 coins.
+    break
+  else
+    mpmadd $n gold -29750
+  endif
+else
+  if gold ($n) < 119000
+    tell $n You need 119,000 coins.
+    break
+  else
+    mpmadd $n gold -119000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for the Refuge Tribe.
+mpechoat $n You mount a griffon and take off for the Refuge Tribe.
+mpechoat $n The flight is very long, but you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16023
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+|
+#16012
+griffon refuge tribe~
+the Griffon~
+The griffon relaxes here, basking in the sun.~
+The griffon is humongous.  On his saddle you see the price listing:
+{078}
+  Roterodamum:           37,000
+  City of Sarglam:      119,000
+  Midgaard:             169,000
+
+~
+ACT_SENTINEL|ACT_SMART
+AFF_DETECT_INVIS|AFF_DETECT_HIDDEN
+0 S
+95 0 0 1d1+9999 1d1+99
+10000 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>speech_prog roterodamum~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 9250
+    tell $n You need 9,250 coins.
+    break
+  else
+    mpmadd $n gold -9250
+  endif
+else
+  if gold ($n) < 37000
+    tell $n You need 37,000 coins.
+    break
+  else
+    mpmadd $n gold -37000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Roterodamum.
+mpechoat $n You mount a griffon and take off for Roterodamum.
+mpechoat $n The flight is very short, and you quickly reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16015
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog sarglam~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 29750
+    tell $n You need 29,750 coins.
+    break
+  else
+    mpmadd $n gold -29750
+  endif
+else
+  if gold ($n) < 119000
+    tell $n You need 119,000 coins.
+    break
+  else
+    mpmadd $n gold -119000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for the City of Sarglam.
+mpechoat $n You mount a griffon and take off for the City of Sarglam.
+mpechoat $n The flight is very long, but you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16021
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog midgaard~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 42250
+    tell $n You need 42,250 coins.
+    break
+  else
+    mpmadd $n gold -42250
+  endif
+else
+  if gold ($n) < 169000
+    tell $n You need 169,000 coins.
+    break
+  else
+    mpmadd $n gold -169000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Midgaard.
+mpechoat $n You mount a griffon and take off for Midgaard.
+mpechoat $n The flight is very long, but you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16025
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+|
+#16013
+griffon midgaard~
+the Griffon~
+The griffon relaxes here, basking in the sun.~
+The griffon is humongous.  On his saddle you see the price listing:
+{078}
+  Sun Dome:          145,000
+  Refuge Tribe:      169,000
+
+~
+ACT_SENTINEL|ACT_SMART
+AFF_DETECT_INVIS|AFF_DETECT_HIDDEN
+0 S
+95 0 0 1d1+9999 1d1+99
+10000 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>speech_prog p sun dome~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 36250
+    tell $n You need 36,250 coins.
+    break
+  else
+    mpmadd $n gold -36250
+  endif
+else
+  if gold ($n) < 145000
+    tell $n You need 145,000 coins.
+    break
+  else
+    mpmadd $n gold -145000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for the Sun Dome.
+mpechoat $n You mount a griffon and take off for the Sun Dome.
+mpechoat $n The flight is very long, but you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16027
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog p refuge tribe~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 42250
+    tell $n You need 42,250 coins.
+    break
+  else
+    mpmadd $n gold -42250
+  endif
+else
+  if gold ($n) < 169000
+    tell $n You need 169,000 coins.
+    break
+  else
+    mpmadd $n gold -169000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for the Refuge Tribe.
+mpechoat $n You mount a griffon and take off for the Refuge Tribe.
+mpechoat $n The flight is very long, but you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16023
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+|
+#16014
+griffon sun dome~
+the Griffon~
+The griffon relaxes here, basking in the sun.~
+The griffon is humongous.  On his saddle you see the price listing:
+{078}
+  Roterodamum:   71,000
+  Midgaard:     145,000
+  Ofcol:         83,000
+~
+ACT_SENTINEL|ACT_SMART|ACT_RACE
+AFF_DETECT_INVIS|AFF_DETECT_HIDDEN
+0 S
+95 0 0 1d1+9999 1d1+99
+10000 RACE_GRIFFON
+POS_STANDING POS_STANDING SEX_MALE
+>speech_prog roterodamum~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 17750
+    tell $n You need 17,750 coins.
+    break
+  else
+    mpmadd $n gold -17750
+  endif
+else
+  if gold ($n) < 71000
+    tell $n You need 71,000 coins.
+    break
+  else
+    mpmadd $n gold -71000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Roterodamum.
+mpechoat $n You mount a griffon and take off for Roterodamum.
+mpechoat $n The flight is very long, but you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16015
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog midgaard~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 36250
+    tell $n You need 36,250 coins.
+    break
+  else
+    mpmadd $n gold -36250
+  endif
+else
+  if gold ($n) < 145000
+    tell $n You need 145,000 coins.
+    break
+  else
+    mpmadd $n gold -145000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Midgaard.
+mpechoat $n You mount a griffon and take off for Midgaard.
+mpechoat $n The flight is very long, but you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16025
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog ofcol~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 15750
+    tell $n You need 15,750 coins.
+    break
+  else
+    mpmadd $n gold -15750
+  endif
+else
+  if gold ($n) < 83000
+    tell $n You need 83,000 coins.
+    break
+  else
+    mpmadd $n gold -83000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Ofcol.
+mpechoat $n You mount a griffon and take off for Ofcol.
+mpechoat $n The flight is very long, but you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16005
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+|
+#16015
+griffon waterdeep~
+the Griffon~
+The griffon relaxes here, basking in the sun.~
+The griffon is humongous.  On his saddle you see the price listing:
+{078}
+  Elven City:     141,000
+  Mount Kolvir:   183,000
+~
+ACT_SENTINEL|ACT_SMART
+AFF_DETECT_INVIS|AFF_DETECT_HIDDEN
+0 S
+95 0 0 1d1+9999 1d1+99
+10000 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>speech_prog p elven city~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 35250
+    tell $n You need 35,250 coins.
+    break
+  else
+    mpmadd $n gold -35250
+  endif
+else
+  if gold ($n) < 141000
+    tell $n You need 145,000 coins.
+    break
+  else
+    mpmadd $n gold -141000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for the Elven City.
+mpechoat $n You mount a griffon and take off for the Elven City.
+mpechoat $n The flight is very long, but you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16009
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+>speech_prog kolvir~
+if level ($n) < 26
+or quest (5,9,$n) == 500
+or race ($n) == race_griffon
+  if gold ($n) < 62750
+    tell $n You need 62,750 coins.
+    break
+  else
+    mpmadd $n gold -62750
+  endif
+else
+  if gold ($n) < 183000
+    tell $n You need 183,000 coins.
+    break
+  else
+    mpmadd $n gold -183000
+    mpmadd $n quest 5 9 1
+  endif
+endif
+mpechoaround $n $n mounts the griffon and takes off for Mount Kolvir.
+mpechoat $n You mount a griffon and take off for Mount Kolvir.
+mpechoat $n The flight is very long, but you reach your destination.
+mptransfer $n 16099
+mpat 16099 connect north 16011
+mpat 16099 mpforce $n north
+tell $n Thank you for flying Griffon Airlines.
+~
+|
+#16099
+griffoneth~
+~
+~
+~
+ACT_SENTINEL|ACT_SMART
+AFF_ETHEREAL
+0 S
+95 0 0 1d1+9999 1d1+99
+10000 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+#0
+
+
+#SHOPS
+0
+
+
+#SPECIALS
+S
+
+
+#OBJECTS
+#16000
+sign small~
+a small sign~
+A small sign is posted on the wall here.~
+~
+ITEM_TYPE_TRASH
+0
+0
+0 0 0 0 0 0 0 0
+1 10 1
+E
+sign small~
+The sign reads:{078}                        o
+                                      / \
+                                     /   \
+                         *===========================*
+                         |                           |
+                         |     Griffon  Airlines     |
+                         |                           |
+                         | "The world's a big place. |
+                         |  Let us show it to you."  |
+                         |                           |
+                         *===========================*
+~
+#16001
+money check~
+a money check~
+A money check has been left here.~
+This money check is worth five million gold coins. You can give it to a griffon
+banker to cash it.
+~
+ITEM_TYPE_TREASURE
+ITEM_FLAG_AUTO_ENGRAVE
+ITEM_WEAR_TAKE
+0 0 0 0 0 0 0 0
+1 10 1
+#0
+
+
+#ROOMS
+#16000
+Griffon Bank & Travel (Mist City)~
+You've entered a small office.  The roof seems a little shaky, but otherwise
+it's a very nice place.  There's a large safe located in one corner of the 
+room, and a little counter in another.  The airstrip is located on the roof.
+~
+0 ROOM_INDOORS|ROOM_BANK|ROOM_SAFE SECT_INSIDE
+DDIR_EAST
+~
+~
+0 -1 10917
+DDIR_UP
+You see the griffon airstrip.~
+~
+0 -1 16001
+S
+#16001
+Griffon Airstrip (Mist City)~
+You're standing on top of the bank and travel.  The air feels cool, compared
+to the small office anyway.  The roof is made simply of long, wooden boards,
+which shake a little under the weight of the mighty griffons.  Down is the
+office.
+~
+0 ROOM_SAFE SECT_CITY
+DDIR_DOWN
+You see the office.~
+~
+0 -1 16000
+S
+#16002
+Griffon Bank & Travel (Ocean City)~
+You've entered a small office.  The roof seems a little shaky, but otherwise
+it's a very nice place.  There's a large safe located in one corner of the 
+room, and a little counter in another.  The airstrip is located on the roof.
+~
+0 ROOM_INDOORS|ROOM_BANK|ROOM_SAFE SECT_INSIDE
+DDIR_EAST
+~
+~
+0 -1 11443
+DDIR_UP
+You see the griffon airstrip.~
+~
+0 -1 16003
+S
+#16003
+Griffon Airstrip (Ocean City)~
+You're standing on top of the bank and travel.  The air feels cool, compared
+to the small office anyway.  The roof is made simply of long, wooden boards,
+which shake a little under the weight of the mighty griffons.  Down is the
+office.
+~
+0 ROOM_SAFE SECT_CITY
+DDIR_DOWN
+You see the office.~
+~
+0 -1 16002
+S
+#16004
+Griffon Bank & Travel (Ofcol)~
+You've entered a small office.  The roof seems a little shaky, but otherwise
+it's a very nice place.  There's a large safe located in one corner of the 
+room, and a little counter in another.  The airstrip is located on the roof.
+~
+0 ROOM_INDOORS|ROOM_BANK|ROOM_SAFE SECT_INSIDE
+DDIR_WEST
+~
+~
+0 -1 752
+DDIR_UP
+You see the griffon airstrip.~
+~
+0 -1 16005
+S
+#16005
+Griffon Airstrip (Ofcol)~
+You're standing on top of the bank and travel.  The air feels cool, compared
+to the small office anyway.  The roof is made simply of long, wooden boards,
+which shake a little under the weight of the mighty griffons.  Down is the
+office.
+~
+0 ROOM_SAFE SECT_CITY
+DDIR_DOWN
+You see the office.~
+~
+0 -1 16004
+S
+#16006
+Griffon Bank & Travel (Kytar)~
+You've entered a small office.  The roof seems a little shaky, but otherwise
+it's a very nice place.  There's a large safe located in one corner of the 
+room, and a little counter in another.  The airstrip is located on the roof.
+~
+0 ROOM_INDOORS|ROOM_BANK|ROOM_SAFE SECT_INSIDE
+DDIR_SOUTH
+~
+~
+0 -1 19243
+DDIR_UP
+You see the griffon airstrip.~
+~
+0 -1 16007
+S
+#16007
+Griffon Airstrip (Kytar)~
+You're standing on top of the bank and travel.  The air feels cool, compared
+to the small office anyway.  The roof is made simply of long, wooden boards,
+which shake a little under the weight of the mighty griffons.  Down is the
+office.
+~
+0 ROOM_SAFE SECT_CITY
+DDIR_DOWN
+You see the office.~
+~
+0 -1 16006
+S
+#16008
+Griffon Bank & Travel (Elven City)~
+You've entered a small office.  The roof seems a little shaky, but otherwise
+it's a very nice place.  There's a large safe located in one corner of the 
+room, and a little counter in another.  The airstrip is located on the roof.
+~
+0 ROOM_INDOORS|ROOM_BANK|ROOM_SAFE SECT_INSIDE
+DDIR_SOUTH
+~
+~
+0 -1 12149
+DDIR_UP
+You see the griffon airstrip.~
+~
+0 -1 16009
+S
+#16009
+Griffon Airstrip (Elven City)~
+You're standing on top of the bank and travel.  The air feels cool, compared
+to the small office anyway.  The roof is made simply of long, wooden boards,
+which shake a little under the weight of the mighty griffons.  Down is the
+office.
+~
+0 ROOM_SAFE SECT_CITY
+DDIR_DOWN
+You see the office.~
+~
+0 -1 16008
+S
+#16010
+Griffon Bank & Travel (Mount Kolvir)~
+You've entered a small office.  The roof seems a little shaky, but otherwise
+it's a very nice place.  There's a large safe located in one corner of the 
+room, and a little counter in another.  The airstrip is located on the roof.
+~
+0 ROOM_INDOORS|ROOM_BANK|ROOM_SAFE SECT_INSIDE
+DDIR_NORTH
+~
+~
+0 -1 10365
+DDIR_UP
+You see the griffon airstrip.~
+~
+0 -1 16011
+S
+#16011
+Griffon Airstrip (Mount Kolvir)~
+You're standing on top of the bank and travel.  The air feels cool, compared
+to the small office anyway.  The roof is made simply of long, wooden boards,
+which shake a little under the weight of the mighty griffons.  Down is the
+office.
+~
+0 ROOM_SAFE SECT_CITY
+DDIR_DOWN
+You see the office.~
+~
+0 -1 16010
+S
+#16012
+Griffon Bank & Travel (City of Ruins)~
+You've entered a small office.  The roof seems a little shaky, but otherwise
+it's a very nice place.  There's a large safe located in one corner of the 
+room, and a little counter in another.  The airstrip is located on the roof.
+~
+0 ROOM_INDOORS|ROOM_BANK|ROOM_SAFE SECT_INSIDE
+DDIR_SOUTH
+~
+~
+0 -1 12528
+DDIR_UP
+You see the griffon airstrip.~
+~
+0 -1 16013
+S
+#16013
+Griffon Airstrip (City of Ruins)~
+You're standing on top of the bank and travel.  The air feels cool, compared
+to the small office anyway.  The roof is made simply of long, wooden boards,
+which shake a little under the weight of the mighty griffons.  Down is the
+office.
+~
+0 ROOM_SAFE SECT_CITY
+DDIR_DOWN
+You see the office.~
+~
+0 -1 16012
+S
+#16014
+Griffon Bank & Travel (Roterodamum)~
+You've entered a small office.  The roof seems a little shaky, but otherwise
+it's a very nice place.  There's a large safe located in one corner of the 
+room, and a little counter in another.  The airstrip is located on the roof.
+~
+0 ROOM_INDOORS|ROOM_BANK|ROOM_SAFE SECT_INSIDE
+DDIR_NORTH
+~
+~
+0 -1 9716
+DDIR_UP
+You see the griffon airstrip.~
+~
+0 -1 16015
+S
+#16015
+Griffon Airstrip (Roterodamum)~
+You're standing on top of the bank and travel.  The air feels cool, compared
+to the small office anyway.  The roof is made simply of long, wooden boards,
+which shake a little under the weight of the mighty griffons.  Down is the
+office.
+~
+0 ROOM_SAFE SECT_CITY
+DDIR_DOWN
+You see the office.~
+~
+0 -1 16014
+S
+#16016
+Griffon Bank & Travel (City of Entropy)~
+You've entered a small office.  The roof seems a little shaky, but otherwise
+it's a very nice place.  There's a large safe located in one corner of the 
+room, and a little counter in another.  The airstrip is located on the roof.
+~
+0 ROOM_INDOORS|ROOM_BANK|ROOM_SAFE SECT_INSIDE
+DDIR_SOUTH
+~
+~
+0 -1 13305
+DDIR_UP
+You see the griffon airstrip.~
+~
+0 -1 16017
+S
+#16017
+Griffon Airstrip (City of Entropy)~
+You're standing on top of the bank and travel.  The air feels cool, compared
+to the small office anyway.  The roof is made simply of long, wooden boards,
+which shake a little under the weight of the mighty griffons.  Down is the
+office.
+~
+0 ROOM_SAFE SECT_CITY
+DDIR_DOWN
+You see the office.~
+~
+0 -1 16016
+S
+#16018
+Griffon Bank & Travel (Antarctica)~
+You've entered a small office.  The roof seems a little shaky, but otherwise
+it's a very nice place.  There's a large safe located in one corner of the 
+room, and a little counter in another.  The airstrip is located on the roof.
+~
+0 ROOM_INDOORS|ROOM_BANK|ROOM_SAFE SECT_INSIDE
+DDIR_NORTH
+~
+~
+0 -1 2707
+DDIR_UP
+You see the griffon airstrip.~
+~
+0 -1 16019
+S
+#16019
+Griffon Airstrip (Antarctica)~
+You're standing on top of the bank and travel.  The air feels cool, compared
+to the small office anyway.  The roof is made simply of long, wooden boards,
+which shake a little under the weight of the mighty griffons.  Down is the
+office.
+~
+0 ROOM_SAFE SECT_CITY
+DDIR_DOWN
+You see the office.~
+~
+0 -1 16018
+S
+#16020
+Griffon Bank & Travel (City of Sarglam)~
+You've entered a small office.  The roof seems a little shaky, but otherwise
+it's a very nice place.  There's a large safe located in one corner of the 
+room, and a little counter in another.  The airstrip is located on the roof.
+~
+0 ROOM_INDOORS|ROOM_BANK|ROOM_SAFE SECT_INSIDE
+DDIR_NORTH
+~
+~
+0 -1 13703
+DDIR_UP
+You see the griffon airstrip.~
+~
+0 -1 16021
+S
+#16021
+Griffon Airstrip (City of Sarglam)~
+You're standing on top of the bank and travel.  The air feels cool, compared
+to the small office anyway.  The roof is made simply of long, wooden boards,
+which shake a little under the weight of the mighty griffons.  Down is the
+office.
+~
+0 ROOM_SAFE SECT_CITY
+DDIR_DOWN
+You see the office.~
+~
+0 -1 16020
+S
+#16022
+Griffon Bank & Travel (Refuge Tribe)~
+You've entered a small office.  The roof seems a little shaky, but otherwise
+it's a very nice place.  There's a large safe located in one corner of the 
+room, and a little counter in another.  The airstrip is located on the roof.
+~
+0 ROOM_INDOORS|ROOM_BANK|ROOM_SAFE SECT_INSIDE
+DDIR_SOUTH
+~
+~
+0 -1 14821
+DDIR_UP
+You see the griffon airstrip.~
+~
+0 -1 16023
+S
+#16023
+Griffon Airstrip (Refuge Tribe)~
+You're standing on top of the bank and travel.  The air feels cool, compared
+to the small office anyway.  The roof is made simply of long, wooden boards,
+which shake a little under the weight of the mighty griffons.  Down is the
+office.
+~
+0 ROOM_SAFE SECT_CITY
+DDIR_DOWN
+You see the office.~
+~
+0 -1 16022
+S
+#16024
+Griffon Bank & Travel (Midgaard)~
+You've entered a small office.  The roof seems a little shaky, but otherwise
+it's a very nice place.  There's a large safe located in one corner of the 
+room, and a little counter in another.  The airstrip is located on the roof.
+~
+0 ROOM_INDOORS|ROOM_BANK|ROOM_SAFE SECT_INSIDE
+DDIR_SOUTH
+~
+~
+0 -1 3024
+DDIR_UP
+You see the griffon airstrip.~
+~
+0 -1 16025
+S
+#16025
+Griffon Airstrip (Midgaard)~
+You're standing on top of the bank and travel.  The air feels cool, compared
+to the small office anyway.  The roof is made simply of long, wooden boards,
+which shake a little under the weight of the mighty griffons.  Down is the
+office.
+~
+0 ROOM_SAFE SECT_CITY
+DDIR_DOWN
+You see the office.~
+~
+0 -1 16024
+S
+#16026
+Griffon Bank & Travel (Sun Dome)~
+You've entered a small office.  The roof seems a little shaky, but otherwise
+it's a very nice place.  There's a large safe located in one corner of the 
+room, and a little counter in another.  The airstrip is located on the roof.
+~
+0 ROOM_INDOORS|ROOM_BANK|ROOM_SAFE SECT_INSIDE
+DDIR_NORTH
+~
+~
+0 -1 11621
+DDIR_UP
+You see the griffon airstrip.~
+~
+0 -1 16027
+S
+#16027
+Griffon Airstrip (Sun Dome)~
+You're standing on top of the bank and travel.  The air feels cool, compared
+to the small office anyway.  The roof is made simply of long, wooden boards,
+which shake a little under the weight of the mighty griffons.  Down is the
+office.
+~
+0 ROOM_SAFE SECT_CITY
+DDIR_DOWN
+You see the office.~
+~
+0 -1 16026
+S
+#16028
+Griffon Bank & Travel (Waterdeep)~
+You've entered a small office.  The roof seems a little shaky, but otherwise
+it's a very nice place.  There's a large safe located in one corner of the 
+room, and a little counter in another.  The airstrip is located on the roof.
+~
+0 ROOM_INDOORS|ROOM_BANK|ROOM_SAFE SECT_INSIDE
+DDIR_SOUTH
+~
+~
+0 -1 8085
+DDIR_UP
+You see the griffon airstrip.~
+~
+0 -1 16029
+S
+#16029
+Griffon Airstrip (Waterdeep)~
+You're standing on top of the bank and travel.  The air feels cool, compared
+to the small office anyway.  The roof is made simply of long, wooden boards,
+which shake a little under the weight of the mighty griffons.  Down is the
+office.
+~
+0 ROOM_SAFE SECT_CITY
+DDIR_DOWN
+You see the office.~
+~
+0 -1 16028
+S
+#16099
+On the Back of a Griffon~
+You see the earth below you.  It's an extremely long distance away.
+~
+0 ROOM_NO_MOB|ROOM_SAFE|ROOM_NO_RECALL SECT_CITY
+S
+#0
+
+
+#RESETS
+M 16000 100 16000
+M 16000 100 16002
+M 16000 100 16004
+M 16000 100 16006
+M 16000 100 16008
+M 16000 100 16010
+M 16000 100 16012
+M 16000 100 16014
+M 16000 100 16016
+M 16000 100 16018
+M 16000 100 16020
+M 16000 100 16022
+M 16000 100 16024
+M 16000 100 16026
+M 16001 100 16001
+M 16002 100 16003
+M 16003 100 16005
+M 16004 100 16007
+M 16005 100 16009
+M 16006 100 16011
+M 16007 100 16013
+M 16008 100 16015
+M 16009 100 16017
+M 16010 100 16019
+M 16011 100 16021
+M 16012 100 16023
+M 16013 100 16025
+M 16014 100 16027
+M 16015 100 16029
+O 16000  15 16000
+O 16000  15 16002
+O 16000  15 16004
+O 16000  15 16006
+O 16000  15 16008
+O 16000  15 16010
+O 16000  15 16012
+O 16000  15 16014
+O 16000  15 16016
+O 16000  15 16018
+O 16000  15 16020
+O 16000  15 16022
+O 16000  15 16024
+O 16000  15 16026
+S
+
+
+#$
+
+XXXXXXXXXX
+#Savearea

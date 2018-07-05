@@ -1,0 +1,13 @@
+cd player
+
+echo "Players who logged in from ${1} :"
+
+nice -n 19 grep -H Login ?/?/* | grep $1 | grep -v bak | cut -d/ -f3 | cut -d: -f1
+
+cd ..
+
+cd del
+
+echo "Deleted Players who logged in from ${1} :"
+
+nice -n 19 grep -H Login ?/* | grep $1 | grep -v bak | cut -d/  -f2 | cut -d: -f1 

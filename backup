@@ -1,0 +1,176 @@
+#!/bin/tcsh
+
+# This backup script is written by Manwe,
+# as I don't really know the tc shell yet, it may well be that some of the
+# code is not really ehrm... efficient... but this works :)
+
+# Modified by Demise 17-04-2002
+# now uses logic, added special tar for castles
+
+#setting defaults
+set script_list = "backup clean_src compile down emud.csh findip start_tail install unpack mkpackage un-install restore script un-install update.sh" 
+set tar_flags = "-jcf"
+# set tar_flags = "-Icf"
+# Since tar-versions differ in bz2 format, you must choose one of the above
+# versions. (or maybe another ?) Simply comment the unwanted and uncomment
+# the wanted version.
+
+set player   = "no"
+set area     = "no"
+set clan     = "no"
+set doc      = "no"
+set src      = "no"
+set scripts  = "no"
+set castle   = "no"
+
+#polling arguments
+
+if ( "$1" == "-h" ) then
+	echo "syntax   : backup [-h] [-player|-area|-clan|-doc|-src|-castle|-scripts]"
+	echo ""
+	echo "-h       : this help screen"
+	echo "-player  : makes a backup of the playerfiles"
+	echo "-area    : makes a backup of the areafiles"
+	echo "-clan    : makes a backup of the clans"
+	echo "-doc     : makes a backup of the documentation"
+	echo "-src     : makes a backup of the source"
+	echo "-scripts : makes a backup of your scripts"
+	echo "-castle  : makes a backup of area_current/castle"
+	echo ""
+	echo "If you give no arguments, I will create all backups"
+	echo ""
+	exit
+else
+	if ( "$1" == "-player" ) then
+		set player = "yes"
+	else
+		if ( "$1" == "-area" ) then
+			set area = "yes"
+		else
+			if ( "$1" == "-clan" ) then
+				set clan = "yes"
+			else
+				if ( "$1" == "-doc" ) then
+					set doc = "yes"
+				else
+					if ( "$1" == "-src" ) then
+						set src	= "yes"
+					else
+						if ( "$1" == "-scripts" ) then
+							set scripts = "yes"
+						else
+							if ( "$1" == "-castle" ) then
+								set castle = "yes"
+							else
+								if ( "$1" == "" ) then
+									set player   = "yes"
+									set area     = "yes"
+									set clan     = "yes"
+									set doc      = "yes"
+									set src      = "yes"
+									set scripts  = "yes"
+									set castle  = "yes"
+								else
+									echo "Unkown argument : ${1} use -h for help"
+								endif
+							endif
+						endif
+					endif
+				endif
+			endif
+		endif
+	endif
+endif
+
+if ( "$player" == "yes" ) then
+	echo "backing up player files."
+
+	tar $tar_flags player.tar.bz2 player/
+
+	rm -f backups/player.tar.bz2 >/dev/null
+
+	mv player.tar.bz2 backups/ >/dev/null
+
+	set CURDATE = `date "+%Y-%m-%d"`
+
+	cp backups/player.tar.bz2 usrbkup/player_${CURDATE}.tar.bz2
+endif
+
+if ( "$area" == "yes" ) then
+	echo "backing up area files."
+
+	tar $tar_flags area_current.tar.bz2 area_current/
+
+	rm -f backups/area_current.tar.bz2 >/dev/null
+
+	mv area_current.tar.bz2 backups/ >/dev/null
+endif
+
+if ( "$clan" == "yes" ) then
+	echo "backing up clan files."
+
+	tar $tar_flags clans.tar.bz2 clans/
+
+	rm -f backups/clans.tar.bz2 >/dev/null
+
+	mv clans.tar.bz2 backups/ >/dev/null
+endif
+
+	
+if ( "$doc" == "yes" ) then
+	echo "backing up doc files."
+
+	tar $tar_flags doc.tar.bz2 doc/
+
+	rm -f backups/doc.tar.bz2 >/dev/null
+
+	mv doc.tar.bz2 backups/ >/dev/null
+endif
+
+if ( "$src" == "yes" ) then
+	echo "backing up source."
+	./clean_src clean
+
+	tar $tar_flags src.tar.bz2 --exclude "*.o" src/
+
+	rm -f backups/src.tar.bz2 >/dev/null
+
+	mv src.tar.bz2 backups/ >/dev/null
+
+	if (! -d ./old-sources) then
+		mkdir old-sources
+	endif
+
+	set VER=`head -c 11 src/VERSION`
+
+	cp backups/src.tar.bz2 old-sources/src-${VER}.tar.bz2
+
+	./clean_src unclean
+endif
+
+if ("$scripts" == "yes") then
+	echo "backing up scripts."
+	if (! -d scripts) then
+		mkdir scripts >/dev/null 
+	endif
+	if ( -e scripts.tar.bz2 ) then
+		rm scripts.tar.bz2
+	endif
+	rm scripts/* >/dev/null
+	cp $script_list scripts/
+	cd scripts
+	tar $tar_flags scripts.tar.bz2 *
+	rm -f ../backups/scripts.tar.bz2 >/dev/null
+	mv scripts.tar.bz2 ../backups/
+	cd ..
+endif
+
+if ( "$castle" == "yes" ) then
+	echo "backing up area_current/castle."
+	if ( ! -d area_current/castle ) then
+		echo "[error]"
+	else
+		tar $tar_flags castle.tar.bz2 area_current/castle/
+		mv castle.tar.bz2 backups/
+	endif
+endif

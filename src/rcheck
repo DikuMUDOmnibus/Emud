@@ -1,0 +1,9 @@
+#!/bin/tcsh
+
+if ( ${1} == "" ) then
+	set TARGET = *.c;
+else
+	set TARGET = ${1};
+endif
+
+grep -n -w -B 1 "	return" ${TARGET} | grep -v "pop_call" | grep -v "return" | grep -v -e "--" > returns.txt

@@ -1,0 +1,1 @@
+nohup emud.csh -n -p 4321 >/dev/null&

@@ -1,0 +1,88 @@
+echo "Moving to be deleted players : "
+
+mv -v a/?/del/* ../del/a/
+mv -v b/?/del/* ../del/b/
+mv -v c/?/del/* ../del/c/
+mv -v d/?/del/* ../del/d/
+mv -v e/?/del/* ../del/e/
+mv -v f/?/del/* ../del/f/
+mv -v g/?/del/* ../del/g/
+mv -v h/?/del/* ../del/h/
+mv -v i/?/del/* ../del/i/
+mv -v j/?/del/* ../del/j/
+mv -v k/?/del/* ../del/k/
+mv -v l/?/del/* ../del/l/
+mv -v m/?/del/* ../del/m/
+mv -v n/?/del/* ../del/n/
+mv -v o/?/del/* ../del/o/
+mv -v p/?/del/* ../del/p/
+mv -v q/?/del/* ../del/q/
+mv -v r/?/del/* ../del/r/
+mv -v s/?/del/* ../del/s/
+mv -v t/?/del/* ../del/t/
+mv -v u/?/del/* ../del/u/
+mv -v v/?/del/* ../del/v/
+mv -v w/?/del/* ../del/w/
+mv -v x/?/del/* ../del/x/
+mv -v y/?/del/* ../del/y/
+mv -v z/?/del/* ../del/z/
+
+echo "Deleting internal backups of playerfiles : "
+
+mv -v a/?/bak/* ../del/a/bak/
+mv -v b/?/bak/* ../del/b/bak/
+mv -v c/?/bak/* ../del/c/bak/
+mv -v d/?/bak/* ../del/d/bak/
+mv -v e/?/bak/* ../del/e/bak/
+mv -v f/?/bak/* ../del/f/bak/
+mv -v g/?/bak/* ../del/g/bak/
+mv -v h/?/bak/* ../del/h/bak/
+mv -v i/?/bak/* ../del/i/bak/
+mv -v j/?/bak/* ../del/j/bak/
+mv -v k/?/bak/* ../del/k/bak/
+mv -v l/?/bak/* ../del/l/bak/
+mv -v m/?/bak/* ../del/m/bak/
+mv -v n/?/bak/* ../del/n/bak/
+mv -v o/?/bak/* ../del/o/bak/
+mv -v p/?/bak/* ../del/p/bak/
+mv -v q/?/bak/* ../del/q/bak/
+mv -v r/?/bak/* ../del/r/bak/
+mv -v s/?/bak/* ../del/s/bak/
+mv -v t/?/bak/* ../del/t/bak/
+mv -v u/?/bak/* ../del/u/bak/
+mv -v v/?/bak/* ../del/v/bak/
+mv -v w/?/bak/* ../del/w/bak/
+mv -v x/?/bak/* ../del/x/bak/
+mv -v y/?/bak/* ../del/y/bak/
+mv -v z/?/bak/* ../del/z/bak/
+
+echo "Deleting internal dumps of player buffers : "
+
+mv -v a/?/dmp/* ../del/a/dump/
+mv -v b/?/dmp/* ../del/b/dump/
+mv -v c/?/dmp/* ../del/c/dump/
+mv -v d/?/dmp/* ../del/d/dump/
+mv -v e/?/dmp/* ../del/e/dump/
+mv -v f/?/dmp/* ../del/f/dump/
+mv -v g/?/dmp/* ../del/g/dump/
+mv -v h/?/dmp/* ../del/h/dump/
+mv -v i/?/dmp/* ../del/i/dump/
+mv -v j/?/dmp/* ../del/j/dump/
+mv -v k/?/dmp/* ../del/k/dump/
+mv -v l/?/dmp/* ../del/l/dump/
+mv -v m/?/dmp/* ../del/m/dump/
+mv -v n/?/dmp/* ../del/n/dump/
+mv -v o/?/dmp/* ../del/o/dump/
+mv -v p/?/dmp/* ../del/p/dump/
+mv -v q/?/dmp/* ../del/q/dump/
+mv -v r/?/dmp/* ../del/r/dump/
+mv -v s/?/dmp/* ../del/s/dump/
+mv -v t/?/dmp/* ../del/t/dump/
+mv -v u/?/dmp/* ../del/u/dump/
+mv -v v/?/dmp/* ../del/v/dump/
+mv -v w/?/dmp/* ../del/w/dump/
+mv -v x/?/dmp/* ../del/x/dump/
+mv -v y/?/dmp/* ../del/y/dump/
+mv -v z/?/dmp/* ../del/z/dump/
+
+echo "Done !"

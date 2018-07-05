@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# This script is called from backup -src
+# it cleans the 'src/' dir or puts the '.o' files back...
+
+case $1 in
+	clean)
+		mv -f src/*.o tmp/ 1>/dev/null 2>/dev/null;
+		rm -f src/*~ 1>/dev/null 2>/dev/null;
+		;;
+	unclean)
+		mv -f tmp/*.o src/ 1>/dev/null 2>/dev/null;
+		;;
+	*)
+		echo "Undefined parameter : ${1}";
+		;;
+esac
+
+# done

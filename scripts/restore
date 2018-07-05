@@ -1,0 +1,8 @@
+#!/bin/bash
+
+tar -yxvf backups/src.tar.bz2 
+tar -yxvf backups/doc.tar.bz2 
+tar -yxvf backups/scripts.tar.bz2 
+tar -yxvf backups/area_current.tar.bz2 
+tar -yxvf backups/clans.tar.bz2 
+tar -yxvf backups/player.tar.bz2 

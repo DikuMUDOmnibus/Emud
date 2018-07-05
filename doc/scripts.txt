@@ -1,0 +1,184 @@
+E-Mud comes with a few scripts, this unlike MrMud.
+I'll explain them here :
+
+compile :
+----------
+
+ Syntax : compile (no arguments)
+
+Compile installs the mud in such a way that you can start running the mud
+right after compile is finished.
+
+
+down :
+-------
+
+syntax : down (no arguments)
+
+down shuts the mud down, by sending the called scripts and the running binary
+the SIGTERM signal.
+
+emud :
+-------
+
+syntax : emud [-h]
+	 emud [-p <port#>] [-areadebug <level>] [-nosocket] [-n] [-count]
+
+emud starts the mud. Except with the -h parameter.
+Here comes the meaning of the flags:
+-h                 : shows the syntaxes described above
+-p <port#>         : This defines the port on which emud will run, it defaults to
+                     4321. If you define another port this way, the mud will run
+                     as a testsite
+-areadebug <level> : The mud can give lots of info while booting and loading
+                     the areas. With this option you can check wether or not
+                     there are problems with an area. Possible level values
+                     are 1 - 5.
+-nosocket          : On some systems the mud would give heaps of SO_ERROR
+                     messages, this suppresses them.
+-n                 : Don't show the log to the screen. This is very handy
+                     when you use nohup to run the mud, or your nohup.out
+                     will grow, with double info, since this info is in the
+                     normal logs already!
+-count             : a nice addition, counting how many areas, mobs, rooms
+                     and objects are in the running.
+
+findalias :
+------------
+
+syntax : findalias (no arguments)
+
+findalias searches all the playerfiles for bad aliasses. As this form of
+aliasses is not possible anymore in the code (still by-hand-editing) you
+probably don't really need this anymore. Still this script is called by
+findip.
+
+findip :
+---------
+
+syntax : findip <ip-address>
+
+findip quickly searches all the playerfiles for the given IP address. So if
+you found out that someone behaved really nasty, eg. made the mud crash, you
+can search for his/her IP address. That persons characters are found, by IP
+address. All the playernames are stored in badass.txt
+
+down :
+-------
+
+syntax : down [-emud] [-tail] [-current_emud]
+
+'down' is used to kill the processes that are used by the mud. While the
+flags exists, they have become deprecated. You better use only 'down' with
+no arguments, so only the processes that are attached to the location where
+you are running the mud are being shut off. It also removed the files
+emud.pid, script.pid and RUNNING
+
+flop :
+-------
+
+syntax : flop (no argument)
+
+copies all files to a floppy. I think this is going to be a deleted script
+anyway...
+
+tarball / tarball2 :
+---------------------
+
+syntax : tarball / tarball2 (no argument)
+
+tarball and tarball2 both create tarballs of the necessary files and store
+those in backups/ . the difference between the two is that tarball uses the
+-y flag for bz2, and tarball2 the -I flag. Mind that after running this
+script, all your src/.o files are gone (a make clean is issued here)
+
+unpack / unpack2 :
+-------------------
+
+syntax : unpack / unpack2 (no arguments)
+
+unpack and unpack2 know the same difference as tarball and tarball2. As the
+name of the script impies, this script is used to unpack the tarballs. They
+will show you a small menu, where you can choose as to which file you want
+to unpack. MIND : the required tarball(s) must be in the current directory.
+
+viewlog :
+----------
+
+syntax : viewlog (no argument)
+
+viewlog looks for the current log and does a tail -f upon that log.
+This script used to be called by the emud script, but I rewrote that one,
+so this one is no longer necessary...
+
+backup :
+---------
+
+syntax : backup [-h] [[-player] [-area] [-clan] [-doc] [-src]]
+
+backup is going to be the replacement for 'tarball'. The idea with backup
+is that you can choose which part you want to backup instead of the whole.
+If you don't use any argument with backup, backup will assume you choose all
+the arguments (except for -h), for the -h is not used in combination with
+any other argument. It doesn't matter in which order you give the arguments,
+though the order of execution is fixed. Backup is quite powerfull, though I
+still have to get used to the quirks of 'tcsh'. Backup calls another new
+script : clean_src...
+
+clean_src :
+------------
+
+syntax : clean_src (no arguments)
+
+Since I had trouble redirecting output under tcsh, I simply changed shell to
+be done with it (dutch quote : als het niet kan zoals het moet, dan moet het
+maar zoals het kan). clean_src simply removes unneeded files from the src/
+dir (unneeded in the way of : not needed in a tarball, to keep those as
+small as possible)
+
+go :
+-----
+(no arguments)
+
+starts emud in one word :) Essentially it only does:
+
+nohup emud -nosocket -count -n >/dev/null &
+
+install :
+----------
+(no arguments)
+
+I know you're lazy, just as I am... You only have to run this script once,
+when you've just unpacked the tarball that is emud (emud-<version>.tar)
+it will install everything you need.
+
+mkpackage :
+------------
+(no arguments)
+
+Makes a tarfile from your backups.
+
+restore :
+----------
+(no arguments)
+
+restores the most important files in your backups/ directory.
+
+start_tail :
+-------------
+called from emud script and should not be run by hand (but it can ofcourse)
+does a background tail, but you have to provide the arguments for tail, so
+you'll need a 'start_tail -f' to have this run in the background...
+
+un-install :
+-------------
+destroys all files (except the backups) associated with emud, for if you
+wish to re-install everything.
+
+unpack :
+---------
+used by the install script, but also handy to use... it provides a way to
+unpack the files (in bzip2 format) on all (cq most) platforms, provided
+bzip2 is installed there.
+
+

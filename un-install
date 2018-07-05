@@ -1,0 +1,28 @@
+#!/bin/bash
+echo Shutting down emud...
+down
+echo -n -e "deleting area_current/"
+rm -R area_current >/dev/null 2>/dev/null
+echo -n -e "\b\b\b\b\b\b\b\b\b\b\b\b\b\b backups/"
+rm -R backups >/dev/null 2>/dev/null
+echo -n -e "\b\b\b\b\b\b\b\b\b bin/"
+rm -R bin >/dev/null 2>/dev/null
+echo -n -e "\b\b\b\b\b clans/"
+rm -R clans/ >/dev/null 2>/dev/null
+echo -n -e "\b\b\b\b\b\b\b doc/"
+rm -R doc >/dev/null 2>/dev/null
+echo -n -e "\b\b\b\b\b log/"
+rm -R log >/dev/null 2>/dev/null
+echo -n -e "\b\b\b\b\b player/"
+rm -R player >/dev/null 2>/dev/null
+echo -n -e "\b\b\b\b\b\b\b\b scripts/"
+rm -R scripts /dev/null 2>/dev/null
+echo -n -e "\b\b\b\b\b\b\b\b src/"
+rm -R src >dev/null 2>/dev/null
+echo -n -e "\b\b\b\b\b tmp/"
+rm -R tmp >/dev/null 2>/dev/null
+echo -n -e "\b\b\b\b\b loose files"
+rm backup clean_src compile down emud findalias findip install mkpackage >/dev/null 2>/dev/null
+rm start_tail unpack nohup.out >/dev/null 2>/dev/null
+echo done.
+ 

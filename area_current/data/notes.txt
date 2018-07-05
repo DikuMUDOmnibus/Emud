@@ -1,0 +1,11 @@
+Sender  Scandum~
+Date    Tue Dec 20 20:28:53 2005~
+Time   1135106933
+To      all~
+Subject first note!~
+Topic   0
+Text
+Have fun :)
+~
+Room 0
+

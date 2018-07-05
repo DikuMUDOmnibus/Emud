@@ -1,0 +1,4742 @@
+#AREA Roterodamum~
+#AUTHORS Gods~
+#VERSION 3
+#RANGES 1 95 0 99
+#OLC_RANGES 9700 9899
+
+
+#HELPS
+0 ROTERODAMUM~
+{138}                                 Roterodamum
+{300}
+This great city was the playground for the Gods that watch over the Lands.
+In their impish youth they ran about causing all sorts of legendary mischief.
+You are welcome to learn and grow strong in their city.
+
+  {128}(A) {058}Quests
+  {128}(B) {058}Equipment
+  {128}(C) {058}Advice
+  {128}(D) {058}Obelisk
+{a}ROTERODAMUMQUESTS
+{b}ROTERODAMUMEQUIPMENT
+{c}ROTERODAMUMADVISE
+{d}OBELISK
+~
+
+0 ROTERODAMUMQUESTS~
+{138}                             Roterodamum Quests
+{300}
+The city holds a fun little quest. Go see Doogan at the bakery and find a
+way to help him solve a tiny furry problem.
+
+  {128}(-) {058}Return
+{-}ROTERODAMUM
+~
+
+0 ROTERODAMUMEQUIPMENT~
+{138}                            Roterodamum Equipment
+{300}
+The city holds lots of equipment for those new to the realm.  It is mostly
+for low level players.  Be sure to visit the Blacksmith and get your things
+personally engraved, making the armor stronger and the weapons hit better.
+
+  {128}(-) {058}Return
+{-}ROTERODAMUM
+~
+
+0 ROTERODAMUMADVISE~
+{138}                             Roterodamum Advise
+{300}
+This is a good place to learn the things that will make for a solid
+foundation for playing on Storms.  Read the signs if one is posted,
+they are there for your protection.  Take some time to wonder about
+and get familiar with where things are.  For easy transportation find
+the Obelisk just south of the Temple, it can take you to lots of
+interesting places.  And, mostly, have fun!
+
+  {128}(-) {058}Return
+{-}ROTERODAMUM
+~
+
+0 OBELISK~
+{128}                                   Obelisk
+{300}
+The obelisk can be found in the temple north from Roterodamum Square. It
+holds ancient magics allowing young adventurers to quickly travel to
+some interesting low level areas. (look at the obelisk for a list).
+Make sure to buy some recall scrolls w,w,n from Roterodamum Square and
+set your recall in Roterodamum, when you go out to explore on your own.
+
+The obelisk will only work for players until level 25.
+
+  {128}(-) {058}Return
+{-}ROTERODAMUM
+~
+
+0 $~
+
+
+#MOBILES
+#9700
+humble priest~
+a humble priest~
+A humble priest stand here retrieving your corpse.~
+A humble priest dressed in a long woolen robe stands here with your corpse.
+~
+ACT_SENTINEL|ACT_SMART
+AFF_DETECT_INVIS|AFF_DETECT_HIDDEN
+1000 S
+95 0 0 0d0+10000 0d0+100
+100000 0
+POS_STANDING POS_STANDING SEX_MALE
+>all_greet_prog 50~
+tell $n Lost something?
+tell $n If it happens to be your corpse..
+tell $n I could help you I think
+~
+|
+#9701
+spectral dragon~
+a spectral dragon~
+A spectral dragon stands here looking fierce.~
+The spectral dragon seems to be sleeping.  Dragon's fighting techniques
+mostly imply slashing with their claws, whipping with their tail, blowing
+their firey breath over you, in other words: generaly stomping the crap out
+of you.  Better not wake it..
+~
+ACT_SENTINEL|ACT_AGGRESSIVE|ACT_SMART|ACT_BODY|ACT_UNDEAD
+0
+0 S
+20 BODY_HEAD|BODY_TAIL BODY_MOUTH|BODY_EYE|BODY_TAIL|BODY_CLAW 1d100+182 1d20+4
+40000 0
+POS_SLEEPING POS_SLEEPING SEX_NEUTRAL
+>fight_prog 20~
+if position ($r) == POS_FIGHTING
+  if rand (33)
+    mpechoat $r {118}$I shoots toward you and rips you open!
+    mpechoaround $r {078}$I shoots toward $r and rips $m open!
+  else
+    if rand (50)
+      mpechoat $r {118}$I inhales deeply and hits you with a blast of flame!
+      mpechoaround $r {078}$I inhales deeply and hits $r with a blast of flame!
+    else
+      mpechoat $r {118}$I's tail shoots toward you and pierces your shoulder!
+      mpechoaround $r {078}$I's tail shoots toward $r and pierces $s shoulder!
+    endif
+  endif
+  mpquiet on
+  mpdamage $r 1 20 attack
+  mpquiet off
+endif
+if rand (10)
+  shout DIE!!! You worthless mortals!!!
+endif
+~
+|
+#9702
+orcish guard~
+an orcish guard~
+An orcish guard stands here.~
+The orcish guard appears to be mangled beyond recognition.  There is a bloody
+symbol of a five pointed arrow cut into his chest.
+~
+ACT_SENTINEL|ACT_RACE
+AFF_DETECT_INVIS
+0 S
+20 0 0 0d0+400 13d2+0
+100 RACE_ORC
+POS_STANDING POS_STANDING SEX_MALE
+#9703
+orcish captain~
+an orcish captain~
+An orcish captain is commanding his troops.~
+This large burly orc guards the entrance to the city.  He has a large sword
+and seems to know his job very well.
+~
+ACT_SENTINEL|ACT_SMART|ACT_BODY|ACT_RACE
+AFF_DETECT_INVIS|AFF_UNDERSTAND|AFF_TONGUES
+0 S
+25 BODY_HEAD|BODY_EYE BODY_MOUTH|BODY_ARM 0d0+500 16d2+0
+200 RACE_ORC
+POS_STANDING POS_STANDING SEX_MALE
+#9704
+Lostinbeer~
+Barman Lostinbeer~
+Barman Lostinbeer stands here selling booze.~
+Lostinbeer watches you calmly, while he skillfully mixes a drink.  A tired
+looking bartender who hates trouble in his bar.
+~
+ACT_SENTINEL|ACT_SMART
+AFF_DETECT_INVIS|AFF_DETECT_HIDDEN
+0 S
+100 0 0 0d0+10000 1d100+51
+0 0
+POS_STANDING POS_STANDING SEX_MALE
+>all_greet_prog 10~
+if level ($n) < 90
+  say Hail stranger.
+  mpechoat $n {168}Barman Lostinbeer hands you a drink.
+  mpechoaround $n Barman Lostinbeer hands $n a drink.
+else
+  if sex ($n) == 2
+    say What would you like to drink Lady.
+  else
+    say What would you like to drink Sir.
+  endif
+endif
+~
+>speech_prog yes sure~
+if quest (12,3,$n) == 3
+  mpoload 9761
+  give I9761 $n
+  mpmset $n quest 12 3 4
+  grin $n
+endif
+if quest (12,3,$n) == 1
+  say Give the banker half a million gold coins and he'll
+  say put it in a bag for you.
+  say I have nothing myself to put such a large amount of
+  say gold in.
+  mpmset $n quest 12 3 2
+endif
+~
+>speech_prog coke~
+if quest (12,2,$n) == 0
+  say You want to buy the big bottle $n?
+  mpmset $n quest 12 3 1
+endif
+~
+>give_prog I9760~
+if quest (12,3,$n) == 2
+  mpjunk I9760
+  mpoload 9715
+  give I9715 $n
+  say want a straw too?
+  snicker 
+  mpmset $n quest 12 3 3
+~
+|
+#9705
+Agnus@~
+Agnus the Warrior~
+Agnus stands here picking his nose.~
+Agnus lets of a real rip-roarer ... a greenish cloud envelops him and
+everything surrounding him.
+~
+ACT_SENTINEL|ACT_TRAIN|ACT_PRACTICE
+0
+0 S
+100 0 0 0d0+10000 1d100+51
+0 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>rand_prog 2~
+emote picks his nose and looks embarrased when he sees you looking.
+~
+|
+#9706
+wrecks@~
+Wrecks~
+Wrecks the Ninja is here, juggling some knifes.~
+The master of the underworld, better known simply as 'Wrecks', is kicked
+back throwing knifes at a dart board.  He hits it perfect at least nine
+out of ten times, and when he misses, it's only because he noticed a fly
+or rat wander in from the streets.  You can tell he has more fun with rats
+than he does with the dart board.
+~
+ACT_SENTINEL|ACT_TRAIN|ACT_PRACTICE
+AFF_SNEAK
+0 S
+100 0 0 0d0+10000 1d100+51
+0 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+#9707
+etherealWaterfall~
+the ethereal waterfall~
+An ethereal waterfall stands here.~
+~
+ACT_SENTINEL
+AFF_ETHEREAL
+0 S
+1 0 0 1d0+10 1d1+1
+0 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>greet_prog 50~
+mpechoat $n The stream drags you over the edge of the waterfall.
+mpechoat $n {008}
+mpechoat $n {168}You tumble down into the water below you!
+mptransfer $n 9769
+mpecho $n tumbles down the waterfall.
+mpat $n mpechoaround $n $n falls with a big SPLASH into the river.
+~
+>rand_prog 50~
+mpechoat $r The stream drags you over the edge of the waterfall.
+mpechoat $r {008}
+mpechoat $r {168}You tumble down into the water below you!
+mptransfer $r 9769
+mpecho $r tumbles down the waterfall.
+mpat $r mpechoaround $r $r falls with a big SPLASH into the river.
+~
+|
+#9708
+Dalin durid~
+Dalin the druid~
+An old and wise druid stands here.~
+Just being in the presence of The Ancient Druid Dalin, one is filled with
+knowledge.
+~
+ACT_SENTINEL|ACT_TRAIN|ACT_PRACTICE
+0
+1000 S
+100 0 0 0d0+10000 1d100+51
+0 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+#9709
+etherealHealer~
+a strange voice~
+The ethereal healer stands here.~
+~
+ACT_SENTINEL|ACT_SMART
+AFF_ETHEREAL
+0 S
+100 0 0 1d2500+5510 1d100+51
+0 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>all_greet_prog 100~
+~
+>speech_prog gods~
+if level ($n) < 51
+  mpechoat $n {308}There are five gods:
+  mpechoat $n {308}To follow one you must be between level 10 and 50
+  mpechoat $n {008}
+  mpechoat $n {148}Ulmo the Lord of Water
+  mpechoat $n {118}Demise the Lord of Fire
+  mpechoat $n {128}Gaia the Lady of Earth
+  mpechoat $n {168}Hypnos the Lord of the Mind
+  mpechoat $n {158}Manwe the Lord of the Winds
+  mpechoat $n {008}
+  mpechoat $n {118}WARNING!!!!!
+  mpechoat $n {118}By following a god you will be able to be hunted and killed
+  mpechoat $n {118}by the followers of any god other than your own.
+  mpechoat $n {118}Follow only at your own risk.
+~
+>speech_prog Ulmo~
+if level ($n) < 51
+  mpechoat $n {148}Ulmo is God of the Waters.{300}
+  mpechoat $n There is no quest available to follow Ulmo at this time.
+  mpechoat $n If you want to follow Ulmo say:
+  mpechoat $n {008}
+  mpechoat $n {148}I want to become a follower of Water!{300}
+endif
+~
+>speech_prog p I want to become a follower of water!~
+if level ($n) < 51
+  if level ($n) > 9
+    if whichgod ($n) == god_neutral
+      if pcsinroom (9818) > 0
+        say There is currently an adventurer taking the test, come back later.
+      else
+        say Slay the testing creature, to prove your strength.
+        mpat 9818 mppurge all
+        mpat 9818 mpmload 9754
+        mpat 9818 mpmset creature quest 0 4 1
+        rescale 9754 $n 200
+        mptransfer $n 9818
+        mpat 9818 mpforce creature berserk
+~
+>speech_prog Demise~
+if whichgod ($n) == god_neutral
+  mpechoat $n {008}
+  mpechoat $n {118}Demise is the Lord of Fire
+  mpechoat $n {008}
+  mpechoat $n {118}You'll find the Temple of Demise on the Northern Continent.
+endif
+~
+>speech_prog Gaia~
+if whichgod ($n) == god_neutral
+  mpechoat $n {120}Gaia is the Goddess of Earth
+  mpechoat $n {300}
+  mpechoat $n {120}You'll find the Forest of Gaia on the Western Continent.
+~
+>speech_prog hypnos~
+if level ($n) > 9
+  if level ($n) < 51
+    mpechoat $n {078}Hypnos is God of the Mind.
+    mpechoat $n {078}There is no quest available at this time.
+    mpechoat $n If you wish to follow Hypnos, say:
+    mpechoat $n {178}I want to become a follower of Mind!{300}
+  endif
+endif
+~
+>speech_prog p I want to become a follower of mind!~
+if level ($n) < 51
+  if level ($n) > 9
+    if whichgod ($n) == god_neutral
+      if pcsinroom (9818) > 0
+        say There is currently an adventurer taking the test, come back later.
+      else
+        say Slay the testing creature, to prove your strength.
+        mpat 9818 mppurge all
+        mpat 9818 mpmload 9754
+        mpat 9818 mpmset creature quest 0 4 2
+        rescale 9754 $n 200
+        mptransfer $n 9818
+        mpat 9818 mpforce creature berserk
+~
+>speech_prog Manwe~
+if whichgod ($n) == god_neutral
+  mpechoat $n {008}
+  mpechoat $n {168}Manwe is the Lord of the Winds
+  mpechoat $n {008}
+  mpechoat $n {168}You'll find the Temple of Manwe on the Eastern Continent.
+endif
+~
+|
+#9710
+Robert~
+Robert~
+Robert the pet shop owner stands here.~
+Robert is here cleaning out the cages.
+~
+ACT_SENTINEL
+0
+0 S
+100 0 0 0d0+10000 1d100+51
+0 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+#9711
+Olaf black smith~
+Olaf the Black Smith~
+Olaf is here pounding out some heated metal.~
+Olaf the blacksmith is a large burly man that easily moves anvils around
+whenever he wants too.  The blacksmith waits to help you with your rusty,
+chipped up armor and weapons.
+~
+ACT_SENTINEL|ACT_SMART
+AFF_DETECT_INVIS|AFF_DETECT_HIDDEN
+0 S
+95 0 0 1d2256+7613 10d10+100
+0 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>rand_prog 10~
+mpmadd self quest 0 3 1
+if quest (0,3,$i) == 2
+  say I can engrave your name into your equipment.
+else
+  if quest (0,3,$i) == 3
+    say Engraving an item will also make it stronger.
+  endif
+endif
+~
+>speech_prog engrave~
+say Engrave it yourself, but here are my tools...
+mpechoat $n {178}Type: ENGRAVE <OBJECT>{308}
+~
+>give_prog i6325~
+mpjunk i6325
+mpecho $I examines the gem and makes it into a sword.
+mpoload 6326
+~
+|
+#9712
+Tanner~
+Tanner the Leather Worker~
+Tanner works here, sewing another patch onto a leather cap.~
+He looks to be an honest and hard working artisan who barely earns enough to
+keep himself going.
+~
+ACT_SENTINEL|ACT_SMART
+0
+0 S
+100 0 0 0d0+10000 1d100+51
+0 0
+POS_STANDING POS_STANDING SEX_MALE
+>greet_prog 100~
+say Welcome to my humble shop, $n.
+say Always remember to look at signs.
+smile $n
+~
+|
+#9713
+high warlock m9713~
+High Warlock~
+The High Warlock sits here playing with a miniature demon.~
+The High Warlock is wearing a black robe with a good, and swirling
+patterns on the sleeves and collar. The warlock is a small man, wearing a
+black glowing chain with a 4 pointed arrows eminating from the center.
+~
+ACT_SENTINEL|ACT_TRAIN|ACT_PRACTICE
+0
+0 S
+100 0 0 0d0+10000 1d100+51
+0 0
+POS_STANDING POS_STANDING SEX_MALE
+#9714
+Small bushes~
+Small bushes~
+Small bushes are growing here.~
+A small thicket of leafy bushes grow here.
+~
+ACT_SENTINEL
+AFF_BLIND|AFF_SNEAK
+0 S
+5 0 0 0d0+25 1d4+1
+0 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>death_prog 100~
+mpmadd $n gold 500
+~
+|
+#9715
+Large bushes~
+Large bushes~
+Large bushes are growing here here.~
+A larger thicket of bushes grow here.
+~
+ACT_SENTINEL
+AFF_BLIND|AFF_SNEAK
+0 S
+9 0 0 1d20+43 1d8+1
+0 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>death_prog 100~
+mpmadd $n gold 1000
+~
+|
+#9716
+alley cat~
+an alley cat~
+An alley cat stretches his paws here.~
+A scroungy alley cat stretches lazily.
+~
+ACT_WEAK|ACT_BODY
+AFF_SNEAK|AFF_HUNT
+50 S
+3 0 BODY_MOUTH|BODY_CLAW 1d2+16 2d2+0
+0 0
+POS_STANDING POS_STANDING SEX_MALE
+#9717
+lady~
+a lovely lady~
+A lady is here walking around.~
+A lovely lady mills about.
+~
+ACT_BODY|ACT_RACE
+0
+0 S
+15 0 0 0d0+150 9d2+0
+100 RACE_HUMAN
+POS_STANDING POS_STANDING SEX_NEUTRAL
+#9718
+chipmunk~
+a small chipmunk~
+A small chipmunk is here crawling in the bushes.~
+A small chipmunk chitters at you.
+~
+ACT_BODY|ACT_RACE
+AFF_BLIND|AFF_HIDE
+0 S
+3 0 0 1d2+16 3d2+0
+10 RACE_HUMAN
+POS_STANDING POS_STANDING SEX_MALE
+>rand_prog 4~
+mpecho {168}You hear something rustling through the leaves.
+~
+|
+#9719
+porcupine~
+a porcupine~
+A porcupine is walking here.~
+A prickly porcupine wiggles his way around.
+~
+ACT_RACE
+0
+0 S
+7 0 0 0d0+40 4d2+1
+2000 RACE_HUMAN
+POS_STANDING POS_STANDING SEX_NEUTRAL
+#9720
+thug~
+a thug~
+A thug is here standing in the shadows.~
+A dirty-looking thug looks as if he is hoping for a fight.
+~
+ACT_SCAVENGER|ACT_RACE
+AFF_SNEAK|AFF_HIDE
+0 S
+4 0 0 0d0+30 3d2+0
+1000 RACE_HUMAN
+POS_STANDING POS_STANDING SEX_MALE
+#9721
+bird~
+a bird~
+A small bird is looking at you.~
+A sultry song bird fills the air with harmony.
+~
+ACT_BODY|ACT_RACE
+AFF_FLYING
+0 S
+7 0 BODY_WING 1d12+30 1d7+2
+20 RACE_HUMAN
+POS_STANDING POS_STANDING SEX_FEMALE
+#9722
+snake~
+a snake~
+A snake is crawling through the grass~
+A snake slithers it way through the tall grasses.
+~
+ACT_BODY|ACT_RACE
+AFF_HIDE
+0 S
+8 BODY_HEAD BODY_MOUTH 1d16+36 5d2+0
+10 RACE_HUMAN
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>fight_prog 15~
+mpquiet on
+cast poison $n
+mpquiet off
+mpechoat $n {118}A snake bites you!
+mpechoaround $n A snake bites $n!
+~
+|
+#9723
+Foreigner~
+a foreigner~
+A foreigner from another city is here.~
+A foreigner has come to visit.
+~
+ACT_BODY|ACT_RACE
+0
+0 S
+15 BODY_HEAD BODY_ARM 0d0+150 9d2+0
+10000 RACE_HUMAN
+POS_STANDING POS_STANDING SEX_NEUTRAL
+#9724
+gate guard~
+a Roterodamum city guard~
+A Roterodamum city guard stands here.~
+A powerful looking Roterodamum city guard keeps a careful watch for trouble.
+~
+ACT_SENTINEL|ACT_SMART|ACT_BODY|ACT_RACE
+AFF_DETECT_HIDDEN
+0 S
+10 BODY_HEAD|BODY_ARM BODY_HEAD|BODY_HAND 1d25+51 7d2+0
+5000 RACE_HUMAN
+POS_STANDING POS_STANDING SEX_MALE
+#9725
+Vagabond~
+a vagabond~
+A vagabond is here looking for victims.~
+A wandering vagabond bumps into you.
+~
+ACT_BODY|ACT_RACE
+0
+0 S
+5 BODY_HEAD BODY_LEG 0d0+30 4d2+0
+0 RACE_HUMAN
+POS_STANDING POS_STANDING SEX_NEUTRAL
+#9726
+hustler~
+a hustler~
+A hustler is here, trying to recruit you.~
+A sly looking hustler pssts your way, hoping to let you in on the deal of a
+life time.
+~
+ACT_BODY|ACT_RACE
+0
+0 S
+10 0 BODY_LEG|BODY_ARM 1d25+51 5d2+1
+1000 RACE_HUMAN
+POS_STANDING POS_STANDING SEX_NEUTRAL
+#9727
+Beggar~
+a beggar~
+A beggar is here asking for a few coins.~
+The beggar looks like she is fed up with life.  Ten thousand is a good number.
+~
+ACT_SENTINEL|ACT_SMART|ACT_BODY|ACT_RACE
+0
+0 S
+1 BODY_HEAD BODY_LEG|BODY_ARM 0d0+10 1d2+1
+0 RACE_HUMAN
+POS_STANDING POS_STANDING SEX_FEMALE
+>greet_prog 100~
+say Please, I beg you.  Alms for the poor?
+~
+|
+#9728
+Beastly fido~
+a beastly fido~
+Beastly fido is here.~
+Fido is a small dog that has a awfull smell and pieces of rotting meat
+hanging from his mouth.
+~
+ACT_BODY|ACT_RACE
+0
+0 S
+1 0 0 0d0+10 1d2+1
+10 RACE_DARKELF
+POS_STANDING POS_STANDING SEX_NEUTRAL
+#9729
+Judge Pteer~
+Judge Pteer~
+Judge Pteer stands here.~
+A masked man with muscles bulging all over his body.  You can tell by the look
+in his eyes that he enjoys seeing you cower in his precense.
+~
+ACT_SENTINEL|ACT_RACE
+AFF_DETECT_INVIS
+0 S
+100 0 0 0d0+12000 1d100+51
+150000 RACE_HUMAN
+POS_STANDING POS_STANDING SEX_MALE
+#9732
+kyntel~
+Kyntel~
+Kyntel stills the huge sharpening stone as you enter.~
+Kyntel is an aging elf who wants to make his first million in gold before age
+50.  He used to want to make it before 45, 40, 35, 30, 25 and 20...but that was
+years ago.  He smiles as you show an interest in his wares.
+~
+ACT_SENTINEL|ACT_SMART
+AFF_DETECT_INVIS
+0 S
+100 0 0 1d2500+8509 10d10+100
+100000 0
+POS_STANDING POS_STANDING SEX_MALE
+>greet_prog 100~
+smile $n.
+say How may I be of help, $N?
+~
+|
+#9733
+Doogan~
+Doogan~
+Doogan looks at you calmly, wiping flour from his face with one hand.~
+A jolly round sort of man with a sparkling blue eyes and a cheery smile.  But
+you can see that he has many scars on his body.  Wonder if they are from baking
+or battling?
+~
+ACT_SENTINEL|ACT_SMART
+AFF_DETECT_INVIS|AFF_DETECT_HIDDEN
+0 S
+100 0 0 0d0+10000 1d100+51
+0 0
+POS_STANDING POS_STANDING SEX_MALE
+>speech_prog mice mouse~
+if quest (15,3,$n) == 0
+  say Yeah, they are damned annoying!
+  spit 
+  say I need some smart dude who can figure out how those
+  say high tech mouse traps from the general store work.
+  say Want to volunteer?
+  mpmset $n quest 15 3 1
+endif
+~
+>speech_prog yes volunteer~
+if quest (15,3,$n) == 1
+  say Well, visit Tresia and ask her about the mouse trap.
+  say I'd be delighted if you'd catch that damned mouse!
+  mpmset $n quest 15 3 2
+endif
+~
+>give_prog I9765~
+say Eeek!
+say Keep that scary gnome tech away from me!
+say Almost lost my thumb last time I touched it!
+give I9765 $n
+~
+>give_prog I9766~
+say Eeek!
+say Keep that scary gnome tech away from me!
+say Almost lost my thumb last time I touched it!
+give I9766 $n
+~
+>give_prog I9767~
+if quest (15,3,$n) == 4
+  mpjunk I9767
+  cheer $n
+  say Great!
+  say Go visit my friend in the general store.
+  say I'll make sure she'll have something for you.
+  mpmset $n quest 15 3 5
+endif
+~
+|
+#9734
+shelan~
+Shelan~
+Shelan walks around behind the counter, talking to himself.~
+Shelan looks old and senile, and yet, he looks like a very powerful wizard.
+He is equiped with fine clothing, and is wearing many fine rings and
+bracelets.  He eyes you warily as you gawk at his items.
+~
+ACT_SENTINEL
+AFF_DETECT_INVIS
+0 S
+100 0 0 0d0+10000 1d100+51
+0 0
+POS_STANDING POS_STANDING SEX_MALE
+#9735
+jeweller~
+the jeweller~
+The jeweller is standing behind the desk.~
+He is fat and has a content although watchful look on his face.
+~
+ACT_SENTINEL
+AFF_DETECT_INVIS
+0 S
+100 0 0 0d0+10000 1d100+51
+0 0
+POS_STANDING POS_STANDING SEX_MALE
+#9736
+monkey@~
+Monkey~
+Monkey stands here, pointing at the clock.~
+Even though your guildmaster looks bored, hairy, and very ape.. you can
+clearly see the vast amount of wisdom he possesses.
+~
+ACT_SENTINEL|ACT_TRAIN|ACT_PRACTICE
+0
+0 S
+100 0 0 0d0+10000 1d100+51
+0 0
+POS_STANDING POS_STANDING SEX_FEMALE
+#9737
+banker~
+the banker~
+The banker is here, counting money.~
+This human wears a pressed robe, which seems to shine with a light golden
+aura.  He's tall, with large muscles from dealing with all the gold.  His
+warm smile and strong physique almost guarantee your gold is safe with him.
+~
+ACT_SENTINEL|ACT_SMART
+AFF_DETECT_INVIS|AFF_DETECT_HIDDEN
+0 S
+100 0 0 1d2500+8509 10d10+100
+0 0
+POS_STANDING POS_STANDING SEX_FEMALE
+>all_greet_prog 100~
+mpforce $n bank balance
+~
+>bribe_prog 10000~
+mpecho $I carefully counts every coin.
+say That's quite a fortune $n!
+mpecho $I starts to fill a bag with gold.
+say There you go!
+smile $n
+mpoload 9760
+give i9760 $n
+~
+|
+#9738
+obelisk ethereal~
+ethereal obelisk~
+~
+0 5 1  = demise
+0 5 2  = manwe
+0 5 7  = grove
+0 5 9  = university
+~
+ACT_SENTINEL
+AFF_ETHEREAL
+0 S
+1 0 0 0d0+10 1d1+1
+0 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>repop_prog 100~
+mpat 8900 mpmload 9752
+mpat 8900 mpoload 9770 room
+mpat 8900 mposet i9770 sactimer 0
+mpat 1656 mpmload 9752
+mpat 1656 mpoload 9770 room
+mpat 1656 mposet i9770 sactimer 0
+mpat 19802 mpmload 9752
+mpat 19802 mpoload 9770 room
+mpat 19802 mposet i9770 sactimer 0
+mpat 2710 mpmload 9752
+mpat 2710 mpoload 9770 room
+mpat 2710 mposet i9770 sactimer 0
+mpat 1005 mpmload 9752
+mpat 1005 mpoload 9770 room
+mpat 1005 mposet i9770 sactimer 0
+mpat 14300 mpmload 9752
+mpat 14300 mpoload 9770 room
+mpat 14300 mposet i9770 sactimer 0
+~
+>speech_prog grove~
+if delayed ($i)
+  mpechoat $n {170}The obelisk seems to be about to transport $X
+else
+  if level ($n) > 25
+    if level ($n) < 99
+      mpecho {170}Laughter echoes through the temple.
+      break
+    endif
+  endif
+  mpdelay self 2 2 $n
+  mpecho {170}Tendrils of white magic start to spin around the obelisk.
+endif
+~
+>delay_prog 2~
+if existsroom ($X)
+  if rand (25)
+    mpecho {170}The obelisk shakes softly.
+    mpdelay self 1 2 $t
+  else
+    mpechoat $t {170}Tendrils of white magic coil about you, pulling you into the obelisk towards your destination.
+    mpechoaround $t {170}Tendrils of white magic coil about $t, pulling $t into the obelisk.
+    mptransfer $t 8900
+    mpat $t mpechoaround $t {170}$t steps out of the obelisk entwined by shrouds of white magic.
+  endif
+else
+  mpecho {170}The tendrils of magic vanish.
+~
+>speech_prog p wyvern~
+if delayed ($i)
+  mpechoat $n {170}The obelisk seems to be about to transport $X
+else
+  if level ($n) > 25
+    if level ($n) < 99
+      mpecho {170}Laughter echoes through the temple.
+      break
+    endif
+  endif
+  mpdelay self 2 3 $n
+  mpecho {170}Tendrils of white magic start to spin around the obelisk.
+endif
+~
+>delay_prog 3~
+if existsroom ($X)
+  if rand (25)
+    mpecho {170}The obelisk shakes softly.
+    mpdelay self 1 3 $t
+  else
+    mpechoat $t {170}Tendrils of white magic coil about you, pulling you into the obelisk towards your destination.
+    mpechoaround $t {170}Tendrils of white magic coil about $t, pulling $t into the obelisk.
+    mptransfer $t 1656
+    mpat $t mpechoaround $t {170}$t steps out of the obelisk entwined by shrouds of white magic.
+  endif
+else
+  mpecho {170}The tendrils of magic vanish.
+~
+>speech_prog university~
+if delayed ($i)
+  mpechoat $n {170}The obelisk seems to be about to transport $X
+else
+  if level ($n) > 25
+    if level ($n) < 99
+      mpecho {170}Laughter echoes through the temple.
+      break
+    endif
+  endif
+  mpdelay self 2 4 $n
+  mpecho {170}Tendrils of white magic start to spin around the obelisk.
+endif
+~
+>delay_prog 4~
+if existsroom ($X)
+  if rand (25)
+    mpecho {170}The obelisk shakes softly.
+    mpdelay self 1 4 $t
+  else
+    mpechoat $t {170}Tendrils of white magic coil about you, pulling you into the obelisk towards your destination.
+    mpechoaround $t {170}Tendrils of white magic coil about $t, pulling $t into the obelisk.
+    mptransfer $t 19802
+    mpat $t mpechoaround $t {170}$t steps out of the obelisk entwined by shrouds of white magic.
+  endif
+else
+  mpecho {170}The tendrils of magic vanish.
+~
+>speech_prog antarctica~
+if delayed ($i)
+  mpechoat $n {170}The obelisk seems to be about to transport $X
+else
+  if level ($n) > 25
+    if level ($n) < 99
+      mpecho {170}Laughter echoes through the temple.
+      break
+    endif
+  endif
+  mpdelay self 2 5 $n
+  mpecho {170}Tendrils of white magic start to spin around the obelisk.
+endif
+~
+>delay_prog 5~
+if existsroom ($X)
+  if rand (25)
+    mpecho {170}The obelisk shakes softly.
+    mpdelay self 1 5 $t
+  else
+    mpechoat $t {170}Tendrils of white magic coil about you, pulling you into the obelisk towards your destination.
+    mpechoaround $t {170}Tendrils of white magic coil about $t, pulling $t into the obelisk.
+    mptransfer $t 2710
+    mpat $t mpechoaround $t {170}$t steps out of the obelisk entwined by shrouds of white magic.
+  endif
+else
+  mpecho {170}The tendrils of magic vanish.
+~
+>speech_prog marsh~
+if delayed ($i)
+  mpechoat $n {170}The obelisk seems to be about to transport $X
+else
+  if level ($n) > 25
+    if level ($n) < 99
+      mpecho {170}Laughter echoes through the temple.
+      break
+    endif
+  endif
+  mpdelay self 2 6 $n
+  mpecho {170}Tendrils of white magic start to spin around the obelisk.
+~
+>delay_prog 6~
+if existsroom ($X)
+  if rand (25)
+    mpecho {170}The obelisk shakes softly.
+    mpdelay self 1 6 $t
+  else
+    mpechoat $t {170}Tendrils of white magic coil about you, pulling you into the obelisk towards your destination.
+    mpechoaround $t {170}Tendrils of white magic coil about $t, pulling $t into the obelisk.
+    mptransfer $t 1005
+    mpat $t mpechoaround $t {170}$t steps out of the obelisk entwined by shrouds of white magic.
+  endif
+else
+  mpecho {170}The tendrils of magic vanish.
+~
+>speech_prog woods~
+if delayed ($i)
+  mpechoat $n {170}The obelisk seems to be about to transport $X
+else
+  if level ($n) > 25
+    if level ($n) < 99
+      mpecho {170}Laughter echoes through the temple.
+      break
+    endif
+  endif
+  mpdelay self 2 7 $n
+  mpecho {170}Tendrils of white magic start to spin around the obelisk.
+~
+>delay_prog 7~
+if existsroom ($X)
+  if rand (25)
+    mpecho {170}The obelisk shakes softly.
+    mpdelay self 1 7 $t
+  else
+    mpechoat $t {170}Tendrils of white magic coil about you, pulling you into the obelisk towards your destination.
+    mpechoaround $t {170}Tendrils of white magic coil about $t, pulling $t into the obelisk.
+    mptransfer $t 14300
+    mpat $t mpechoaround $t {170}$t steps out of the obelisk entwined by shrouds of white magic.
+  endif
+else
+  mpecho {170}The tendrils of magic vanish.
+~
+>speech_prog gnome gnomedell~
+if delayed ($i)
+  mpechoat $n The obelisk seems to be about to transport $X
+else
+  if level ($n) > 25
+    if level ($n) < 99
+      mpecho Laughter echoes through the temple.
+      break
+    endif
+  endif
+  mpdelay self 2 8 $n
+  mpecho Tendrils of white magic start to spin around the obelisk.
+~
+>delay_prog 8~
+if existsroom ($X)
+  if rand (25)
+    mpecho The obelisk shakes softly.
+    mpdelay self 1 7 $t
+  else
+    mpechoat $t Tendrils of white magic coil about you, pulling you into the obelisk towards your destination.
+    mpechoaround $t Tendrils of white magic coil about $t, pulling $t into the obelisk.
+    mptransfer $t 1501
+    mpat $t mpechoaround $t $t steps out of the obelisk entwined by shrouds of white magic.
+  endif
+else
+  mpecho The tendrils of magic vanish.
+~
+|
+#9739
+Tresia~
+Tresia~
+Tresia, the Shopkeeper, is here refilling the shelves.~
+Her cheeks are flushed and some locks of her auburn hair have strayed from the
+long braid down her back, but she has a smile on her face when she sees you.  If
+you could read her thoughts, you'd know she was thinking of her lover ...
+Gregorius.
+~
+ACT_SENTINEL|ACT_SMART
+AFF_DETECT_INVIS|AFF_DETECT_HIDDEN
+0 S
+100 0 0 1d2500+8509 10d10+100
+10000 0
+POS_STANDING POS_STANDING SEX_FEMALE
+>all_greet_prog 100~
+if quest (15,3,$n) == 5
+  say I see the mouse hunt was succesful
+  smile $n
+  say If you give me the trap back I will
+  say give you something that will be of
+  say more use for you now.
+  mpmset $n quest 15 3 6
+endif
+~
+>speech_prog mouse trap mousetrap~
+if quest (15,3,$n) == 2
+  say That's expensive stuff...
+  say They don't make them like that anymore,
+  say whoever 'they' were.
+  ponder 
+  say Bring me a bag of gold as payment and you
+  say will get your trap.
+  say Simply give the banker 10000 gold coins
+  say and he'll fill you a bag with it.
+  mpmset $n quest 15 3 3
+endif
+~
+>give_prog I9760~
+if quest (15,3,$n) == 3
+  mpjunk I9760
+  mpoload 9765
+  give I9765 $n
+  say Good luck with the mouse hunting, $n.
+  mpmset $n quest 15 3 4
+~
+>give_prog I9765~
+if quest (15,3,$n) == 6
+  mpjunk I9765
+  mpoload 9768
+  give I9768 $n
+  say I think you will like this $n
+  cap 
+  mpmset $n quest 15 3 7
+endif
+~
+>give_prog I9766~
+if quest (15,3,$n) == 6
+  mpjunk I9766
+  mpoload 9768
+  give I9768 $n
+  say I think you will like this $n
+  cap 
+  mpmset $n quest 15 3 7
+endif
+~
+>speech_prog gregorius~
+giggle 
+say He's such a sweetie!!
+say And so handsome!
+blush 
+~
+|
+#9740
+citral~
+Citral~
+An old dark elf stands here.~
+Smoking a weird looking kind of cigar he eyes you up with a little smile.
+An aura of danger surrounds him.. though he looks pretty harmless.
+~
+ACT_SENTINEL|ACT_TRAIN|ACT_PRACTICE
+0
+0 S
+100 0 0 0d0+10000 1d100+51
+0 0
+POS_STANDING POS_STANDING SEX_MALE
+#9741
+xavier~
+Xavier~
+Xavier stands here, looking at the clock.~
+Even though your guildmaster looks old, tired, and very bald.. you can
+clearly see the vast amount of knowledge he possesses.  He is wearing
+fine magic clothing, and you notice that he is surrounded by a blue
+shimmering aura.
+~
+ACT_SENTINEL|ACT_TRAIN|ACT_PRACTICE
+0
+0 S
+100 0 0 0d0+10000 1d100+51
+0 0
+POS_STANDING POS_STANDING SEX_FEMALE
+#9742
+etherealMouse~
+an ethereal mouse~
+The mighty ethereal mouse ethereals around here.~
+~
+ACT_SENTINEL
+AFF_ETHEREAL
+0 S
+1 0 0 1d0+10 1d1+1
+0 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>rand_prog 15~
+if quest (0,4,$i) == 0
+  mpecho You hear a rustling sound from under the counter.
+endif
+if quest (0,4,$i) == 2
+  mpforce doogan say Bloody mice!
+  mpforce doogan say They always eat my cheese when I go to bed!
+  mpforce doogan groan
+endif
+if quest (0,4,$i) == 4
+or quest (0,4,$i) == 8
+or quest (0,4,$i) == 12
+  if existsroom (i9766)
+    mppurge i9766
+    mpoload 9765 room
+    mpoload 9767 room
+    mpecho {088}
+    mpecho {110}You hear the sound of a sharp smack while blood splatters on your boots!
+  endif
+endif
+if quest (0,4,$i) == 6
+  mpecho You hear a squeeking sound from under the counter.
+endif
+if quest (0,4,$i) == 10
+  mpecho You hear the patter of little feet.
+endif
+if quest (0,4,$i) == 14
+  mpecho You see a little mouse running through the store and disappearing through the opened door.
+  mppurge self
+  break
+endif
+mpmadd self quest 0 4 1
+~
+|
+#9743
+Herzog trainer~
+Herzog the Trainer~
+Herzog is standing here, watching.~
+He is tall and broad, with dark curling hair and a full beard.  He has a
+powerful sword at his hip, and a dangerous dagger at his waist.  His cool grey
+eyes regard you carefully.
+~
+ACT_SENTINEL|ACT_TRAIN|ACT_PRACTICE
+0
+0 S
+100 0 0 0d0+10000 1d100+51
+0 0
+POS_STANDING POS_STANDING SEX_MALE
+#9744
+falcon~
+a trained falcon~
+A trained falcon flies circles above his Master's head here.~
+~
+ACT_BODY|ACT_RACE
+0
+0 S
+5 0 BODY_MOUTH|BODY_EYE|BODY_WING|BODY_CLAW 1d6+27 1d5+3
+0 RACE_PHOENIX
+POS_STANDING POS_STANDING SEX_MALE
+#9745
+rattlesnake~
+a rattlesnake~
+A rattlesnake rests around its Master's neck here.~
+~
+ACT_SMART|ACT_BODY|ACT_RACE
+AFF_SNEAK
+0 S
+10 0 BODY_MOUTH|BODY_EYE|BODY_TAIL 0d0+100 1d10+6
+0 RACE_HUMAN
+POS_STANDING POS_STANDING SEX_NEUTRAL
+#9746
+skunk~
+a skunk~
+A skunk sits next to its Master here.~
+~
+ACT_BODY|ACT_RACE
+0
+0 S
+15 0 BODY_MOUTH|BODY_EYE|BODY_CLAW 0d0+250 10d2+0
+0 RACE_HUMAN
+POS_STANDING POS_STANDING SEX_NEUTRAL
+#9747
+wolf~
+a wolf~
+A large, silver wolf stands next to its Master here.~
+~
+ACT_BODY|ACT_RACE
+0
+0 S
+20 0 BODY_MOUTH|BODY_CLAW 0d0+300 1d20+13
+0 RACE_HUMAN
+POS_STANDING POS_STANDING SEX_MALE
+#9748
+dragonette~
+a dragonette~
+A dragonette sits on her Master's shoulder here.~
+~
+ACT_BODY|ACT_RACE
+AFF_INVISIBLE|AFF_DETECT_INVIS|AFF_FLYING
+0 S
+25 0 BODY_HIP|BODY_WING|BODY_TAIL 0d0+400 1d25+16
+0 RACE_HUMAN
+POS_STANDING POS_STANDING SEX_FEMALE
+#9749
+Tigress~
+a tigress~
+A tigress prowls around here.~
+~
+ACT_BODY|ACT_RACE
+AFF_DETECT_HIDDEN|AFF_SNEAK
+0 S
+30 0 BODY_MOUTH|BODY_CLAW 0d0+600 1d30+20
+0 RACE_HUMAN
+POS_STANDING POS_STANDING SEX_FEMALE
+#9750
+frog~
+a large frog~
+A large frog sits here.~
+~
+ACT_SENTINEL|ACT_BODY|ACT_RACE
+0
+0 S
+15 0 0 0d0+150 9d2+0
+10000 RACE_HUMAN
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>act_prog p looks at you.~
+mpechoat $n {138}The frog tells you 'Go back.  You will die if you travel further.'
+mpechoat $n {138}The frog tells you 'Read the HELP ARENA.'
+~
+|
+#9751
+small sprite~
+a small sprite~
+A small sprite holding a magical wand flutters here.~
+The sprite catches you looking at him and gives you a wry smile.
+~
+ACT_SMART|ACT_BODY|ACT_RACE
+AFF_UNDERSTAND|AFF_TONGUES
+0 S
+15 0 0 0d0+150 9d2+0
+30000 RACE_SPRITE
+POS_STANDING POS_STANDING SEX_MALE
+>delay_prog 1~
+if existsroom ($X)
+  if quest (0,1,$i) == 1
+    mpecho {178}The sprite glows brightly!
+    mpechoaround $t $t disappears suddenly!
+    mptransfer $t 4414
+    mpat 4414 mpforce $t look auto
+    mpat 4414 mpechoaround $t $t appears suddenly!
+    mpat 4414 mpecho The sprite claps his hands and is gone.
+    wake 
+    mpmset self quest 0 1 0
+    break
+  endif
+  if level ($t) < 26
+    mpecho {138}J{038}ingle {128}J{028}ingle {158}J{058}ingle{178}!
+    mpechoat $t The small sprite looks at you conspiratorially.
+    tell $t For a small donation (100 gold), I can get you in to
+    tell $t see the big man himself.  You know, the North Pole.
+  endif
+~
+>bribe_prog 100~
+if level ($n) > 26
+  laugh 
+  cackle 
+  say You are much too old to sit on Santa's lap!
+  break
+endif
+if quest (0,1,$i) == 0
+  mpoload 9720
+  give i9720 $n
+  tell $n Take this recall scroll.  If you wish to recall to
+  tell $n Roterodamum later, type 'RECALL SET' now.
+  rest 
+  mpecho The sprite tightens his face in concentration...
+  mpdelay self 6 1 $n
+  mpmset self quest 0 1 1
+else
+  smile $n
+  tell $n Hold your horses, I'm working on it!
+endif
+~
+>greet_prog 100~
+if delayed ($i)
+  break
+endif
+if level ($n) < 26
+  mpdelay self 1 1 $n
+~
+|
+#9752
+ethereal obelisk~
+an ethereal obelisk~
+~
+~
+ACT_SENTINEL
+AFF_ETHEREAL
+0 S
+1 0 0 0d0+10 0d0+2
+0 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>speech_prog rot roterodamum~
+if delayed ($i)
+  mpechoat $n {170}The obelisk seems to be about to transport $X
+else
+  if level ($n) > 25
+    if level ($n) < 99
+      mpecho {170}Laughter echoes through the temple.
+      break
+    endif
+  endif
+  mpdelay self 2 1 $n
+  mpecho {170}Tendrils of white magic start to spin around the obelisk.
+~
+>delay_prog 1~
+if existsroom ($X)
+  if rand (25)
+    mpecho {170}The obelisk shakes softly.
+    mpdelay self 1 1 $t
+  else
+    mpechoat $t {170}Tendrils of white magic coil about you, pulling you into the obelisk towards your destination.
+    mpechoaround $t {170}Tendrils of white magic coil about $t, pulling $t into the obelisk.
+    mptransfer $t 9702
+    mpat $t mpechoaround $t {170}$t steps out of the obelisk entwined by shrouds of white magic.
+  endif
+else
+  mpecho {170}The tendrils of magic vanish.
+~
+|
+#9753
+haldir elf~
+Haldir~
+Haldir sits here waiting to speak to you.~
+He stands about six feet tall, with long, dark hair and deep brown eyes.  He
+wears an outfit of mossy green, and tall boots rise almost to his knees.  His
+face is lineless, but knowing.
+~
+ACT_SENTINEL|ACT_SMART
+0
+0 S
+50 0 0 1d625+1197 1d50+14
+0 0
+POS_STANDING POS_STANDING SEX_MALE
+>greet_prog 50~
+emote smiles as the door opens.
+say Welcome!  I am so pleased to see you.
+say I can identify an object for you, for a small fee,
+say if you type identify, and the name of the questionable article.
+~
+|
+#9754
+testing creature~
+the testing creature~
+The testing creature stands here.~
+The testing creature is a small golem, it's very skilled in killing newbies.
+~
+ACT_SENTINEL
+AFF_TRUESIGHT|AFF_SANCTUARY|AFF_HASTE|AFF_STABILITY
+0 S
+100 0 0 1d2500+5510 1d100+52
+0 0
+POS_STANDING POS_STANDING SEX_NEUTRAL
+>death_prog 100~
+if quest (0,4,$i) == 1
+  if level ($n) < 51
+    if level ($n) > 9
+      if whichgod ($n) == god_neutral
+        mpquiet on
+        mpoload 60
+        give i60 $n
+        cast 'cure blindness'
+        cast 'cure blindness' $n
+        mpquiet off
+        echo {148}$n has chosen the path of Ulmo!
+      endif
+    endif
+  endif
+endif
+if quest (0,4,$i) == 2
+  if level ($n) < 51
+    if level ($n) > 9
+      if whichgod ($n) == god_neutral
+        mpquiet on
+        mpoload 59
+        give i59 $n
+        cast 'cure blindness' $n
+        mpquiet off
+        echo {168}$n has chosen the path of Hypnos!
+      endif
+    endif
+  endif
+~
+|
+#9755
+stallion horse steed~
+a horse~
+A sleek ebony horse paws at the ground here.~
+A beautiful ebony horse, famed in the misty forests of Roterodamum, stands here.
+ His nostrils flare as he watches your approach, his hoof pawing at the ground.
+~
+ACT_MOUNT|ACT_SMART|ACT_BODY
+AFF_SANCTUARY|AFF_PASS_DOOR|AFF_HASTE
+500 S
+40 BODY_LEG|BODY_TAIL BODY_LEG|BODY_TAIL 1d400+746 1d40+10
+0 0
+POS_STANDING POS_STANDING SEX_MALE
+#9756
+roan horse~
+a roan~
+A strawberry roan stands here tossing her mane.~
+~
+ACT_MOUNT|ACT_SMART|ACT_BODY
+AFF_SANCTUARY|AFF_PASS_DOOR|AFF_HASTE
+500 S
+40 BODY_HEAD|BODY_TAIL BODY_HEAD|BODY_TAIL 1d400+746 1d40+10
+0 0
+POS_STANDING POS_STANDING SEX_FEMALE
+#0
+
+
+#SHOPS
+9700 ITEM_TYPE_SCROLL ITEM_TYPE_POTION ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING  100  50  0 23
+9704 ITEM_TYPE_DRINK_CON ITEM_TYPE_FOOD ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING  100  50  0 23
+9710 ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING  100  50  0 23
+9711 ITEM_TYPE_ARMOR ITEM_TYPE_BOAT ITEM_TYPE_LIGHT ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING  100  50  0 23
+9712 ITEM_TYPE_ARMOR ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING  100  50  0 23
+9732 ITEM_TYPE_WEAPON ITEM_TYPE_AMMO ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING  100  50  0 23
+9733 ITEM_TYPE_FOOD ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING  100  50  0 23
+9734 ITEM_TYPE_WAND ITEM_TYPE_SCROLL ITEM_TYPE_STAFF ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING  100  50  0 23
+9735 ITEM_TYPE_TREASURE ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING ITEM_TYPE_LIGHT ITEM_TYPE_NOTHING  100  50  0 23
+9739 ITEM_TYPE_CONTAINER ITEM_TYPE_DRINK_CON ITEM_TYPE_LIGHT ITEM_TYPE_NOTHING ITEM_TYPE_TRASH  100  50  0 23
+9740 ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING  100  50  0 23
+9753 ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING ITEM_TYPE_NOTHING  100  50  0 23
+0
+
+
+#SPECIALS
+S
+
+
+#OBJECTS
+#9700
+split oak tree~
+a split~
+A charred split in a huge oak tree catches your attention.~
+~
+ITEM_TYPE_CONTAINER
+0
+0
+100 0 0 0 0 0 0 0
+1 10 20
+#9701
+pearl necklace~
+a pearl necklace~
+A pearl necklace lies forgotten here.~
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_MAGIC|ITEM_FLAG_ANTI_EVIL
+ITEM_WEAR_TAKE|ITEM_WEAR_NECK
+6 0 0 0 0 0 0 0
+5 25 10
+A APPLY_CON 2 0
+A APPLY_SAVING_SPELL -2 0
+A APPLY_WIS 2 0
+#9702
+phosphorous plate~
+a phosphorous plate~
+A small glowing object.~
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_GLOW|ITEM_FLAG_MAGIC|ITEM_FLAG_NODROP|ITEM_FLAG_ANTI_GOOD|ITEM_FLAG_AUTO_ENGRAVE
+ITEM_WEAR_TAKE|ITEM_WEAR_BODY|ITEM_WEAR_SHIELD
+6 0 0 0 0 0 0 0
+25 500 15
+A APPLY_HITROLL 2 0
+A APPLY_DAMROLL 2 0
+A APPLY_STR 2 0
+#9703
+spear~
+a keldon spear~
+a long spear is standing here.~
+~
+ITEM_TYPE_WEAPON
+ITEM_FLAG_ANTI_GOOD
+ITEM_WEAR_TAKE|ITEM_WEAR_WIELD
+WEAPONTYPE_SPEAR 3 7 WEAPON_PIERCE 0 0 0 0
+5 10 15
+#9704
+warhammer~
+a warhammer~
+a big hammer is lying here~
+~
+ITEM_TYPE_WEAPON
+ITEM_FLAG_DARK|ITEM_FLAG_MAGIC
+ITEM_WEAR_TAKE|ITEM_WEAR_WIELD
+WEAPONTYPE_MACE 2 10 WEAPON_CRUSH 0 0 0 0
+15 25 12
+A APPLY_STR 2 0
+A APPLY_AC 5 0
+#9705
+Great Warrior Statue~
+Great Warrior Statue~
+A statue of Deadbolt the Great stands here~
+A statue of a great warrior is here, slaying his opponents and grieving for his
+friends.
+~
+ITEM_TYPE_FURNITURE
+0
+0
+0 0 0 0 0 0 0 0
+1 10 1
+#9706
+Earth nature~
+Statue of earth~
+A statue of Earth, mother of all life stands here.~
+~
+ITEM_TYPE_FURNITURE
+0
+0
+0 0 0 0 0 0 0 0
+1 10 1
+#9707
+Sign~
+Sign~
+A sign is hanging here on the wall.~
+{158}Welcome to the General Store
+
+            {078}Type 'list' to see what there is to buy
+            {078}Type 'sell' to try and sell something
+            {078}Type 'value' to have us appraise one of your items.
+
+                                  {158}-The Management
+~
+ITEM_TYPE_FURNITURE
+ITEM_FLAG_NODROP|ITEM_FLAG_NOREMOVE
+0
+0 0 0 0 0 0 0 0
+99 99 1
+#9708
+fountain~
+a fountain~
+a small fountain is here providing water.~
+Nothing really special about this fountain, it just does it's job.
+~
+ITEM_TYPE_FOUNTAIN
+0
+0
+0 0 LIQ_WATER 0 0 0 0 0
+1 10 1
+#9709
+fountain~
+a fountain~
+A small white fountain gushes forth here.~
+It is very nice.  Made from white marble.
+~
+ITEM_TYPE_FOUNTAIN
+0
+0
+0 0 LIQ_WATER 0 0 0 0 0
+1 10 1
+#9710
+badge~
+a badge~
+A badge has been left here.~
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_MAGIC|ITEM_FLAG_AUTO_ENGRAVE
+ITEM_WEAR_TAKE|ITEM_WEAR_BODY|ITEM_WEAR_ARMS
+2 0 0 0 0 0 0 0
+1 100 2
+A APPLY_WIS 1 0
+A APPLY_INT 1 0
+A APPLY_CON 1 0
+#9711
+ring diamond wedding~
+a diamond wedding ring~
+A diamond wedding ring has been left here.~
+A slender gold band set with a marquise-cut four carat blue-white solitaire.
+Inscribed on the inside of the band is: 'Your loving husband'
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_MAGIC|ITEM_FLAG_AUTO_ENGRAVE
+ITEM_WEAR_TAKE|ITEM_WEAR_FINGER
+2 0 0 0 0 0 0 0
+1 1000000 4
+A APPLY_DAMROLL 1 0
+A APPLY_STR 1 0
+A APPLY_HITROLL 1 0
+#9712
+ring diamond wedding~
+a diamond wedding ring~
+A diamond wedding ring has been left here.~
+A slender gold band set with a marquise-cut four carat blue-white solitaire.
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_MAGIC|ITEM_FLAG_AUTO_ENGRAVE
+ITEM_WEAR_TAKE|ITEM_WEAR_FINGER
+2 0 0 0 0 0 0 0
+1 1000000 1
+#9713
+nothing~
+nothing~
+A sign is hanging here on the wall.~
+You look at nothing.. very amuzing..
+~
+ITEM_TYPE_FURNITURE
+ITEM_FLAG_NODROP|ITEM_FLAG_NOREMOVE
+0
+0 0 0 0 0 0 0 0
+99 99 1
+#9714
+coke~
+a bottle of coke~
+A small bottle of coke lies on the ground here.~
+~
+ITEM_TYPE_DRINK_CON
+0
+ITEM_WEAR_TAKE|ITEM_WEAR_HOLD
+1 1 LIQ_COKE 0 0 0 0 0
+1 30 1
+#9715
+coke~
+a two gallon bottle of coke~
+A huge bottle of coke lies on the ground here.~
+~
+ITEM_TYPE_DRINK_CON
+0
+ITEM_WEAR_TAKE|ITEM_WEAR_HOLD
+500 500 LIQ_COKE 0 0 0 0 0
+20 500 5
+#9716
+barrel beer~
+a barrel of beer~
+A beer barrel has been left here.~
+~
+ITEM_TYPE_DRINK_CON
+0
+ITEM_WEAR_TAKE
+50 50 LIQ_BEER 0 0 0 0 0
+65 300 1
+#9717
+bottle beer~
+a bottle of beer~
+A beer botte has been left here.~
+~
+ITEM_TYPE_DRINK_CON
+0
+ITEM_WEAR_TAKE
+8 8 LIQ_BEER 0 0 0 0 0
+10 20 1
+#9718
+bottle firebreather~
+a bottle of firebreather~
+A bottle of firebreather has been left here.~
+~
+ITEM_TYPE_DRINK_CON
+0
+ITEM_WEAR_TAKE
+8 8 LIQ_FIREBRT 0 0 0 0 0
+10 50 1
+#9719
+bottle local~
+a bottle of local specialty~
+A dark bottle has been left here.~
+~
+ITEM_TYPE_DRINK_CON
+0
+ITEM_WEAR_TAKE
+8 8 LIQ_LOCALSPC 0 0 0 0 0
+10 20 1
+#9720
+recall scroll~
+a scroll of recall~
+a scroll of recall lies on the ground here.~
+~
+ITEM_TYPE_SCROLL
+0
+ITEM_WEAR_TAKE
+1 SPELL_WORD_OF_RECALL -1 -1 0 0 0 0
+1 10 1
+#9721
+dagger~
+a dagger~
+a dagger with a long thin blade is here.~
+~
+ITEM_TYPE_WEAPON
+0
+ITEM_WEAR_TAKE|ITEM_WEAR_WIELD
+WEAPONTYPE_DAGGER 2 3 WEAPON_PIERCE 0 0 0 0
+4 200 1
+#9722
+small sword~
+a small sword~
+a small sword lies here.~
+~
+ITEM_TYPE_WEAPON
+0
+ITEM_WEAR_TAKE|ITEM_WEAR_WIELD
+WEAPONTYPE_SWORD 2 5 WEAPON_STAB 0 0 0 0
+2 300 3
+#9723
+long sword~
+a long sword~
+A long sword has been left here.~
+~
+ITEM_TYPE_WEAPON
+0
+ITEM_WEAR_TAKE|ITEM_WEAR_WIELD
+WEAPONTYPE_SWORD 2 6 WEAPON_SLICE 0 0 0 0
+13 1500 8
+#9724
+torch~
+a torch~
+a large torch~
+~
+ITEM_TYPE_LIGHT
+0
+ITEM_WEAR_TAKE
+0 0 48 0 0 0 0 0
+1 16 1
+#9725
+lantern~
+a hooded brass lantern~
+a hooded brass lantern has been left here.~
+It is a large and robust but somewhat battered oil lantern made from brass,
+equipped with a handle to make it handy and a hood to protect its flame.
+Some letters have been scratched on its bottom.
+~
+ITEM_TYPE_LIGHT
+0
+ITEM_WEAR_TAKE
+0 0 96 0 0 0 0 0
+2 60 4
+E
+letters~
+They say, "Use 'hold lantern' to activate."
+~
+#9726
+bag~
+a bag~
+A small bag.~
+~
+ITEM_TYPE_CONTAINER
+0
+ITEM_WEAR_TAKE
+50 CONT_CLOSEABLE -1 0 0 0 0 0
+1 20 2
+#9727
+box~
+a box~
+A small box.~
+~
+ITEM_TYPE_CONTAINER
+0
+ITEM_WEAR_TAKE
+50 0 0 0 0 0 0 0
+1 50 5
+#9728
+scroll identify~
+a scroll of identify~
+A scroll has carelessly been left here.~
+The scroll has a magic formula drawn upon it:
+
+                 ???
+                ?   ?
+                   ?
+                  ?
+                  ?
+                  *
+~
+ITEM_TYPE_SCROLL
+0
+ITEM_WEAR_TAKE
+2 SPELL_IDENTIFY -1 -1 0 0 0 0
+1 200 2
+#9729
+yellow potion~
+a yellow potion of see invisible~
+A yellow potion has carelessly been left here~
+The potion has a small label 'Detect The Invisible'.
+~
+ITEM_TYPE_POTION
+0
+ITEM_WEAR_TAKE
+5 SPELL_DETECT_INVIS -1 -1 0 0 0 0
+1 100 1
+#9731
+yellow scroll~
+a yellow scroll of see invisible~
+A yellow scroll has carelessly been left here~
+The scroll is all about 'Detect The Invisible'.
+~
+ITEM_TYPE_SCROLL
+0
+ITEM_WEAR_TAKE
+5 SPELL_DETECT_INVIS -1 -1 0 0 0 0
+1 100 1
+#9732
+understanding potion~
+a potion of understanding~
+A potion of understanding has been left here.~
+A small warning reads:
+
+'Doesn't mean you understand the meaning of all the crap ya hear'
+~
+ITEM_TYPE_POTION
+0
+ITEM_WEAR_TAKE
+10 SPELL_UNDERSTAND -1 -1 0 0 0 0
+1 50 1
+#9733
+tongues potion~
+a potion of tongues~
+A potion of speak in tongues has been left here.~
+A warning reads:
+
+'Deaf people still won't dig shit of what ya say'
+~
+ITEM_TYPE_POTION
+0
+ITEM_WEAR_TAKE
+10 SPELL_TONGUES -1 -1 0 0 0 0
+1 50 1
+#9734
+bronze breast plate~
+a bronze breast plate~
+A bronze breast plate is lying on the ground.~
+~
+ITEM_TYPE_ARMOR
+0
+ITEM_WEAR_TAKE|ITEM_WEAR_BODY
+4 0 0 0 0 0 0 0
+6 1000 3
+#9735
+scale mail jacket~
+a scale mail jacket~
+A scale mail jacket lies in the gutter here.~
+~
+ITEM_TYPE_ARMOR
+0
+ITEM_WEAR_TAKE|ITEM_WEAR_BODY
+4 0 0 0 0 0 0 0
+5 400 2
+#9736
+raft~
+a raft~
+A raft has been left here.~
+The raft looks rather primitive.
+~
+ITEM_TYPE_BOAT
+0
+ITEM_WEAR_TAKE
+0 0 0 0 0 0 0 0
+25 400 1
+#9737
+leather jerkin~
+a leather jerkin~
+A lether jerkin has been left here.~
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_MAGIC
+ITEM_WEAR_TAKE|ITEM_WEAR_BODY
+5 0 0 0 0 0 0 0
+2 100 5
+A APPLY_MOVE 10 0
+#9738
+leather cap~
+a leather cap~
+a leather cap has been left here.~
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_MAGIC
+ITEM_WEAR_TAKE|ITEM_WEAR_HEAD
+5 0 0 0 0 0 0 0
+2 50 5
+A APPLY_HIT 3 0
+#9739
+leather pants~
+a pair of leather pants~
+a pair of leather pants has been left here.~
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_MAGIC
+ITEM_WEAR_TAKE|ITEM_WEAR_LEGS
+5 0 0 0 0 0 0 0
+2 200 5
+A APPLY_DEX 1 0
+#9740
+leather boots~
+a pair of leather boots~
+a pair of leather boots has been left here.~
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_MAGIC
+ITEM_WEAR_TAKE|ITEM_WEAR_FEET
+5 0 0 0 0 0 0 0
+2 200 5
+A APPLY_MANA 10 0
+#9741
+leather gloves~
+a pair of leather gloves~
+a pair of leather gloves has been left here.~
+~
+ITEM_TYPE_ARMOR
+0
+ITEM_WEAR_TAKE|ITEM_WEAR_HANDS
+5 0 0 0 0 0 0 0
+2 200 5
+#9742
+leather sleeves~
+a pair of leather sleeves~
+a pair of leather sleeves lies on the ground here.~
+~
+ITEM_TYPE_ARMOR
+0
+ITEM_WEAR_TAKE|ITEM_WEAR_ARMS
+5 0 0 0 0 0 0 0
+2 300 5
+#9743
+metal shield~
+a small metal shield~
+a small metal shield is lying on the ground here.~
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_MAGIC
+ITEM_WEAR_TAKE|ITEM_WEAR_SHIELD
+5 0 0 0 0 0 0 0
+2 500 5
+A APPLY_STR 1 0
+#9744
+leather bracer~
+a small leather bracer~
+a small bracer lies in the dirt here.~
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_MAGIC
+ITEM_WEAR_TAKE|ITEM_WEAR_WRIST
+5 0 0 0 0 0 0 0
+2 200 5
+A APPLY_DEX 1 0
+#9745
+iron bracer~
+an iron bracer~
+an iron bracer is lying on the ground.~
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_MAGIC
+ITEM_WEAR_TAKE|ITEM_WEAR_WRIST
+5 0 0 0 0 0 0 0
+5 5000 5
+A APPLY_DAMROLL 1 0
+#9746
+bench~
+the bench~
+A white painted wooden bench is standing here.~
+It is a quite heavy but a very comfortable bench.  It is placed with its
+front towards the river side so you watch the river.
+~
+ITEM_TYPE_FURNITURE
+0
+0
+0 0 0 0 0 0 0 0
+1 10 1
+#9747
+skin water buffalo~
+a buffalo water skin~
+a bloated dead buffalo is on the floor here.~
+~
+ITEM_TYPE_DRINK_CON
+0
+ITEM_WEAR_TAKE
+10 10 LIQ_WATER 0 0 0 0 0
+5 30 1
+#9748
+Standard issue sword~
+a standard issue sword~
+you see a standard issue sword~
+~
+ITEM_TYPE_WEAPON
+ITEM_FLAG_MAGIC
+ITEM_WEAR_TAKE|ITEM_WEAR_WIELD
+WEAPONTYPE_SWORD 3 4 WEAPON_SLICE 0 0 0 0
+5 100 11
+A APPLY_HITROLL 2 0
+A APPLY_DAMROLL 2 0
+#9749
+vest~
+a standard issue vest~
+You see a standard issue vest here.~
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_MAGIC
+ITEM_WEAR_TAKE|ITEM_WEAR_BODY
+6 0 0 0 0 0 0 0
+5 100 11
+A APPLY_HITROLL 2 0
+A APPLY_DAMROLL 2 0
+#9750
+shield~
+standard issue shield~
+You see a standard issue shield here.~
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_MAGIC
+ITEM_WEAR_TAKE|ITEM_WEAR_SHIELD
+6 0 0 0 0 0 0 0
+5 100 11
+A APPLY_HITROLL 2 0
+#9751
+cloak~
+standard issue cloak~
+A standard issie cloak is here.~
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_MAGIC
+ITEM_WEAR_TAKE|ITEM_WEAR_NECK
+6 0 0 0 0 0 0 0
+5 100 11
+A APPLY_STR 1 0
+#9752
+war banner~
+a war banner~
+A war banner is on the floor here.~
+~
+ITEM_TYPE_LIGHT
+ITEM_FLAG_MAGIC
+ITEM_WEAR_TAKE
+0 0 96 0 0 0 0 0
+3 10 11
+A APPLY_SAVING_BREATH -2 0
+A APPLY_AC -2 0
+#9753
+armor wand~
+a wand of armor~
+a small wand lies here.~
+~
+ITEM_TYPE_WAND
+0
+ITEM_WEAR_TAKE|ITEM_WEAR_HOLD
+5 3 3 SPELL_ARMOR 0 0 0 0
+3 200 1
+#9754
+crossbow~
+a crossbow~
+A wooden crossbow lies here.~
+~
+ITEM_TYPE_WEAPON
+0
+ITEM_WEAR_TAKE|ITEM_WEAR_WIELD
+WEAPONTYPE_CROSSBOW 5 2 WEAPON_CRUSH 0 0 0 0
+10 500 10
+#9755
+bolt~
+crossbow bolt~
+A crossbow bolt lies here.~
+~
+ITEM_TYPE_AMMO
+ITEM_FLAG_ANTI_GOOD|ITEM_FLAG_ANTI_EVIL|ITEM_FLAG_ANTI_NEUTRAL|ITEM_FLAG_AUTO_ENGRAVE
+ITEM_WEAR_TAKE
+12 5 10 5 0 0 0 0
+1 10 10
+#9756
+letter~
+a sealed letter~
+A sealed letter lies forgotten on the ground here.~
+With a crappy handwriting it reads 'For Sunny' on it.. maybe you should
+deliver it to 'Sunny' ?
+~
+ITEM_TYPE_TRASH
+0
+ITEM_WEAR_TAKE
+0 0 0 0 0 0 0 0
+1 100 1
+#9757
+caviar sandwich~
+a caviar sandwich~
+A delicious sandwich lies on the ground here.~
+It looks delicous.  But it won't fill your stomach for too long..
+~
+ITEM_TYPE_FOOD
+0
+ITEM_WEAR_TAKE
+4 0 0 0 0 0 0 0
+1 500 1
+#9758
+loaf bread~
+a loaf of bread~
+A loaf of bread lies in the dirt here.~
+It looks like it would be a good meal.
+~
+ITEM_TYPE_FOOD
+0
+ITEM_WEAR_TAKE
+48 0 0 0 0 0 0 0
+1 10 1
+#9759
+lockpick~
+a beginner's lockpick~
+A slender piece of steel is here.~
+It is fashioned of thin steel, a slender wedge at its tip, decorated with a
+miniature skull at the base.
+~
+ITEM_TYPE_LOCKPICK
+0
+ITEM_WEAR_TAKE|ITEM_WEAR_HOLD
+15 50 0 0 0 0 0 0
+1 1000 10
+#9760
+bag gold~
+bag of gold~
+A brown bag has been left here.~
+As you peek inside of it you gasp.  It's filled with a zillion gold coins!
+~
+ITEM_TYPE_WEAPON
+0
+ITEM_WEAR_TAKE|ITEM_WEAR_WIELD
+WEAPONTYPE_FLAIL 2 5 WEAPON_POUND 0 0 0 0
+15 10000 5
+#9761
+straw~
+a straw~
+A straw is lying here.~
+You see a small straw, it would do a nice job if you stick it in a bottle
+and 'suck'.
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_AUTO_ENGRAVE
+ITEM_WEAR_TAKE|ITEM_WEAR_HOLD
+3 0 0 0 0 0 0 0
+1 10 1
+P 1
+TRIG_UNKNOWN 100 suck
+OPROG_IF_HAS_OBJECT 9715 2 3
+P 2
+TRIG_VOID
+OPROG_GOD_COMMAND
+mpechoaround $ {168}You see $ stick a straw into a huge bottle of coke.
+mpechoat $ {168}You stick a straw into a huge bottle of coke.
+drink I9715~
+P 3
+TRIG_VOID
+OPROG_GOD_COMMAND
+mpechoaround $ {168}You see $ stick a straw into his mouth and suck in some air.
+mpechoat $ {168}You stick a straw into your mouth and suck in some air.~
+#9762
+stone sharpening~
+a sharpening stone~
+A stone lies on the ground here.~
+This stone was once used to sharpen weapons, but it's used up and worthless
+now.
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_MAGIC|ITEM_FLAG_ANTI_GOOD|ITEM_FLAG_ANTI_EVIL|ITEM_FLAG_NOREMOVE
+ITEM_WEAR_TAKE|ITEM_WEAR_HOLD
+5 0 0 0 0 0 0 0
+2 10 15
+A APPLY_DAMROLL 2 0
+A APPLY_STR 2 0
+#9764
+slice cheese~
+a slice of cheese~
+A yummie slice of cheese lies here.~
+You see a delicious slice of yellow cheese.
+~
+ITEM_TYPE_FOOD
+0
+ITEM_WEAR_TAKE
+8 0 0 0 0 0 0 0
+1 10 5
+#9765
+mouse trap~
+a mouse trap~
+A mouse trap stands here.~
+It's a weird looking mouse trap.  Made from light colored wood and a metal
+that has the color of copper.  The mechanism must have been thought up by
+some kind of genius gnome.  It works with a little pedal that makes the
+copper part of the device slam with a scary speed on something that presses
+the pedal.  In order to use it you should PLACE some cheese on it before
+you ACTIVATE it.
+~
+ITEM_TYPE_FURNITURE
+0
+ITEM_WEAR_TAKE
+0 0 0 0 0 0 0 0
+1 500000 10
+P 1
+TRIG_UNKNOWN 100 place
+OPROG_IF_HAS_OBJECT 9764 3 2
+P 2
+TRIG_VOID
+OPROG_ECHO
+You have no cheese to place on the mouse trap.~
+P 3
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 0 1 = 0 5 4
+P 4
+TRIG_VOID
+OPROG_ECHO
+You have already placed some cheese on the mouse trap.~
+P 5
+TRIG_VOID
+OPROG_GOD_COMMAND
+mpechoat self {168}You place some cheese on the mouse trap.
+mpjunk i9764~
+P 5
+TRIG_VOID
+OPROG_QUEST_SET 0 1 1
+P 6
+TRIG_UNKNOWN 100 activate
+OPROG_OBJECT_QUEST_IF 0 1 = 1 8 7
+P 7
+TRIG_VOID
+OPROG_ECHO
+You might want to place some cheese on it before activating it?~
+P 8
+TRIG_VOID
+OPROG_ECHO
+You activate the mouse trap.~
+P 8
+TRIG_VOID
+OPROG_GOD_COMMAND
+mpoload 9766~
+P 8
+TRIG_VOID
+OPROG_JUNK
+#9766
+mouse trap~
+a mouse trap~
+A mouse trap stands here.~
+It's a weird looking mouse trap.  Made from light colored wood and a metal
+that has the color of copper.  The mechanism must have been thought up by
+some kind of genius gnome.  It works with a little pedal that makes the
+copper part of the device slam with a scary speed on something that presses
+the pedal.  The trap has been activated and some cheese is placed on it.
+Now all you have to do is place it on the ground where you expect a mouse
+to snoop around.
+~
+ITEM_TYPE_FURNITURE
+0
+ITEM_WEAR_TAKE
+0 0 0 0 0 0 0 0
+1 500000 10
+#9767
+dead mouse~
+a dead mouse~
+A dead mouse lies here.~
+The poor lil thing's skull has been crushed *sniff*
+~
+ITEM_TYPE_FOOD
+0
+ITEM_WEAR_TAKE
+1 0 0 0 0 0 0 0
+1 10 10
+#9768
+black staff~
+a black staff~
+A hard black staff lies here.~
+This staff, magical and powerful, is carved in mystical runes.
+~
+ITEM_TYPE_STAFF
+ITEM_FLAG_DARK|ITEM_FLAG_MAGIC|ITEM_FLAG_INVENTORY
+ITEM_WEAR_TAKE|ITEM_WEAR_WIELD|ITEM_WEAR_HOLD
+20 2 2 SPELL_SANCTUARY 0 0 0 0
+1 500000 15
+E
+runes~
+It says ...  For wisdom and might, wield me.  For sanctuary from the storms,
+brandish.
+~
+A APPLY_WIS 2 0
+A APPLY_CON 2 0
+A APPLY_STR 2 0
+C
+~
+FLAG_CLASS_WARRIOR|FLAG_CLASS_GLADIATOR|FLAG_CLASS_MARAUDER|FLAG_CLASS_NINJA|FLAG_CLASS_DRUID|FLAG_CLASS_SORCERER|FLAG_CLASS_SHAMAN|FLAG_CLASS_WARLOCK
+#9769
+black obelisk~
+a black obelisk~
+A black obelisk rises from the ground here.~
+{078}
+   +----------------------------------------------------------------+
+   |  Simply say the name of the location to which you would like   |
+   |  to travel and the obelisk will magically transport you!       |
+   |                                                                |
+   |   Available locations include:       Recommended levels:       |
+   |                                                                |
+   |   Holy Grove                         Levels  5 - 15            |
+   |   Whispering Woods                   Levels  5 - 15            |
+   |   Gnomedell                          Levels  5 - 20            |
+   |   Antarctica                         Levels 10 - 20            |
+   |   Wyvern's Tower                     Levels 10 - 20            |
+   |   Manitou Marsh                      Levels 15 - 25            |
+   |   University                         Levels 15 - 25            |
+   +----------------------------------------------------------------+
+~
+ITEM_TYPE_TREASURE
+0
+0
+0 0 0 0 0 0 0 0
+100 100 1
+#9770
+black obelisk~
+a black obelisk~
+A black obelisk rises from the ground here.~
+{078}
+{078}      _____________________________________________________________
+{078}    /                                                              \
+{078}   |  Simply say the name of the location to which you would like   |
+{078}   |  to travel and the obelisk will magically transport you!       |
+{078}   |                                                                |
+{078}   |   Available locations include:       Recommended levels:       |
+{078}   |                                                                |
+{078}   |   Roterodamum                        Levels  5 - 25            |
+{078}   |                                                                |
+{078}    \______________________________________________________________/
+~
+ITEM_TYPE_TRASH
+0
+0
+0 0 0 0 0 0 0 0
+100 100 1
+#9771
+magical wand~
+a magical wand~
+A magical wand lies here.~
+~
+ITEM_TYPE_TRASH
+ITEM_FLAG_NODROP|ITEM_FLAG_NOREMOVE|ITEM_FLAG_INVENTORY
+ITEM_WEAR_TAKE
+0 0 0 0 0 0 0 0
+1 10 1
+#0
+
+
+#ROOMS
+#9700
+The Bank~
+You've entered a small office.  The roof seems a little shaky, but otherwise
+it's a very nice place.  There is a large safe located in one corner of the
+room, and a little counter in another.
+~
+0 ROOM_NO_MOB|ROOM_INDOORS|ROOM_BANK|ROOM_SAFE SECT_INSIDE
+DDIR_WEST
+You hear the booming roar of Thunder Road.~
+~
+0 -1 9722
+S
+#9701
+The Misty Forest of Roterodamum~
+You are walking in the forest. Trees loom over your head and the air is
+buzzing with insects.  The howling of creatures and rustling of critters seems
+to echo through the thick brush.  A fine, almost shimmering, mist falls gently
+from the heavens.
+~
+0 0 SECT_FOREST
+DDIR_EAST
+~
+~
+0 -1 9735
+DDIR_SOUTH
+~
+~
+0 -1 9754
+DDIR_WEST
+~
+~
+0 -1 9756
+S
+#9702
+Entrance to the Temple~
+You stand at the entrance to the land's most sacred Temple.  It is here that the
+ancient arts of magic and war are whispered of. Often those in need of a cure
+come here to pray seeking the attention of the Gods.
+~
+0 ROOM_NO_MOB|ROOM_SAFE SECT_CITY
+DDIR_NORTH
+The great temple of Roterodamum lies before you.~
+~
+0 -1 9703
+DDIR_EAST
+You see a massive building rising in the distance.~
+~
+0 -1 9796
+DDIR_SOUTH
+Roterodamum Square stretches out to you.~
+~
+0 -1 9755
+DDIR_WEST
+You smell a foul stench coming from a small building.~
+~
+0 -1 9798
+DDIR_UP
+The Tower of Training looms above you.~
+~
+0 -1 9709
+S
+#9703
+The Sacred Temple of Roterodamum~
+A large statue representing the five gods stands here, looking almost alive.
+The room is scattered with offerings of flora and fauna and sacrifices of the
+first born of a flock.  It is here all quests begin and end.
+~
+0 ROOM_NO_MOB|ROOM_INDOORS|ROOM_SAFE SECT_INSIDE
+DDIR_SOUTH
+~
+~
+0 -1 9702
+S
+#9704
+The Blacksmith Guild~
+This is one of the very few guilds in the city of Roterodamum that allows
+everyone to enter.  Black smoke from the smithy's fire curls and dances around
+the ceiling. Loud clinking of hammers rivet the room. Several sweaty, burly men
+labor here, their muscles bulging from wielding the tools of a blacksmith.
+There is a sign on the wall.
+~
+0 ROOM_NO_MOB|ROOM_INDOORS|ROOM_SAFE SECT_INSIDE
+DDIR_EAST
+~
+~
+0 -1 9800
+DDIR_SOUTH
+~
+~
+0 -1 9710
+E
+sign~
+The sign reads:
+
+  Welcome to the Blacksmith Guild.  Feel free to look around, but be aware
+  that nothing is for sale.  We serve those that serve themselves.
+
+You may wish to ENGRAVE an item here.
+
+  Engraving an item will make it stronger, but costs gold.
+  An engraved object cannot be used by a thief.
+  An engraved object's strenght depends on the level of the engraver.
+~
+S
+#9705
+Thunder Road~
+You are walking through a busy area where people are doing their daily shopping.
+You hear shopkeepers shouting out bargain prices for their wares.  Rowdy sounds
+come from the south. Apparently, the patrons in the tavern are enjoying
+themselves!
+~
+0 0 SECT_CITY
+DDIR_EAST
+~
+~
+0 -1 9755
+DDIR_WEST
+~
+~
+0 -1 9706
+S
+#9706
+Thunder Road~
+You are walking through a busy area where people are doing their daily shopping.
+Shoppers haggle over prices with the locals, but all in good humor.  Drifting in
+from the south are delightful aromas, coming from the local bakery.
+~
+0 0 SECT_CITY
+DDIR_NORTH
+~
+~
+0 -1 9739
+DDIR_EAST
+~
+~
+0 -1 9705
+DDIR_SOUTH
+~
+~
+0 -1 9740
+DDIR_WEST
+~
+~
+0 -1 9711
+S
+#9707
+Thunder Road~
+You make your way through a crowded thoroughfare where people are hurrying to
+complete their purchases for the day.  Shopkeepers coax and coerce, offering
+their best merchandise to potential customers.  To the south is Tanner's Leather
+Goods, offering wares made from only the finest hides.
+~
+0 0 SECT_CITY
+DDIR_EAST
+Towards the Eastern Gate~
+~
+0 -1 9708
+DDIR_SOUTH
+Leather Goods this way.~
+~
+0 -1 9738
+DDIR_WEST
+Back to Roterodamum.~
+~
+0 -1 9755
+S
+#9708
+Thunder Road~
+Busy shoppers weave their way through the hectic streets, their arms filled with
+packages from the day's shopping.  To the south lies the Warrior's Guild and to
+the northeast is the Blacksmith's Guild.
+~
+0 0 SECT_CITY
+DDIR_NORTH
+You see the beginning of a dark alley.~
+~
+0 -1 9814
+DDIR_EAST
+~
+~
+0 -1 9710
+DDIR_SOUTH
+~
+~
+0 -1 9737
+DDIR_WEST
+~
+~
+0 -1 9707
+S
+#9709
+Above the Temple Square~
+There is a nice view here of the Temple Square.  While the sight of clouds as
+they drift by is satisfying, as always, you think perhaps you should move along
+and continue your exploration.
+~
+0 ROOM_NO_MOB SECT_CITY
+DDIR_EAST
+~
+~
+0 -1 3760
+DDIR_DOWN
+~
+~
+0 -1 9702
+S
+#9710
+Corner of Thunder Road and Hailstone Lane~
+You have reached a busy corner, and you step back hurriedly to get out of the
+way of the bustling crowds.  To the west, one can enter the busy shopping
+district of Thunder Road.  In the south trails Hailstone Lane.
+~
+0 0 SECT_CITY
+DDIR_NORTH
+You hear the bang of an anvil.~
+~
+0 -1 9704
+DDIR_EAST
+You see a forest in the distance.~
+~
+0 -1 9727
+DDIR_SOUTH
+You see quiet Hailstone Lane.~
+~
+0 -1 9713
+DDIR_WEST
+You hear booming Thunder Road.~
+~
+0 -1 9708
+DDIR_UP
+You see a military building.~
+~
+0 -1 9783
+S
+#9711
+Corner of Thunder Road and Lightning Blvd~
+You continue on your stroll through the city.  To the south lies Lightning Blvd.
+where the wealthiest citizens of Roterodamum seem to gather.
+~
+0 0 SECT_CITY
+DDIR_EAST
+~
+~
+0 -1 9706
+DDIR_SOUTH
+~
+~
+0 -1 9712
+DDIR_WEST
+~
+~
+0 -1 9725
+DDIR_UP
+~
+~
+0 -1 9782
+S
+#9712
+Lightning Blvd~
+This boulevard is lined with unusual flora, native to this land.  Wrought iron
+fences line the path and benches are dotted here and there.  A few of the more
+financially secure patrons of the city mill about enjoying their day.
+~
+0 0 SECT_CITY
+DDIR_NORTH
+~
+~
+0 -1 9711
+DDIR_SOUTH
+~
+~
+0 -1 9715
+S
+#9713
+Hailstone Lane~
+This simple paved lane doesn't hold much excitement.  It is quiet, unadorned and
+just trails along.  This is the poorer section of the city, so it is not given
+much attention.  However, alongside of the road, a few wildflowers struggle to
+add a touch of beauty to this little lane.
+~
+0 0 SECT_CITY
+DDIR_NORTH
+You see a busy corner.~
+~
+0 -1 9710
+DDIR_EAST
+You see gladiators strut in.~
+~
+0 -1 9803
+DDIR_SOUTH
+You see quiet Hailstone Lane.~
+~
+0 -1 9714
+E
+wildflowers~
+Small daisies, pale pink primrose and tender yellow buttercups grow here.
+~
+S
+#9714
+Hailstone Lane~
+You move along a lane leading north and south.  A few houses line both sides of
+the paved path, their small walkways lined in small flowers.  Smoke curls from a
+few of the chimneys, and the scent of home-cooking wafts through the air.
+~
+0 0 SECT_CITY
+DDIR_NORTH
+You hear a booming roar in the distance.~
+~
+0 -1 9713
+DDIR_EAST
+You see a small shop.~
+~
+0 -1 15000
+DDIR_SOUTH
+You see a busy corner.~
+~
+0 -1 9722
+S
+#9715
+Lightning Blvd~
+Just a few of the more wealthy patrons are here, discussing politics or some
+juicy gossip.  A few brightly colored songbirds sing a melody of joy adding to
+the beauty of this cobblestone road.
+~
+0 0 SECT_CITY
+DDIR_NORTH
+~
+~
+0 -1 9712
+DDIR_SOUTH
+~
+~
+0 -1 9716
+DDIR_WEST
+You see the entrance to the guild halls.~
+~
+0 -1 30900
+DDIR_UP
+You see hoovering steps.~
+~
+0 -1 30950
+S
+#9716
+Corner of Lightning Blvd and Tornado Alley~
+This is the corner of Lightning Blvd. and Tornado Alley.  Lightning Blvd. runs
+to the north and Tornado Alley to the east.  To the south is a bank and looking
+up you can see an enormous, saddled griffon sunbathing on a roof, its wings
+barely moving.
+~
+0 0 SECT_CITY
+DDIR_NORTH
+~
+~
+0 -1 9715
+DDIR_EAST
+~
+~
+0 -1 9717
+DDIR_SOUTH
+~
+~
+0 -1 16014
+DDIR_UP
+~
+~
+0 -1 9781
+S
+#9717
+Tornado Alley~
+This street is a whirlwind of activity.  People buzz about tending to their
+business.  The distinct hum of Sorcery comes from the north and to the south is
+a charming little general store.
+~
+0 0 SECT_CITY
+DDIR_NORTH
+~
+~
+0 -1 9733
+DDIR_EAST
+~
+~
+0 -1 9718
+DDIR_SOUTH
+~
+~
+0 -1 9786
+DDIR_WEST
+~
+~
+0 -1 9716
+S
+#9718
+Tornado Alley~
+This street is simply a whirlwind of activity.  People are rushing all around.
+Vendors and marketpeople do their best to lure customers into their shops.
+~
+0 0 SECT_CITY
+DDIR_NORTH
+~
+~
+0 -1 9734
+DDIR_EAST
+~
+~
+0 -1 9719
+DDIR_WEST
+~
+~
+0 -1 9717
+S
+#9719
+Rainbow Square~
+You are standing on a large square in the city.  People pass you by as they
+hurry to complete their errands.  A large statue stands in the center here, and
+pigeons fly on and off of its shoulder.  To the east and west lies Tornado
+Alley, probably the busiest street in the city.  To the north lies Rainbow
+Street and to the south you see the southern gate.
+~
+0 ROOM_SAFE SECT_CITY
+DDIR_NORTH
+~
+~
+0 -1 9724
+DDIR_EAST
+~
+~
+0 -1 9720
+DDIR_SOUTH
+~
+~
+0 -1 9730
+DDIR_WEST
+~
+~
+0 -1 9718
+S
+#9720
+Tornado Alley~
+The hustle and bustle of Tornado Alley takes your breath away.  The citizenry of
+Roterodamum hurry in and out of shops, and vendors and marketpeople do their
+best to lure customers into their store.
+~
+0 0 SECT_CITY
+DDIR_NORTH
+~
+~
+0 -1 9801
+DDIR_EAST
+~
+~
+0 -1 9721
+DDIR_WEST
+~
+~
+0 -1 9719
+S
+#9721
+Tornado Alley~
+This is probably the busiest street in Roterodamum.  People hurry in and out of
+the heavily stocked shops.  Vendors and marketpeople do their best to lure new
+customers into their store.  Kyntel's Weapons is to the north and Gouden's
+Jewelry is to the south.
+~
+0 0 SECT_CITY
+DDIR_NORTH
+You see a dangerous shop.~
+~
+0 -1 9736
+DDIR_EAST
+You see a busy corner.~
+~
+0 -1 9722
+DDIR_SOUTH
+You see a shop of great beauty.~
+~
+0 -1 9797
+DDIR_WEST
+You see a darkish alley.~
+~
+0 -1 9720
+S
+#9722
+Corner of Hailstone Lane and Tornado Alley ~
+This is the corner of Hailstone Lane and Tornado Alley.  Going north takes one
+up Hailstone Lane and going west leads down Tornado Alley.  Directly east is the
+main bank of Roterodamum.
+~
+0 0 SECT_CITY
+DDIR_NORTH
+You see quiet Hailstone Lane.~
+~
+0 -1 9714
+DDIR_EAST
+You see a small financial institution.~
+~
+0 -1 9700
+DDIR_WEST
+You see a darkish alley.~
+~
+0 -1 9721
+DDIR_UP
+You see a small military building.~
+~
+0 -1 9780
+S
+#9723
+Rainbow Street~
+You are walking through a highly traversed street in the city.  People are
+milling all around with merchandise and wares.  Selling or buying, you can do it
+all here on this little street.  To the west you find the Inn.
+~
+0 0 SECT_CITY
+DDIR_NORTH
+~
+~
+0 -1 9755
+DDIR_SOUTH
+~
+~
+0 -1 9724
+DDIR_WEST
+~
+~
+0 -1 9787
+DDIR_UP
+~
+~
+0 -1 9817
+S
+#9724
+Rainbow Street~
+You are walking through a highly traversed street in the city.  People are
+milling all around with merchandise and wares.  Selling or buying, you can do it
+all here on this little street.  You smile at the busy hustle and bustle.
+~
+0 0 SECT_CITY
+DDIR_NORTH
+~
+~
+0 -1 9723
+DDIR_SOUTH
+~
+~
+0 -1 9719
+DDIR_UP
+You see the entrance to a sacred Hallway.~
+~
+0 -1 30930
+S
+#9725
+The Western Gate~
+This is the western gate of the city of Roterodamum.  These massive gates
+protect the city at night from bandits and robbers, while during the day they
+are watched over by city guards.
+~
+0 ROOM_NO_MOB SECT_CITY
+DDIR_EAST
+~
+~
+0 -1 9711
+DDIR_WEST
+~
+~
+0 -1 9726
+S
+#9726
+Outside the City~
+You are walking outside the city.
+~
+0 ROOM_NO_MOB SECT_CITY
+DDIR_EAST
+~
+~
+0 -1 9725
+DDIR_WEST
+~
+~
+0 -1 6000
+S
+#9727
+The Eastern Gate~
+This is the eastern gate of the city of Roterodamum.  These massive gates
+protect the city at night from bandits and robbers, while during the day they
+are watched over by city guards.
+~
+0 ROOM_NO_MOB SECT_CITY
+DDIR_EAST
+~
+~
+0 -1 9728
+DDIR_WEST
+~
+~
+0 -1 9710
+S
+#9728
+Outside the City~
+The noise of the city is quieter here.  There is a narrow gravel path stretching
+to the east, and in the distance looms a large forest.  To the west stand the
+tall, wrought-iron gates of Roterodamum, the ancient city.
+~
+0 ROOM_NO_MOB SECT_CITY
+DDIR_EAST
+You see a forest in the distance.~
+~
+0 -1 9729
+DDIR_WEST
+You see ancient Roterodamum.~
+~
+0 -1 9727
+S
+#9729
+Outside the City~
+The sounds of the city are in the distance, and a small gravel path leads both
+east and west.  To the south you see an important looking Guild.
+~
+0 ROOM_NO_MOB SECT_CITY
+DDIR_EAST
+You see a forest looming ahead.~
+~
+0 -1 17225
+DDIR_SOUTH
+You see an important Guild.~
+~
+0 -1 30910
+DDIR_WEST
+You see the gates of Roterodamum.~
+~
+0 -1 9728
+S
+#9730
+The Southern Gate~
+This is the southern gate of the city of Roterodamum.  These massive gates
+protect the city at night from bandits and robbers, while during the day they
+are watched over by city guards.
+~
+0 ROOM_NO_MOB SECT_CITY
+DDIR_NORTH
+~
+~
+0 -1 9719
+DDIR_SOUTH
+~
+~
+0 -1 9731
+S
+#9731
+Path in the forest~
+This path seems highly traveled.  Soft pine needles cushion your feet as you
+walk, and tall trees and fields of barley surround you. To the north lies
+Roterodamum.
+~
+0 ROOM_NO_MOB SECT_FIELD
+DDIR_NORTH
+~
+~
+0 -1 9730
+DDIR_SOUTH
+~
+~
+0 -1 9750
+DDIR_WEST
+~
+~
+0 -1 9741
+S
+#9732
+Shadow's Path. ~
+This is the school of the unseen.  Only ninjas are allowed here.  There is
+a large practice yard here and a fighting ring in the center of the room.
+~
+0 ROOM_NO_MOB|ROOM_INDOORS|ROOM_ALLOW_NIN SECT_CITY
+DDIR_UP
+~
+~
+0 -1 9736
+S
+#9733
+Sorcerer's Guildhall~
+This is the Magical Experiments Laboratory.  Dark smoke-stained stones arch
+over numerous huge oaken tables, most of these cluttered with strange looking
+pipes and flasks.  The floor is covered with half-erased pentagrams and even
+weirder symbols, and a blackboard in a dark corner has only been partially
+cleaned, some painful looking letters faintly visible.  A well in the middle
+of the floor leads down into darkness.  Vile smells waft from the depths.
+~
+0 ROOM_NO_MOB|ROOM_INDOORS|ROOM_SAFE|ROOM_ALLOW_SOR SECT_INSIDE
+DDIR_SOUTH
+~
+~
+0 -1 9717
+S
+#9734
+Monkey's School of Mystical Healing.~
+This is the Guild of Shamans.  Here a shaman can profit and learn from the
+wisdom gained by Monkey in his long life.  Although Monkey always followed
+the way of healing he also wanders on the path of Harming.
+~
+0 ROOM_NO_MOB|ROOM_INDOORS|ROOM_SAFE|ROOM_ALLOW_SHA SECT_INSIDE
+DDIR_SOUTH
+~
+~
+0 -1 9718
+S
+#9735
+In the forest~
+You are walking in the forest, trees are looming over your head and the air
+is buzzing with insects.  The howling of creatures and rustling of critters
+are constantly filling the air.  The bushes are thick and difficult to get
+through.
+~
+0 0 SECT_FOREST
+DDIR_EAST
+You see the entrance area to a tower.~
+~
+0 -1 43000
+DDIR_WEST
+~
+~
+0 -1 9701
+S
+#9736
+Kyntel's Weapons~
+Various weapons hang on the walls in here. Sunlight streams in through the large
+window, causing the countertop to gleam softly.  Behind the big counter stands
+an impressive looking fellow sharpening a shortsword.  You see a sign on the
+southern wall.
+~
+0 ROOM_NO_MOB|ROOM_INDOORS|ROOM_NO_RECALL SECT_INSIDE
+DDIR_SOUTH
+~
+~
+0 -1 9721
+DDIR_DOWN
+~
+~
+0 -1 9732
+E
+sign~
+.               {148}School of the unseen, invitations only.
+~
+S
+#9737
+The warriors guild hall~
+You are standing in the warrior's guildhall.  Here people talk about their
+adventures or about their times as a mercenary for hire.  Small decorative
+chairs and tables fill the room as well as a practice and training hall in
+the back.
+~
+0 ROOM_NO_MOB|ROOM_INDOORS|ROOM_SAFE|ROOM_ALLOW_WAR SECT_INSIDE
+DDIR_NORTH
+~
+~
+0 -1 9708
+S
+#9738
+Tanner's Leather Goods~
+An acidic smell fills this large shop.  Along the walls are numerous shelves
+containing various types of animal hide, and a large iron pot, filled with
+boiling water, hangs in the crackling fireplace.  In the middle of the shop is a
+large oak table. A wooden sign is hanging above the fireplace.
+~
+0 ROOM_NO_MOB|ROOM_INDOORS|ROOM_NO_RECALL SECT_INSIDE
+DDIR_NORTH
+Thunder Road is to the north.~
+~
+0 -1 9707
+E
+sign~
+.                     {128}Welcome to Tanner's Leather Goods
+
+        {078}Type 'list' to see what is for sale.
+        {078}Type 'buy item' to purchase an item.
+        {078}Type 'sell item' to sell an item.
+        {078}Type 'value item' to ask Tanner to give you a price.
+
+                                    {128}- The Management
+~
+S
+#9739
+Shelan's Wizardry and Potions~
+The power here overwhelms you.  The shelves are filled with many exotic and
+powerful potions. Crystal balls glow with soft, magical auras, and there is a
+delightful scent in the air.
+~
+0 ROOM_NO_MOB|ROOM_INDOORS SECT_INSIDE
+DDIR_SOUTH
+~
+~
+0 -1 9706
+DDIR_UP
+~
+~
+0 -1 9789
+S
+#9740
+Doogan's Bread and Delicacies~
+You are standing in the bakery of Doogan, known for his excellent bread rolls
+and iced cakes.  A huge counter is set in the middle of the shop.  There are
+a lot of different types of bread being sold here.
+~
+0 ROOM_NO_MOB|ROOM_INDOORS|ROOM_NO_RECALL SECT_INSIDE
+DDIR_NORTH
+~
+~
+0 -1 9706
+S
+#9741
+In the Forest~
+You are walking in the forest, trees are looming over your head and the air
+is buzzing with insects.  The howling of creatures and rustling of critters
+are constantly filling the air.  The bushes are thick and difficult to get
+through.
+~
+0 0 SECT_FOREST
+DDIR_EAST
+~
+~
+0 -1 9731
+DDIR_SOUTH
+~
+~
+0 -1 9743
+S
+#9742
+In the Forest~
+You are walking in the forest, trees are looming over your head and the air
+is buzzing with insects.  The howling of creatures and rustling of critters
+are constantly filling the air.  The bushes are thick and difficult to get
+through.
+~
+0 0 SECT_FOREST
+DDIR_SOUTH
+~
+~
+0 -1 9745
+S
+#9743
+In the Forest~
+You are walking in the forest, trees are looming over your head and the air
+is buzzing with insects.  The howling of creatures and rustling of critters
+are constantly filling the air.  The bushes are thick and difficult to get
+through.
+~
+0 0 SECT_FOREST
+DDIR_NORTH
+~
+~
+0 -1 9741
+DDIR_SOUTH
+~
+~
+0 -1 9747
+DDIR_WEST
+~
+~
+0 -1 9744
+S
+#9744
+An Oasis of Peace and Silence~
+In this place surrounded by plants and animals a druid can completely train
+his skills and spells to maximum capacity.  An old druid stands here helping
+and guiding your practicing.
+~
+0 ROOM_NO_MOB|ROOM_SAFE|ROOM_ALLOW_DRU SECT_FOREST
+DDIR_EAST
+~
+~
+0 -1 9743
+S
+#9745
+A Path in the Forest~
+This path seems highly traveled.  Soft pine needles cushion your feet as you
+walk, and tall trees and fields of barley surround you.  It is probably the main
+connection from Roterodamum and the land of Durdania.  To the south lies an
+immense forest and to the north is the city of Roterodamum.
+~
+0 ROOM_NO_MOB SECT_FIELD
+DDIR_NORTH
+~
+~
+0 -1 9742
+DDIR_SOUTH
+~
+~
+0 -1 9751
+DDIR_WEST
+~
+~
+0 -1 9750
+S
+#9746
+In the Forest~
+You are walking in the forest, trees are looming over your head and the air
+is buzzing with insects.  The howling of creatures and rustling of critters
+are constantly filling the air.  The bushes are thick and difficult to get
+through.
+~
+0 0 SECT_FOREST
+DDIR_EAST
+~
+~
+0 -1 9751
+DDIR_WEST
+~
+~
+0 -1 9747
+S
+#9747
+In the Forest~
+You are walking in the forest, trees are looming over your head and the air
+is buzzing with insects.  The howling of creatures and rustling of critters
+are constantly filling the air.  The bushes are thick and difficult to get
+through.
+~
+0 0 SECT_FOREST
+DDIR_NORTH
+~
+~
+0 -1 9743
+DDIR_EAST
+~
+~
+0 -1 9746
+S
+#9748
+In the Forest~
+You are walking in the forest, trees are looming over your head and the air
+is buzzing with insects.  The howling of creatures and rustling of critters
+are constantly filling the air.  The bushes are thick and difficult to get
+through.
+~
+0 0 SECT_FOREST
+DDIR_NORTH
+~
+~
+0 -1 9749
+DDIR_SOUTH
+You see a beautiful meadow.~
+~
+0 -1 30920
+DDIR_WEST
+~
+~
+0 -1 9751
+S
+#9749
+Western River Bank~
+You are now on the western side of the river, south of the city.  You hear
+creatures rustling in the bushes surrounding you.  A small porcupine walks
+nearby, looking at you curiously.  A small path leads to the south.
+~
+0 0 SECT_FOREST
+DDIR_EAST
+~
+~
+0 -1 9764
+DDIR_SOUTH
+~
+~
+0 -1 9748
+S
+#9750
+Path in the forest~
+This path seems highly traveled.  Soft pine needles cushion your feet as you
+walk, and tall trees and fields of barley surround you.  It is probably the main
+connection from Roterodamum and the land of Durdania.  To the south lies an
+immense forest and to the north is the city of Roterodamum.
+~
+0 ROOM_NO_MOB SECT_FIELD
+DDIR_NORTH
+~
+~
+0 -1 9731
+DDIR_EAST
+~
+~
+0 -1 9745
+S
+#9751
+A Path in the Forest~
+This path seems highly traveled.  Soft pine needles cushion your feet as you
+walk, and tall trees and fields of barley surround you.  It is probably the main
+connection from Roterodamum and the land of Durdania.  To the south lies an
+immense forest and to the north is the city of Roterodamum.
+~
+0 ROOM_NO_MOB SECT_FIELD
+DDIR_NORTH
+~
+~
+0 -1 9745
+DDIR_EAST
+~
+~
+0 -1 9748
+DDIR_SOUTH
+~
+~
+0 -1 9756
+DDIR_WEST
+~
+~
+0 -1 9746
+S
+#9752
+In the Forest~
+You are walking in the forest, trees are looming over your head and the air
+is buzzing with insects.  The howling of creatures and rustling of critters
+are constantly filling the air.  The bushes are thick and difficult to get
+through.
+~
+0 0 SECT_FOREST
+DDIR_EAST
+~
+~
+0 -1 9756
+DDIR_SOUTH
+~
+~
+0 -1 9757
+S
+#9753
+A Path in the Forest~
+This path seems highly traveled.  Soft pine needles cushion your feet as you
+walk, and tall trees and fields of barley surround you.  It is probably the main
+connection from Roterodamum and the land of Durdania.  To the south lies an
+immense forest and to the north is the city of Roterodamum.
+~
+0 ROOM_NO_MOB SECT_FIELD
+DDIR_NORTH
+~
+~
+0 -1 9756
+DDIR_EAST
+~
+~
+0 -1 9754
+DDIR_SOUTH
+~
+~
+0 -1 9762
+S
+#9754
+In the Forest~
+You are walking in the forest, trees are looming over your head and the air
+is buzzing with insects.  The howling of creatures and rustling of critters
+are constantly filling the air.  The bushes are thick and difficult to get
+through.
+~
+0 0 SECT_FOREST
+DDIR_NORTH
+~
+~
+0 -1 9701
+DDIR_SOUTH
+~
+~
+0 -1 9761
+DDIR_WEST
+~
+~
+0 -1 9753
+S
+#9755
+Roterodamum Square~
+You are standing on a stone tiled square in the center of this ancient city.  To
+the east and west you see bustling Thunder Road and to the south lies Rainbow
+Street.  To the north lies the Temple and a Tower rising high into the skies.
+~
+0 ROOM_NO_MOB|ROOM_ALTAR_N|ROOM_SAFE SECT_CITY
+DDIR_NORTH
+The great temple of Roterodamum lies before you.~
+~
+0 -1 9702
+DDIR_EAST
+You hear the tumult of booming Thunder Road.~
+~
+0 -1 9707
+DDIR_SOUTH
+You see the colorful beauty of Rainbow Street.~
+~
+0 -1 9723
+DDIR_WEST
+You hear the tumult of booming Thunder Road.~
+~
+0 -1 9705
+S
+#9756
+A Path in the Forest~
+This path seems highly traveled.  Soft pine needles cushion your feet as you
+walk, and tall trees and fields of barley surround you.  It is probably the main
+connection from Roterodamum and the land of Durdania.  To the south lies an
+immense forest and to the north is the city of Roterodamum.
+~
+0 ROOM_NO_MOB SECT_FIELD
+DDIR_NORTH
+~
+~
+0 -1 9751
+DDIR_EAST
+~
+~
+0 -1 9701
+DDIR_SOUTH
+~
+~
+0 -1 9753
+DDIR_WEST
+~
+~
+0 -1 9752
+S
+#9757
+In the Forest~
+You are walking in the forest, trees are looming over your head and the air
+is buzzing with insects.  The howling of creatures and rustling of critters
+are constantly filling the air.  The bushes are thick and difficult to get
+through.
+~
+0 0 SECT_FOREST
+DDIR_NORTH
+~
+~
+0 -1 9752
+DDIR_WEST
+~
+~
+0 -1 9758
+S
+#9758
+In the Forest~
+You are walking in the forest, trees are looming over your head and the air
+is buzzing with insects.  The howling of creatures and rustling of critters
+are constantly filling the air. the bushes are thick and difficult to get
+through.
+~
+0 0 SECT_FOREST
+DDIR_EAST
+~
+~
+0 -1 9757
+DDIR_SOUTH
+~
+~
+0 -1 9759
+S
+#9759
+In the Forest~
+You are walking in the forest, trees are looming over your head and the air
+is buzzing with insects.  The howling of creatures and rustling of critters
+are constantly filling the air.  The bushes are thick and difficult to get
+through.
+~
+0 0 SECT_FOREST
+DDIR_NORTH
+~
+~
+0 -1 9758
+DDIR_EAST
+~
+~
+0 -1 9760
+DDIR_WEST
+~
+gate~
+EX_ISDOOR -1 9776
+S
+#9760
+In the Forest~
+You are walking in the forest, trees are looming over your head and the air
+is buzzing with insects.  The howling of creatures and rustling of critters
+are constantly filling the air.  The bushes are thick and difficult to get
+through.
+~
+0 0 SECT_FOREST
+DDIR_EAST
+~
+~
+0 -1 9762
+DDIR_WEST
+~
+~
+0 -1 9759
+S
+#9761
+In the Forest~
+You are walking in the forest, trees are looming over your head and the air
+is buzzing with insects.  The howling of creatures and rustling of critters
+are constantly filling the air.  The bushes are thick and difficult to get
+through.
+~
+0 0 SECT_FOREST
+DDIR_NORTH
+~
+~
+0 -1 9754
+S
+#9762
+A Path in the Forest~
+This path seems highly traveled.  Soft pine needles cushion your feet as you
+walk, and tall trees and fields of barley surround you.  It is probably the main
+connection from Roterodamum and the land of Durdania.  To the south lies an
+immense forest and to the north is the city of Roterodamum.
+~
+0 ROOM_NO_MOB SECT_FIELD
+DDIR_NORTH
+~
+~
+0 -1 9753
+DDIR_SOUTH
+~
+~
+0 -1 9763
+DDIR_WEST
+~
+~
+0 -1 9760
+S
+#9763
+A Path in the Forest~
+This path seems highly traveled.  Soft pine needles cushion your feet as you
+walk, and tall trees and fields of barley surround you.  It is probably the main
+connection from Roterodamum and the land of Durdania.  To the south begins a
+long, paved road leading to the lands of Durdania.
+~
+0 ROOM_NO_MOB SECT_FIELD
+DDIR_NORTH
+~
+~
+0 -1 9762
+DDIR_SOUTH
+~
+~
+0 -1 17232
+S
+#9764
+Above the Waterfall~
+You are standing above a waterfall.  The water flows quickly past and you can
+feel its strength trying to suck you under.  Perhaps it would be best if you
+kept walking along.
+~
+0 ROOM_NO_MOB SECT_LAKE
+DDIR_NORTH
+~
+~
+0 -1 9766
+DDIR_EAST
+~
+~
+0 -1 9765
+DDIR_WEST
+~
+~
+0 -1 9749
+DDIR_DOWN
+~
+~
+0 -1 9768
+E
+waterfall~
+The raging waterfall is pouring down from here, maybe it is not a good idea
+to keep standing here.
+~
+S
+#9765
+Eastern River Bank~
+You are on the eastern river bank on the south side of the city of Roterodamum.
+Birds are singing cheerfully in the trees around you.  Above you is a ledge
+that leads to a cave.
+~
+0 0 SECT_FOREST
+DDIR_WEST
+~
+~
+0 -1 9764
+DDIR_UP
+~
+~
+0 -1 9784
+S
+#9766
+The River Aneel~
+This river is the main source of water for the city.  It also provides
+sufficient water to tend the forests located downstream.
+~
+0 0 SECT_LAKE
+DDIR_EAST
+~
+~
+0 -1 9767
+DDIR_SOUTH
+~
+~
+0 -1 9764
+S
+#9767
+The River Aneel~
+This river is the main source of water for the city.  It also provides
+sufficient water to tend the forests located downstream.
+~
+0 0 SECT_LAKE
+DDIR_WEST
+~
+~
+0 -1 9766
+S
+#9768
+Halfway up the Waterfall~
+The rocks here are not only sharp, but slippery from the constant barrage of
+water upon them.  As you pause to wonder how you could have possibly gotten this
+far, you can feel your grip giving way.
+~
+0 0 SECT_LAKE
+DDIR_UP
+~
+~
+0 -1 9764
+DDIR_DOWN
+~
+~
+0 -1 9769
+S
+#9769
+Under the Waterfall~
+You just tumbled down the waterfall and the heavy water crashes down upon you.
+A rainbow arcs in the mists and escape seems almost impossible with such high
+cliffs and steep rocks blocking your ascent into the upper level of the forest.
+~
+0 0 SECT_LAKE
+DDIR_SOUTH
+~
+~
+0 -1 9770
+DDIR_UP
+~
+~
+0 -1 9768
+E
+waterfall~
+Water is raging downwards as you try to figure out a way to get topside again.
+~
+S
+#9770
+The River Aneel~
+This river is the main source of water for the city.  It also provides
+sufficient water to tend the forests located downstream.
+~
+0 0 SECT_LAKE
+DDIR_NORTH
+~
+~
+0 -1 9769
+DDIR_SOUTH
+~
+~
+0 -1 9771
+S
+#9771
+The River Aneel~
+This river is the main source of water for the city.  It also provides
+sufficient water to tend the forests located downstream.
+~
+0 0 SECT_LAKE
+DDIR_NORTH
+~
+~
+0 -1 9770
+DDIR_EAST
+~
+~
+0 -1 9772
+S
+#9772
+The River Aneel~
+This river is the main source of water for the city.  It also provides
+sufficient water to tend the forests located downstream.
+~
+0 0 SECT_LAKE
+DDIR_EAST
+~
+~
+0 -1 9773
+DDIR_WEST
+~
+~
+0 -1 9771
+S
+#9773
+The River Aneel~
+This river is the main source of water for the city.  It also provides
+sufficient water to tend the forests located downstream.
+~
+0 0 SECT_LAKE
+DDIR_SOUTH
+~
+~
+0 -1 9774
+DDIR_WEST
+~
+~
+0 -1 9772
+S
+#9774
+The River Aneel~
+This river is the main source of water for the city.  It also provides
+sufficient water to tend the forests located downstream.
+~
+0 0 SECT_LAKE
+DDIR_NORTH
+~
+~
+0 -1 9773
+DDIR_SOUTH
+~
+~
+0 -1 9775
+S
+#9775
+The River Aneel~
+This river is the main source of water for the city.  It also provides
+sufficient water to tend the forests located downstream.
+~
+0 0 SECT_LAKE
+DDIR_NORTH
+~
+~
+0 -1 9774
+S
+#9776
+Southern Park~
+Walking through the park, feeling in touch with nature and breathing the fresh
+air, you feel delighted.  To the west is the center and east is the gate.
+~
+0 0 SECT_FIELD
+DDIR_NORTH
+~
+~
+0 -1 9795
+DDIR_EAST
+~
+gate~
+EX_ISDOOR -1 9759
+DDIR_SOUTH
+~
+~
+0 -1 9794
+DDIR_WEST
+~
+~
+0 -1 9777
+S
+#9777
+Center of Southern Park~
+Walking through the park, feeling in touch with nature and breathing the fresh
+air, you feel delighted.  The park stretches out all around you.
+~
+0 ROOM_ALTAR_N|ROOM_SAFE SECT_FIELD
+DDIR_NORTH
+~
+~
+0 -1 9791
+DDIR_EAST
+~
+~
+0 -1 9776
+DDIR_SOUTH
+~
+~
+0 -1 9778
+DDIR_WEST
+~
+~
+0 -1 9779
+S
+#9778
+Southern Park~
+Walking through the park, feeling in touch with nature and breathing the
+fresh air, you feel delighted.  To the north is the center.
+~
+0 0 SECT_FIELD
+DDIR_NORTH
+~
+~
+0 -1 9777
+DDIR_EAST
+~
+~
+0 -1 9794
+DDIR_WEST
+~
+~
+0 -1 9793
+S
+#9779
+Southern Park~
+Walking through the park, feeling in touch with nature and breathing the
+fresh air, you feel delighted.  To the east is the center.
+~
+0 0 SECT_FIELD
+DDIR_NORTH
+~
+~
+0 -1 9792
+DDIR_EAST
+~
+~
+0 -1 9777
+DDIR_SOUTH
+~
+~
+0 -1 9793
+S
+#9780
+Guard Post~
+Here is one of Roterodamum's guard posts.  These guards have been placed to spot
+any enemies as they approach the city, and to defend its citizens in time of
+need.
+~
+0 ROOM_NO_MOB SECT_CITY
+DDIR_DOWN
+You see a busy corner.~
+~
+0 -1 9722
+S
+#9781
+Guard Post~
+Here is one of Roterdamum's Guard Posts.  These guards have been placed to spot
+any enemies as they approach the city, and to defend its citizens in time of
+need.
+~
+0 ROOM_NO_MOB SECT_CITY
+DDIR_DOWN
+~
+~
+0 -1 9716
+S
+#9782
+Guard Post~
+Here is one of Roterdamum's Guard Posts.  These guards have been placed to spot
+any enemies as they approach the city, and to defend its citizens in time of
+need.
+~
+0 ROOM_NO_MOB SECT_CITY
+DDIR_DOWN
+~
+~
+0 -1 9711
+S
+#9783
+Guard Post~
+Here is one of Roterodamum's guard posts.  These guards have been placed to spot
+any enemies as they approach the city, and to defend its citizens in time of
+need.
+~
+0 ROOM_NO_MOB SECT_CITY
+DDIR_DOWN
+You see a busy corner.~
+~
+0 -1 9710
+S
+#9784
+Entrance to a Cave~
+The walls here are scorched black. The ashes on the floor reveal a heavy fire
+has recently raged through this cave.  Farther on down, you can hear the song of
+some birds and you spy a large hole on the eastern ledge.
+~
+0 0 SECT_MOUNTAIN
+DDIR_EAST
+~
+~
+0 -1 9785
+DDIR_DOWN
+~
+~
+0 -1 9765
+S
+#9785
+A large Cave~
+You are standing in a very large cave. The lack of light, as well as the smoke,
+makes it difficult for you to see.  All sorts of bones are scattered around. You
+hear the distinct, soft rumbling of some kind of creature in the distance.
+~
+0 ROOM_DARK SECT_DEEP_EARTH
+DDIR_WEST
+~
+~
+0 -1 9784
+S
+#9786
+The General Store~
+This is a rather small, but cozy, shop.  Over in the corner is a very attractive
+shopkeeper stocking the shelves with new items.  Over the counter you notice a
+sign.
+~
+0 ROOM_NO_MOB|ROOM_INDOORS|ROOM_NO_RECALL SECT_INSIDE
+DDIR_NORTH
+~
+~
+0 -1 9717
+S
+#9787
+Boar's Head Pub~
+You are standing in the city's most popular tavern.  The bar itself is set up
+against the western wall, old archaic writing, carvings and symbols covering its
+top.  A hearth is built inside the northern wall, and through the southeastern
+windows you can see Roterodamum Square.  The hospitality of this tavern makes
+you wish to perhaps sit and stay awhile.
+~
+0 ROOM_NO_MOB|ROOM_INDOORS SECT_INSIDE
+DDIR_EAST
+You see colorful Rainbow Street.~
+~
+0 -1 9723
+DDIR_UP
+You see a secluded spot.~
+~
+0 -1 30962
+E
+bottle coke ~
+The bottle seems big enough to hold a couple of gallons of the dark brown
+juice it is filled with.  A price tag reads 'collectors item 500000 coins'
+(please put the money in a bag)
+~
+S
+#9788
+In the Basement~
+oo oo, you got stuck in the basement, bummer..
+~
+0 ROOM_NO_MOB|ROOM_INDOORS|ROOM_SAFE SECT_INSIDE
+S
+#9789
+Warlock Tower~
+You are standing in a large foyer, at least 50 feet wide, with an amazingly
+large spiral staircase rising into the meticulously painted ceiling.  Statues of
+all the dead sons and daughters of Hypnos surround the chamber in recessed
+alcoves.  The stairs lead down into Shelan's shop.  There is a large checkered
+area on the floor, with small figures moving about.
+~
+0 ROOM_NO_MOB|ROOM_INDOORS|ROOM_SAFE SECT_CITY
+DDIR_WEST
+You see a black corridor~
+~
+0 -1 30940
+DDIR_UP
+~
+~
+0 -1 9790
+DDIR_DOWN
+~
+~
+0 -1 9739
+S
+#9790
+The Chamber of the High Warlock~
+The high warlock sits in judgment of all those that study the black arts. There
+are a few scrolls on the wall, with a large desk here.
+~
+0 ROOM_NO_MOB|ROOM_INDOORS|ROOM_SAFE|ROOM_ALLOW_WLC SECT_CITY
+DDIR_DOWN
+~
+~
+0 -1 9789
+E
+scrolls~
+{068}
+One of the scrolls explains:
+{078}
+"... The shouts can be heard faintly even by an unshielded warlock.
+However when a shield against magic is erected the magical screams
+are amplified by resonance with the shield. The screams emanate from
+the souls of the dead, screaming for relief from the eternal torment and
+suffering they must endure. To prompt their shouting, scream loudly.
+Their wails will then be heard..."
+~
+E
+tomes~
+{068}
+One of the tomes reads:
+{078}
+"The song of the dead may be sung to gain entrance to the home and origin of
+the ancient warlock's art of necromancy.  The song's words are written in the
+tongue of our trade, the subject of this tome.  The letter A in the common
+tongue corresponds to the necromancer's Z.  The letter B corresponds to the
+necromancer's letter A. The letter C corresponds to the necromancer's let..."
+
+{388}The rest of the document is illegible.
+~
+E
+parchments~
+{068}
+One of the parchments reads:
+{078}
+"JDX QSGW SC JDX BXZB
+
+XKVF QSPFQ, FVKXQ SC FPQJ
+PGBXZB DSFX SC XZIJDXG YIPQJ
+BVIJ, YSCCVG, ASGX, BPQJ
+SHXG GSO ZQ V QZN NSP TPQJ"
+~
+E
+desk~
+The desk is covered with scattered parchments with a few heavy tomes weighing
+them down.
+~
+S
+#9791
+Southern Park~
+Walking through the park, feeling in touch with nature and breathing the
+fresh air, you feel delighted.  To the south is the center.
+~
+0 0 SECT_FIELD
+DDIR_EAST
+~
+~
+0 -1 9795
+DDIR_SOUTH
+~
+~
+0 -1 9777
+DDIR_WEST
+~
+~
+0 -1 9792
+S
+#9792
+Corner of Southern Park~
+You are standing in one of the corners of the Southern Park of Roterodamum.
+The cheerful chirping of birds and rustling in the bushes almost makes
+them seem to be alive.
+~
+0 0 SECT_FIELD
+DDIR_EAST
+~
+~
+0 -1 9791
+DDIR_SOUTH
+~
+~
+0 -1 9779
+S
+#9793
+Corner of Southern Park~
+You are standing in one of the corners of the Southern Park of Roterodamum.
+The cheerful chirping of birds and rustling in the bushes almost makes
+them seem to be alive.
+~
+0 0 SECT_FIELD
+DDIR_NORTH
+~
+~
+0 -1 9779
+DDIR_EAST
+~
+~
+0 -1 9778
+S
+#9794
+Corner of Southern Park~
+You are standing in one of the corners of the Southern Park of Roterodamum.
+The cheerful chirping of birds and rustling in the bushes almost makes
+them seem to be alive.
+~
+0 0 SECT_FIELD
+DDIR_NORTH
+~
+~
+0 -1 9776
+DDIR_WEST
+~
+~
+0 -1 9778
+S
+#9795
+Corner of Southern Park~
+You are standing in one of the corners of the Southern Park of Roterodamum.
+The cheerful chirping of birds and rustling in the bushes almost makes
+them seem to be alive.
+~
+0 0 SECT_FIELD
+DDIR_SOUTH
+~
+~
+0 -1 9776
+DDIR_WEST
+~
+~
+0 -1 9791
+S
+#9796
+Judge Pteer's Meeting Hall~
+This is the meeting hall where ideas are presented in a calm and orderly
+fashion.  No windows are here, keeping all chance of disturbance away.  It is
+quite a large hall, able to accommodate any number of people.
+~
+0 ROOM_NO_MOB|ROOM_INDOORS|ROOM_SAFE SECT_INSIDE
+DDIR_WEST
+~
+~
+0 -1 9702
+S
+#9797
+Gouden's Jewelry~
+You are in a small, beautifully furnished room.  The warm light emanating from
+the small oil lamps on the walls is reflected in the hard, polished surface of
+the big mahogany desk that stands in the center of the room. A small sign with
+golden letters stands on the desk.
+~
+0 ROOM_NO_MOB|ROOM_INDOORS|ROOM_NO_RECALL SECT_INSIDE
+DDIR_NORTH
+~
+~
+0 -1 9721
+E
+oil lamps~
+They are made from polished gold and looks as if they are securely fastened
+to the smooth stone walls.
+~
+E
+desk~
+Your face is reflected in its surface.
+~
+E
+sign~
+.                     {138}Welcome to Gouden's Jewelry
+
+            {078}Type 'list' to see what is in the store,
+            {078}Type 'buy item' to purchase an item,
+            {078}Type 'sell item' to try to sell an item and
+            {078}Type 'value item' to ask us to appraise an item.
+
+                                         {138}-The Management
+~
+S
+#9798
+The Morgue~
+Here is where lost souls who find themselves dead after a hard fought battle can
+retrieve their corpses.  An altar stands here, sadly holding several corpses and
+in the back are countless more.
+~
+0 ROOM_NO_MOB|ROOM_INDOORS|ROOM_NO_RECALL|ROOM_MORGUE SECT_INSIDE
+DDIR_EAST
+~
+~
+0 -1 9702
+S
+#9799
+Marauder's Guildhall~
+Once upon a time this place was beautifully furnished, but now it seems almost
+empty.  It has turned into a place where you can lose both your life and money.
+Above you is the entrance to the Pet Shop.
+~
+0 ROOM_NO_MOB|ROOM_INDOORS|ROOM_SAFE|ROOM_ALLOW_MAR SECT_INSIDE
+DDIR_UP
+~
+~
+0 -1 9801
+S
+#9800
+The Armory~
+This is Roterodamum's finest armory.  Smoke floats inside through the
+entrance to the Blacksmith Guild to the west.
+~
+0 0 SECT_INSIDE
+DDIR_WEST
+~
+~
+0 -1 9704
+S
+#9801
+Robert's Pet Shop~
+This is a small, yet very clean, pet shop.  The animals available for purchase
+here are of the very finest quality, and softly rattle their cages to get your
+attention.
+~
+0 ROOM_INDOORS|ROOM_SAFE|ROOM_PET_SHOP SECT_INSIDE
+DDIR_SOUTH
+~
+~
+0 -1 9720
+DDIR_DOWN
+~
+~
+0 -1 9799
+S
+#9802
+Pets for Robert's Shop~
+Dangerous creatures have been locked up in cages here, waiting for a boss.
+~
+0 ROOM_NO_MOB|ROOM_INDOORS|ROOM_PRIVATE|ROOM_SAFE SECT_INSIDE
+S
+#9803
+Guild of the Gladiator~
+You have entered the Guild of the Gladiators, where the mighty come to train and
+practice.  It is spotlessly clean, and has two walls hung with weaponry to test
+your skills on.
+~
+0 ROOM_NO_MOB|ROOM_INDOORS|ROOM_SAFE|ROOM_ALLOW_GLA SECT_INSIDE
+DDIR_WEST
+You see quiet Hailstone Lane.~
+~
+0 -1 9713
+S
+#9804
+The Northern Pass~
+A quiet path leads you north.  To the south lies the beginning of a dark alley.
+~
+0 ROOM_NO_MOB SECT_CITY
+DDIR_NORTH
+~
+~
+0 -1 9805
+DDIR_SOUTH
+~
+~
+0 -1 9816
+S
+#9805
+The Northern Pass~
+This serene path leads north to the Northern Gate or south back to the city.
+~
+0 ROOM_NO_MOB SECT_CITY
+DDIR_NORTH
+~
+~
+0 -1 9806
+DDIR_SOUTH
+~
+~
+0 -1 9804
+S
+#9806
+The Northern Gate~
+Here lies the Northern Gate of the city Roterodamum.  Taking this path
+south leads to the city of Roterodamum.
+~
+0 ROOM_NO_MOB SECT_CITY
+DDIR_NORTH
+~
+~
+0 -1 9807
+DDIR_SOUTH
+~
+~
+0 -1 9805
+S
+#9807
+Outside the City~
+You are walking outside of the city.
+~
+0 ROOM_NO_MOB SECT_CITY
+DDIR_NORTH
+~
+~
+0 -1 17224
+DDIR_SOUTH
+~
+~
+0 -1 9806
+S
+#9808
+Sewers~
+You are in one of the nastiest smelling places that you have ever been.  Rats
+and large insects can be seen moving about.  Several small snakes brush up on
+your leg.  A strange noise can be heard from the west.
+~
+0 ROOM_DARK SECT_CITY
+DDIR_NORTH
+~
+~
+EX_HIDDEN -1 30960
+DDIR_EAST
+~
+~
+0 -1 9811
+DDIR_WEST
+~
+~
+0 -1 9809
+DDIR_UP
+~
+~
+0 -1 9815
+S
+#9809
+Sewers~
+This is a very dark section of the nasty sewers.  You really should not be down
+here, as the snakes get larger in this direction.  A loud strange noise can be
+heard from the west.
+~
+0 ROOM_DARK SECT_CITY
+DDIR_EAST
+~
+~
+0 -1 9808
+DDIR_SOUTH
+~
+~
+0 -1 9812
+DDIR_WEST
+~
+~
+0 -1 9810
+S
+#9810
+Sewers~
+This is a very dark section of these very nasty sewers.  You have run into a
+large mound of dirty blocking the slowly moving cess-pool.
+~
+0 ROOM_DARK SECT_CITY
+DDIR_EAST
+~
+~
+0 -1 9809
+DDIR_WEST
+You see the entrance to the arena.~
+~
+0 -1 10500
+S
+#9811
+Sewers~
+You are blocked from going further by a large mound of debris.  The stench is
+awful.  You have mud, and what looks like mud, but smells worse, sticking to
+your boots.  There is a soft moaning sound from the west.
+~
+0 ROOM_DARK SECT_CITY
+DDIR_WEST
+~
+~
+0 -1 9808
+S
+#9812
+Sewer~
+This section of the sewer system does not smell bad at all, and you can see
+some light coming from the east.  There is a small table set here in the center
+of the corridor.
+~
+0 ROOM_DARK SECT_CITY
+DDIR_NORTH
+~
+~
+0 -1 9809
+DDIR_EAST
+~
+~
+0 -1 9813
+S
+#9813
+Sewer~
+This is a well lit, and well aired, section of the underground sewer system.
+You almost think that this section is habitable, if you got rid of the
+oversized goons guarding the door.
+~
+0 0 SECT_CITY
+DDIR_WEST
+~
+~
+0 -1 9812
+DDIR_DOWN
+~
+~
+0 -1 7030
+S
+#9814
+A dark passage between buildings~
+You stand in a dark narrow alley which connects Thunder Road with the Northern
+Gates of Roterodamum.
+~
+0 ROOM_DARK SECT_CITY
+DDIR_NORTH
+To the Northern Gate~
+~
+0 -1 9815
+DDIR_SOUTH
+Warrior's Guild this way.~
+~
+0 -1 9708
+S
+#9815
+A dark alley~
+You stand in a dark narrow alley which leads south back into the city.  Some
+stairs lead down into some kind of tunnel from which a dirty stench rises.
+~
+0 ROOM_DARK SECT_CITY
+DDIR_NORTH
+Towards the Northern Gate~
+~
+0 -1 9816
+DDIR_SOUTH
+To Thunder Road and Warrior's Guild~
+~
+0 -1 9814
+DDIR_DOWN
+Rats are this way.~
+~
+0 -1 9808
+S
+#9816
+A dark alley~
+You are standing in a dark, narrow alley which connects Thunder Road with the
+Northern Gates of Roterodamum.
+~
+0 ROOM_DARK SECT_CITY
+DDIR_NORTH
+~
+~
+0 -1 9804
+DDIR_SOUTH
+~
+~
+0 -1 9815
+S
+#9817
+Revelatory Oasis~
+This is a small room, with walls painted a dark midnight blue, and a glass
+ceiling which lets in the sunshine and moonglow.  A handsome elf sits on a
+beautifully carved chair in front of a fireplace and turns to look at you as you
+enter, his dark eyes staring into yours.
+~
+0 ROOM_NO_MOB|ROOM_SAFE SECT_INSIDE
+DDIR_DOWN
+You see Rainbow Street below.~
+~
+0 -1 9723
+E
+chair~
+It is carved with beautiful twining leaves and flowers.
+~
+E
+fireplace~
+Sometimes lit, in the cold weather, empty in the warm weather, the fireplace is tall enough to stand in, and built of heavy quarry stone and timber from the forests surrounding Roterodamum.
+~
+S
+#9818
+The Testing Chamber~
+The floor is covered with the bones of adventurers who failed the test.
+~
+0 ROOM_NO_RECALL|ROOM_NO_SAVE SECT_INSIDE
+DDIR_DOWN
+~
+~
+0 -1 9703
+S
+#0
+
+
+#RESETS
+M 9701 100 9785
+E 9702 100 WEAR_BODY
+M 9702 100 9782
+E 9748 100 WEAR_WIELD
+E 9749 100 WEAR_BODY
+M 9702 100 9782
+E 9748 100 WEAR_WIELD
+E 9749 100 WEAR_BODY
+M 9702 100 9783
+E 9748 100 WEAR_WIELD
+E 9749 100 WEAR_BODY
+M 9702 100 9783
+E 9748 100 WEAR_WIELD
+E 9749 100 WEAR_BODY
+M 9702 100 9781
+E 9748 100 WEAR_WIELD
+E 9749 100 WEAR_BODY
+M 9702 100 9781
+E 9748 100 WEAR_WIELD
+E 9749 100 WEAR_BODY
+M 9702 100 9780
+E 9748 100 WEAR_WIELD
+E 9749 100 WEAR_BODY
+M 9702 100 9780
+E 9748 100 WEAR_WIELD
+E 9749 100 WEAR_BODY
+M 9705 100 9737
+M 9707 100 9764
+M 9708 100 9744
+M 9709 100 9703
+M 9712 100 9738
+G 9737 100 0
+G 9742 100 0
+G 9744 100 0
+G 9739 100 0
+G 9740 100 0
+G 9741 100 0
+M 9713 100 9790
+M 9714 100 9779
+M 9714 100 9779
+M 9714 100 9779
+M 9714 100 9778
+M 9714 100 9778
+M 9714 100 9778
+M 9714 100 9776
+M 9714 100 9776
+M 9714 100 9776
+M 9714 100 9791
+M 9714 100 9791
+M 9714 100 9791
+M 9715 100 9792
+M 9715 100 9792
+M 9715 100 9792
+M 9715 100 9793
+M 9715 100 9793
+M 9715 100 9793
+M 9715 100 9794
+M 9715 100 9794
+M 9715 100 9794
+M 9715 100 9795
+M 9715 100 9795
+M 9715 100 9795
+M 9724 100 9725
+E 9703 100 WEAR_WIELD
+E 9749 100 WEAR_BODY
+M 9724 100 9725
+E 9703 100 WEAR_WIELD
+E 9749 100 WEAR_BODY
+M 9724 100 9727
+E 9703 100 WEAR_WIELD
+E 9749 100 WEAR_BODY
+M 9724 100 9727
+E 9703 100 WEAR_WIELD
+E 9734 100 WEAR_BODY
+M 9724 100 9730
+E 9703 100 WEAR_WIELD
+E 9749 100 WEAR_BODY
+M 9724 100 9730
+E 9703 100 WEAR_WIELD
+E 9749 100 WEAR_BODY
+M 9729 100 9796
+M 9732 100 9736
+G 9703 100 0
+G 9704 100 0
+G 9754 100 0
+G 9755 100 0
+G 9721 100 0
+G 9762 100 0
+M 9733 100 9740
+G 9757 100 0
+G 9758 100 0
+G 9764 100 0
+M 9735 100 9797
+G 9712 100 0
+M 9737 100 9700
+M 9716 100 9723
+M 9716 100 9714
+M 9717 100 9713
+M 9718 100 9741
+M 9718 100 9747
+M 9719 100 9745
+M 9720 100 9706
+M 9721 100 9721
+M 9721 100 9742
+M 9722 100 9743
+M 9722 100 9746
+M 9723 100 9717
+M 9726 100 9715
+M 9727 100 9712
+M 9714 100 9748
+M 9719 100 9750
+M 9721 100 9751
+M 9755 100 9754
+M 9721 100 9754
+M 9755 100 9761
+M 9718 100 9761
+M 9721 100 9762
+M 9714 100 9763
+M 9711 100 9704
+G 9743 100 0
+G 9745 100 0
+G 9749 100 0
+G 9750 100 0
+G 9751 100 0
+G 9734 100 0
+G 9735 100 0
+M 9700 100 9798
+M 9755 100 9701
+M 9718 100 9701
+M 9704 100 9787
+G 9714 100 0
+G 9716 100 0
+G 9717 100 0
+G 9718 100 0
+G 9719 100 0
+G 9747 100 0
+M 9734 100 9739
+G 9720 999 0
+G 9728 100 0
+G 9729 100 0
+G 9731 100 0
+G 9732 100 0
+G 9733 100 0
+M 9738 100 9702
+M 9739 100 9786
+G 9725 100 0
+G 9726 100 0
+G 9727 100 0
+G 9747 100 0
+M 9740 100 9799
+G 9759 100 0
+M 9742 100 9740
+M 9710 100 9801
+M 9743 100 9803
+M 9749 100 9802
+M 9747 100 9802
+M 9748 100 9802
+M 9746 100 9802
+M 9745 100 9802
+M 9744 100 9802
+M 9724 100 9806
+M 9724 100 9806
+M 9706 100 9732
+M 9736 100 9734
+M 9741 100 9733
+M 9750 100 9810
+M 9751 100 9723
+E 9771 100 WEAR_HOLD
+O 9705 100 9719
+O 9706 100 9703
+O 9707 100 9736
+O 9707 100 9786
+O 9700 100 9779
+P 9701   1 9700
+O 9708 100 9777
+O 9713 100 9797
+O 9709 100 9755
+O 9746 100 9749
+O 9769 100 9702
+M 9753 100 9817
+M 9755 100 9735
+M 9756 100 9735
+S
+
+
+#$
+
+XXXXXXXXXX
+#Savearea

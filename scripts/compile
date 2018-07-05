@@ -1,0 +1,61 @@
+#!/bin/sh
+
+if [ -e bin/emud ] 
+then
+	echo "Making backup first..."
+	cp bin/emud bin/old_emud
+fi
+
+cd src
+echo -n "installing. [compiling]"
+nice -n 19 make 1>/dev/null 2>src_err.txt
+echo -n "installing. [sync]     "
+nice -n 19 sync
+echo -n "installing. [du1]      "
+SIZE=`du -h ../bin/emud`
+echo -n "installing. [strip]    "
+nice -n 19 strip ../bin/emud*
+echo -n "installing. [du2]      "
+NWSIZE=`du -h ../bin/emud`
+echo -n "installing. [cp]       "
+nice -n 19 cp ../bin/emud ../bin/next_emud
+if ! test -s src_err.txte
+then
+	echo -n "installing. [rm]       "
+	rm src_err.txt
+else
+	echo -n "installing.            "
+fi
+echo "installing. [done]     "
+echo "Size of bin/emud (1) before stripping, (2) after stripping :"
+echo ${SIZE}
+echo ${NWSIZE}
+if [ -e src_err.txt ]
+then
+	WARNING=`grep "warning" src_err.txt | wc -l`
+	ERRORS=`grep "error" src_err.txt | wc -l`
+else
+	WARNING=0
+     ERRORS=0
+fi
+
+
+echo "This compile gave :"
+echo "- ${WARNING} warnings."
+echo "- ${ERRORS} errors."
+cd ..
+
+
+if [ -e bin/next_emud ]
+then
+	if [ -e bin/current_emud ]
+	then
+		nice -n 19 diff bin/current_emud bin/next_emud 1>bin/hotboot.txt
+		if test -s bin/hotboot.txt
+		then
+			nice -n 19 rm bin/current_emud
+			nice -n 19 cp bin/next_emud bin/current_emud
+		fi
+		rm bin/hotboot.txt
+	fi
+fi

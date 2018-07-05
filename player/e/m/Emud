@@ -1,0 +1,394 @@
+#PLAYER
+Version  1
+Login    127.0.0.1~
+S_Descr  Demise~
+L_Descr  ~
+E_Descr  ~
+Level    99
+Sex      1
+Class    6
+Race     11
+Room     9714
+LastRoom 9714
+Language 536870911
+Speak    2097152
+Played   28296706
+K_Played 9900780
+O_Played 0
+HpMaMv   4321 4321 4321 4321 4321 4321
+Actuals  4321 4321 4321
+Gold     45367660
+Account  0
+Exp      4321
+Ansi     1
+Vt100    0
+Act      25937580076
+Affects1 0
+Affects2 0
+Practice 0
+Align    -1000
+Function 8
+Channel  127
+Morph    0
+Trivia   0
+Wimpy    0
+LastTime 1152548802
+Playtime 3
+Jailtime 0
+Jaildate 0
+MailAddy ~
+HtmlAddy ~
+Password 0
+Bamfin   ~
+Bamfout  {010}$n returns to the fires below.~
+Title     ~
+Prefix   0
+AttrPerm 40 99 20 40 99
+AttrMod  0 0 0 0 0
+DrFuThAi 0 48 48 10
+Mclass   0 99
+Mclass   1 99
+Mclass   2 99
+Mclass   3 99
+Mclass   4 99
+Mclass   5 99
+Mclass   6 99
+Mclass   7 99
+Skill    99 'slot -1'
+Skill    99 'object rape'
+Skill    99 'armor'
+Skill    99 'teleport'
+Skill    99 'bless'
+Skill    99 'blindness'
+Skill    99 'burning hands'
+Skill    99 'call lightning'
+Skill    99 'charm person'
+Skill    99 'chill touch'
+Skill    99 'stone fist'
+Skill    99 'color spray'
+Skill    99 'control weather'
+Skill    99 'create food'
+Skill    99 'cure blindness'
+Skill    99 'cure critical'
+Skill    99 'cure light'
+Skill    99 'curse'
+Skill    99 'detect evil'
+Skill    99 'detect invis'
+Skill    99 'detect poison'
+Skill    99 'dispel evil'
+Skill    99 'earthquake'
+Skill    99 'enchant weapon'
+Skill    99 'energy drain'
+Skill    99 'fireball'
+Skill    99 'harm'
+Skill    99 'heal'
+Skill    99 'invis'
+Skill    99 'petrifying touch'
+Skill    99 'locate object'
+Skill    99 'magic missile'
+Skill    99 'poison'
+Skill    99 'protection evil'
+Skill    99 'remove curse'
+Skill    99 'sanctuary'
+Skill    99 'shocking grasp'
+Skill    99 'sleep'
+Skill    99 'giant strength'
+Skill    99 'ventriloquate'
+Skill    99 'word of recall'
+Skill    99 'cure poison'
+Skill    99 'detect hidden'
+Skill    99 'windblast'
+Skill    99 'waterburst'
+Skill    99 'mindblast'
+Skill    99 'snake dart'
+Skill    99 'paralyzing embrace'
+Skill    99 'identify'
+Skill    99 'fly'
+Skill    99 'continual light'
+Skill    99 'dispel magic'
+Skill    99 'cure serious'
+Skill    99 'cause light'
+Skill    99 'cause critical'
+Skill    99 'cause serious'
+Skill    99 'flamestrike'
+Skill    99 'stone skin'
+Skill    99 'shield'
+Skill    99 'weaken'
+Skill    99 'mass invis'
+Skill    99 'acid blast'
+Skill    99 'faerie fire'
+Skill    99 'faerie fog'
+Skill    99 'pass door'
+Skill    99 'summon'
+Skill    99 'infravision'
+Skill    99 'create spring'
+Skill    99 'refresh'
+Skill    99 'change sex'
+Skill    99 'gate'
+Skill    99 'acid breath'
+Skill    99 'fire breath'
+Skill    99 'frost breath'
+Skill    99 'gas breath'
+Skill    99 'lightning breath'
+Skill    99 'psionic shockwave'
+Skill    99 'high explosive'
+Skill    99 'block area'
+Skill    99 'write spell'
+Skill    99 'homonculous'
+Skill    99 'demon'
+Skill    99 'beast'
+Skill    99 'shade'
+Skill    99 'phantasm'
+Skill    99 'rift'
+Skill    99 'rip'
+Skill    99 'tongues'
+Skill    99 'understand'
+Skill    99 'haste'
+Skill    99 'enhanced rest'
+Skill    99 'enhanced heal'
+Skill    99 'enhanced revive'
+Skill    99 'animate dead'
+Skill    99 'banish'
+Skill    99 'enhance object'
+Skill    99 'mage shield'
+Skill    99 'dispel undead'
+Skill    99 'dispel good'
+Skill    99 'remove fear'
+Skill    99 'feast'
+Skill    99 'restore'
+Skill    99 'tremor'
+Skill    99 'energy shift'
+Skill    99 'induction'
+Skill    99 'illusion'
+Skill    99 'mirror image'
+Skill    99 'hallucinate'
+Skill    99 'stability'
+Skill    99 'ethereal travel'
+Skill    99 'astral projection'
+Skill    99 'breath water'
+Skill    99 'mage blast'
+Skill    99 'confusion'
+Skill    99 'sanctify'
+Skill    99 'soothing touch'
+Skill    99 'benediction'
+Skill    99 'righteous fury'
+Skill    99 'farheal'
+Skill    99 'unholy word'
+Skill    99 'holy word'
+Skill    99 'invigorate'
+Skill    99 'improved invis'
+Skill    99 'truesight'
+Skill    99 'recharge'
+Skill    99 'transport'
+Skill    99 'anti-magic shell'
+Skill    99 'possess'
+Skill    99 'nightmare'
+Skill    99 'smoke'
+Skill    99 'slow'
+Skill    99 'brew potion'
+Skill    99 'elemental'
+Skill    99 'fireshield'
+Skill    99 'unbarring ways'
+Skill    99 'vampiric touch'
+Skill    99 'protection good'
+Skill    99 'metamorphose liquids'
+Skill    99 'firewalk'
+Skill    99 'detect good'
+Skill    99 'divine inspiration'
+Skill    99 'black aura'
+Skill    99 'mana shield'
+Skill    99 'magic mirror'
+Skill    99 'animate object'
+Skill    99 'mana shackles'
+Skill    99 'globe of darkness'
+Skill    99 'earthbind'
+Skill    99 'quicken'
+Skill    99 'torrid balm'
+Skill    99 'song of the seas'
+Skill    99 'ice arrow'
+Skill    99 'earthen spirit'
+Skill    99 'energy bolt'
+Skill    99 'ice layer'
+Skill    99 'icicle armor'
+Skill    99 'flamewave'
+Skill    99 'envision'
+Skill    99 'winged call'
+Skill    99 'fear'
+Skill    99 'chain lightning'
+Skill    99 'flame blade'
+Skill    99 'hide'
+Skill    99 'sneak'
+Skill    99 'stealth'
+Skill    99 'clear path'
+Skill    99 'hunt'
+Skill    99 'berserk'
+Skill    99 'critical hit'
+Skill    99 'blood frenzy'
+Skill    99 'cripple'
+Skill    99 'polymorph'
+Skill    99 'backstab'
+Skill    99 'knife'
+Skill    99 'martial arts'
+Skill    99 'acupunch'
+Skill    99 'kick'
+Skill    99 'bash'
+Skill    99 'gouge'
+Skill    99 'circle'
+Skill    99 'trip'
+Skill    99 'disarm'
+Skill    99 'dodge'
+Skill    99 'enhanced damage'
+Skill    99 'parry'
+Skill    99 'peek'
+Skill    99 'pick lock'
+Skill    99 'rescue'
+Skill    99 'second attack'
+Skill    99 'third attack'
+Skill    99 'fourth attack'
+Skill    99 'fifth attack'
+Skill    99 'climb'
+Skill    99 'steal'
+Skill    99 'shoot'
+Skill    99 'track'
+Skill    99 'notice'
+Skill    99 'throw'
+Skill    99 'rearm'
+Skill    99 'shadow'
+Skill    99 'divert'
+Skill    99 'voice'
+Skill    99 'bargain'
+Skill    99 'camp'
+Skill    99 'lock lock'
+Skill    99 'makepoison'
+Skill    99 'disguise'
+Skill    99 'spy'
+Skill    99 'attack'
+Skill    99 'armor usage'
+Skill    99 'distract'
+Skill    99 'greater peek'
+Skill    99 'snatch'
+Skill    99 'greater pick'
+Skill    99 'assassinate'
+Skill    99 'glance'
+Skill    99 'guard'
+Skill    99 'forge'
+Skill    99 'detect forgery'
+Skill    99 'plant'
+Skill    99 'greater backstab'
+Skill    99 'anatomy'
+Skill    99 'greater stealth'
+Skill    99 'quick draw'
+Skill    99 'flash powder'
+Skill    99 'muffle'
+Skill    99 'pass without trace'
+Skill    99 'door bash'
+Skill    99 'greater hunt'
+Skill    99 'greater track'
+Skill    99 'dual wield'
+Skill    99 'mass'
+Skill    99 'shield block'
+Skill    99 'fisticuffs'
+Skill    99 'range cast'
+Skill    99 'drain'
+Skill    99 'whirl'
+Skill    99 'reposte'
+Skill    99 'head butt'
+Skill    99 'sword fighting'
+Skill    99 'dagger fighting'
+Skill    99 'axe fighting'
+Skill    99 'mace fighting'
+Skill    99 'staff fighting'
+Skill    99 'whip fighting'
+Skill    99 'flail fighting'
+Skill    99 'spear fighting'
+Skill    99 'claw fighting'
+Skill    99 'brawling'
+Skill    99 'resilience'
+Skill    99 'lightning reflexes'
+Skill    99 'precision'
+Skill    99 'warmth'
+Skill    99 'recite'
+Skill    99 'brandish'
+Skill    99 'zap'
+Skill    99 'scroll mastery'
+Skill    99 'ambush'
+Skill    99 'first strike'
+Skill    99 'mount'
+Skill    99 'tame'
+Skill    99 'withdraw'
+Skill    99 'endurance'
+Skill    99 'perception'
+Skill    99 'impale'
+Skill    99 'strangle'
+Speed    3
+Reinc    11
+Prev_hrs 0
+Tactical 6
+TactIndx !!~
+Compass  8
+A_Range  44400 44499
+Pvnum    1
+Vt100_T  8027
+Vt100_F  254
+Portsize 10000
+Prompt   {078}<$c$h{078}hp $c$m{078}m $c$v{078}mv $c$X{078}xp> <{178}$e{078}> ($c$l{078}) ($c$L{078}) ~
+Spam     1696
+Clock    100
+Recall   17214
+Death    9755
+Whichgod 0
+Blocking ~
+AutoComm psionic shockwave~
+AutoMode 1
+History  0 0
+History  1 0
+History  2 0
+History  3 0
+History  4 0
+History  5 0
+LastNote 1135106933
+Topic    0 1135106933
+Topic    1 1113652922
+Topic    2 1116254770
+Topic    3 1117300179
+Topic    4 1116531568
+Topic    5 1118199180
+Topic    6 1094108406
+Color     0 86
+Color     1 17
+Color     2 43
+Color     3 83
+Color     4 81
+Color     5 82
+Color     6 87
+Color     7 85
+Color     8 84
+Color     9 83
+Color    10 82
+Color    11 85
+Color    12 47
+Color    13 43
+Color    14 41
+Color    15 45
+Color    16 83
+Color    17 85
+Color    18 87
+Alias    boom~echo {110}T{130}h{010}e {110}L{130}o{010}r{110}d {130}o{010}f {110}H{130}e{010}l{110}l {130}F{010}i{110}r{130}e {010}B{110}o{130}o{010}m{110}s '{010}%{110}'~
+Alias    check~edit area check %~
+Alias    gratz~chat .'.'.'.'.'.'.'.' G r A t Z '.'.'.'.'.'.'.'.~
+Alias    think~emote thinks . o O (%)~
+Critical 0
+PK_ATTACKS 10
+0 0 NULL~
+0 0 NULL~
+0 0 NULL~
+0 0 NULL~
+0 0 NULL~
+0 0 NULL~
+0 0 NULL~
+0 0 NULL~
+0 0 NULL~
+0 0 NULL~
+End
+
+#END Emud

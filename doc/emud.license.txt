@@ -1,0 +1,51 @@
+-------------------------------------------------------------------------------
+
+Emud Release 3.0    Friday 12 December 2003
+
+Igor van den Hoven
+Michiel Lange
+
+-------------------------------------------------------------------------------
+
+                                   Copyright
+
+Diku Mud is copyright (C) 1990, 1991 by Sebastian Hammer, Michael Seifert,
+Hans Hendrik St{rfeldt, Tom Madsen, and Katja Nyboe.  Their license agreement
+is in the file 'diku.license.txt'.
+
+Merc Diku Mud (C) 1992, 1993 by Michael Chastain, Michael Quan,
+and Mitchell Tse. Their license agreement is in the file 'merc.license.txt'.
+
+MrMud 1.4 (C) 1994, 1995 by David Bills and Dug Michael.
+
+Emud 3.0 (C) 1999, 2000 by Michiel Lange and Igor van den Hoven. Our license
+agreement is in the file 'emud.license.txt'.
+
+-------------------------------------------------------------------------------
+
+                             Terms and Conditions
+
+ 1. Copyrights must remain in original source.
+
+ 2. 'help emud' and 'help mrmud' must report our help text, as shipped.
+
+ 3. The 'credits' command must link to the merc, mrmud, and emud helpfiles.
+
+ 4. There are currently 8 login screens from which a random screen is picked
+    when a player connects. The following information must be displayed on at
+    least 1 login screen:
+
+    01 Aug 1993 Merc  2.1 Furey, Hatchet, Kahn
+    11 Nov 1993 MrMud 1.4 David Bills, Dug Michael
+    11 Oct 1999 Emud  2.0 Michiel Lange
+    02 Feb 2001 Emud  3.0 Igor van den Hoven
+
+ 5. If you register your MUD on sites such as mudconnector.com you should
+    mention the codebase it's directly derived from, which is Emud 3.0
+    unless you're using a publicly available derived codebase based on
+    Emud 3.0.
+
+ 6. By using any part of this codebase you indicate your acceptance of this
+    license, along with all terms and conditions.
+
+-------------------------------------------------------------------------------

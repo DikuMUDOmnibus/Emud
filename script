@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# get the pids and get the shells out of them
+
+for i in `ps U $1 -o "%p"`
+do
+	if [ $i != "PID" ]
+	then
+		kill -TERM $i;
+	fi
+done

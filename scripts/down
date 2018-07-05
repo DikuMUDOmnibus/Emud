@@ -1,0 +1,70 @@
+#!/bin/bash
+
+if [ -e emud.pid ]
+then
+	EMUD=`cat emud.pid`;
+else
+	if [ "$1" != "-tail" ]
+	then
+		echo "Cannot find the pid of current_emud.";
+		exit;
+	fi
+fi
+
+if [ -e script.pid ]
+then
+	SCRIPT=`cat script.pid`;
+else
+	echo "Cannot determine the pid of the emud-script.";
+fi
+
+case $1 in
+	-emud)
+		echo "Sending Emud-process ${EMUD} and ${SCRIPT} the TERM signal..."
+		kill -TERM $EMUD;
+		killall -TERM tail 1>/dev/null 2>/dev/null;
+		kill -TERM $SCRIPT
+		sleep 3;
+		echo "Send all Emud-process the KILL signal..."
+		kill -KILL $EMUD 1>/dev/null 2>/dev/null;
+		killall -KILL tail 1>/dev/null 2>/dev/null;
+		killl -KILL $SCRIPT 1>/dev/null 2>/dev/null;
+		echo "OK"
+		;;
+	-tail)
+		killall -TERM tail 1>/dev/null 2>/dev/null;
+		sleep 3;
+		killall -KILL tail 1>/dev/null 2>/dev/null;
+		;;
+	-current_emud)
+		killall -TERM $EMUD;
+		sleep 2;
+		killall -KILL $EMUD 1>/dev/null 2>/dev/null;
+		;;
+	*)
+		echo "Sending Emud-processes $EMUD and $SCRIPT the TERM signal..."
+		kill -TERM $EMUD;
+		killall -TERM tail 1>/dev/null 2>/dev/null;
+		kill -TERM $SCRIPT;
+		sleep 3
+		echo "Sending all Emud-processes the KILL signal..."
+		kill -KILL $EMUD 1>/dev/null 2>/dev/null;
+		killall -KILL tail 1>/dev/null 2>/dev/null;
+		kill -KILL $SCRIPT 1>/dev/null 2>/dev/null;
+		if [ -e ./RUNNING ]
+		then
+			echo "Removing the RUNNING file...";
+			rm RUNNING;
+		fi
+		if [ -e ./emud.pid ]
+		then
+			echo "Removing emud.pid...";
+			rm emud.pid;
+		fi
+		if [ -e ./script.pid ]
+		then
+			echo "Removing script.pid...";
+			rm script.pid;
+		fi
+		;;
+esac

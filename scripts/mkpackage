@@ -1,0 +1,14 @@
+#!/bin/sh
+
+#
+# mkpackage
+#
+# Script to create an install package quickly
+# By Michiel Lange
+#
+VERSION=`head -c 11 src/VERSION`
+echo "Packing emud-$VERSION.tar"
+tar -cvf emud-$VERSION.tar backups/
+tar --append -vf emud-$VERSION.tar install
+tar --append -vf emud-$VERSION.tar unpack
+tar --append -vf emud-$VERSION.tar mkpackage

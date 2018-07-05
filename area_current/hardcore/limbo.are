@@ -1,0 +1,1144 @@
+#AREA Limbo~
+#AUTHORS Diku~
+#VERSION 3
+#RANGES 0 99 0 99
+#OLC_RANGES 1 99
+#RESETMSG off~
+
+#FLAGS AFLAG_NOTELEPORT|AFLAG_NOSUMMON
+
+
+#HELPS
+0 LIMBO~
+{128}                                    Limbo
+{308}
+This is Chaos' private studio of fractal confusion and militant entropy.
+The only way in is via immortal intervention.
+~
+
+99 AREA_TAG_SAVE~
+{128}                                Area Tag Save
+
+Limbo will not load with ARMY tag.
+
+Here it is for safekeeping:
+
+#ARMY 515 2514 424 16322 1908 705 2420 1868
+~
+
+0 $~
+
+
+#MOBILES
+#1
+Puff~
+Puff~
+Puff the Fractal Dragon is here, contemplating a higher reality.~
+~
+ACT_SENTINEL|ACT_SMART
+AFF_SANCTUARY
+1000 S
+300 0 0 1d22500+76510 1d300+452
+25 0
+POS_STANDING POS_STANDING SEX_FEMALE
+>rand_prog 15~
+switch numberrange (1,17)
+  case 1
+    pat $r
+  case 2
+    say Are you awake $r?
+  case 3
+    mpecho {108}Puff fades into the relative darkness.
+  case 4
+    mpecho {058}U{078}l{058}t{078}r{058}a {078}v{058}i{078}o{058}l{078}e{058}t {078}flames shoot from Puff's nostrils.
+  case 5
+    mpecho {078}A small plasma cloud burps out of Puff.
+  case 6
+    mpecho {078}Puff s{178}n{078}e{178}e{078}z{178}e{078}s, an arctic wind chilling your bones.
+  case 7
+    mpecho {078}Puff flaps her little wings and scary {108}s{078}h{108}a{078}d{108}o{078}w{108}s {078}f{068}l{078}i{068}c{078}k{068}e{078}r through the void.
+  case 8
+    mpecho {078}Puff scrapes its claws over a temporary materialized {038}m{078}i{038}l{078}l {038}s{078}t{038}o{078}n{038}e{078}.
+  case 9
+    mpecho {078}Puff fades into the room description.
+  case 10
+    mpecho {078}Puff flies out of the room description.
+  case 11
+    mpecho {078}Flames leak from Puff's nostrils which Puff uses to light a cigarette.
+  case 12
+    mpecho {078}Grey smoke leaks from Puff's nostrils forming circles which float up slowly.
+  case 13
+    mpecho {078}Puff the Fractal Dragon huffs and puffs.
+  case 14
+    mpecho {078}Puff stares at the stars.
+  case 15
+    smile $r
+    say What's a cutie like you doing in a place like this?
+  case 16
+    mpecho {078}S{068}w{078}i{068}r{078}l{068}i{078}n{068}g{078} l{068}i{078}g{068}h{078}t{068}s dangle through the void as Puff air-guitars like a {018}m{068}a{018}d {068}g{018}i{068}r{018}l{068}!
+  case 17
+    cast feast
+~
+|
+#2
+tsi TsiCat~
+Tsi the Cat~
+Tsi the magic cat is hiding here.~
+Tsi looks like an ordinary cat with the exception of pure black eyes.
+Tsi is wearing a Grand Prix drivers suit.
+~
+ACT_SENTINEL|ACT_MOUNT|ACT_SMART|ACT_BODY|ACT_RACE
+AFF_TONGUES|AFF_HASTE
+1000 S
+30 BODY_HEAD|BODY_EYE BODY_MOUTH 1d225+410 1d30+6
+10000 RACE_HUMAN
+POS_STANDING POS_STANDING SEX_FEMALE
+>speech_prog arglebargle~
+mpquiet on
+mpat $2 mpforce $2 dump buffer
+mpquiet off
+~
+>speech_prog calc~
+mpmset self quest 0 4 0
+if name ($i) !/ $4
+  mpcalculate $2 $3 $4
+  mpmadd self quest 0 4 1
+endif
+if name ($i) !/ $6
+  mpcalculate $X $5 $6
+  mpmadd self quest 0 4 1
+endif
+if name ($i) !/ $8
+  mpcalculate $X $7 $8
+  mpmadd self quest 0 4 1
+endif
+if name ($i) !/ $9
+  say Sorry, I cannot calculate that much :(
+endif
+if quest (0,4,$i) == 0
+  say What would you like me to calculate sweety?
+endif
+if quest (0,4,$i) == 1
+  say $2 $3 $4 = $X
+endif
+if quest (0,4,$i) == 2
+  say $2 $3 $4 $5 $6 = $X
+endif
+if quest (0,4,$i) == 3
+  say $2 $3 $4 $5 $6 $7 $8 = $X
+endif
+~
+>act_prog p looks a little parched.~
+cast feast
+~
+>fight_prog 100~
+if hitprcnt ($i) < 100
+  if hitprcnt ($n) > $x
+    say You win
+  else
+    say I win
+~
+>death_prog 100~
+mpmload 2
+~
+|
+#3
+junkman dukenuken tenedos yahoo jesus cunt saurong aquarius hours~
+the Junk Man~
+The Junk Man is here picking up trash.~
+The Junk Man looks very dirty.
+~
+0
+AFF_ETHEREAL
+0 S
+300 0 0 1d22500+76510 1d300+452
+0 0
+POS_STANDING POS_STANDING SEX_MALE
+#4
+totem~
+a totem~
+A revered emblem of magical power is here.~
+Though you look at it and study it, it's impossible to tell what features the
+totem has, as they constantly shift and morph from one to another.
+~
+ACT_SENTINEL|ACT_SMART
+0
+0 S
+99 0 0 1d2450+5385 1d99+51
+0 0
+POS_STANDING POS_STANDING SEX_MALE
+#10
+morphling M10~
+a morphling~
+~
+~
+ACT_SENTINEL|ACT_SMART|ACT_RACE
+0
+0 S
+100 0 0 0d0+10000 1d100+101
+0 RACE_ELF
+POS_STANDING POS_STANDING SEX_NEUTRAL
+#0
+
+
+#SHOPS
+0
+
+
+#SPECIALS
+S
+
+
+#OBJECTS
+#2
+coin gold~
+a gold coin~
+One miserable gold coin.~
+~
+ITEM_TYPE_MONEY
+0
+ITEM_WEAR_TAKE
+1 0 0 0 0 0 0 0
+1 10 1
+#3
+coins gold~
+%d gold coins~
+A pile of gold coins.~
+~
+ITEM_TYPE_MONEY
+0
+ITEM_WEAR_TAKE
+0 0 0 0 0 0 0 0
+1 10 1
+#4
+totem~
+a totem~
+A totem of supernatural energy stands here.~
+A multi-hued aura surrounds this emblem of magical powers, turning it green,
+then yellow, then white, a soft, diffused glow lighting the area surrounding it.
+~
+ITEM_TYPE_TOTEM
+ITEM_FLAG_GLOW|ITEM_FLAG_HUM
+0
+-1 -1 -1 -1 0 0 0 0
+1 10 99
+#10
+corpse %scorpse~
+corpse of %s~
+The corpse of %s is lying here.~
+~
+ITEM_TYPE_CORPSE_NPC
+0
+ITEM_WEAR_TAKE
+0 0 0 1 0 0 0 0
+10000 10 1
+#11
+corpse %scorpse~
+corpse of %s~
+The corpse of %s is lying here.~
+~
+ITEM_TYPE_CORPSE_PC
+0
+ITEM_WEAR_TAKE
+0 0 0 1 0 0 0 0
+20000 10 1
+#12
+head~
+head of %s~
+The severed head of %s is lying here.~
+~
+ITEM_TYPE_FOOD
+0
+ITEM_WEAR_TAKE
+10 0 0 0 0 0 0 0
+5 10 1
+#13
+heart~
+heart of %s~
+The torn-out heart of %s is lying here.~
+~
+ITEM_TYPE_FOOD
+0
+ITEM_WEAR_TAKE
+16 0 0 0 0 0 0 0
+2 10 1
+#14
+arm~
+arm of %s~
+The sliced-off arm of %s is lying here.~
+~
+ITEM_TYPE_FOOD
+0
+ITEM_WEAR_TAKE
+20 0 0 0 0 0 0 0
+5 10 1
+#15
+leg~
+leg of %s~
+The sliced-off leg of %s is lying here.~
+~
+ITEM_TYPE_FOOD
+0
+ITEM_WEAR_TAKE
+20 0 0 0 0 0 0 0
+5 10 1
+#16
+steaming turd~
+a steaming turd~
+The steaming turds of %s assail your nostrils.~
+~
+ITEM_TYPE_TRASH
+0
+0
+5 0 0 1 0 0 0 0
+1 10 1
+#20
+mushroom magic~
+a Magic Mushroom~
+A delicious magic mushroom is here.~
+~
+ITEM_TYPE_FOOD
+0
+ITEM_WEAR_TAKE
+5 0 0 0 0 0 0 0
+1 10 1
+#21
+ball light~
+a bright ball of light~
+A bright ball of light shimmers in the air.~
+~
+ITEM_TYPE_LIGHT
+0
+ITEM_WEAR_TAKE
+0 0 -1 0 0 0 0 0
+1 10 1
+#22
+spring~
+a magical spring~
+A magical spring flows from the ground here.~
+~
+ITEM_TYPE_FOUNTAIN
+ITEM_FLAG_MAGIC
+0
+100000 100000 LIQ_WATER 0 0 0 0 0
+5000 10 1
+#23
+shimmering gateway~
+a shimmering gateway~
+A shimmering gateway stands here.~
+~
+ITEM_TYPE_PORTAL
+ITEM_FLAG_MAGIC
+0
+-1 0 GATE_STEP_INTO -1 0 0 0 0
+1 10 1
+#24
+ice arrow~
+an ice arrow~
+A dangerous looking piece of ice has been left here.~
+The arrow glitters like blue fire in the light.  It is burning cold to the
+touch, with an evil, dangerous tip.
+~
+ITEM_TYPE_AMMO
+0
+ITEM_WEAR_TAKE
+0 0 0 0 0 0 0 0
+1 10 1
+#25
+head %s~
+the head of %s~
+The head of %s lies here.~
+The head of %s stares up at you, eyes unseeing, mouth open in a permanent gasp of surprise.  Power wielded in death is now inherent in the head, worth, on the open market, %d gold coins.
+~
+ITEM_TYPE_ARTIFACT
+ITEM_FLAG_AUTO_ENGRAVE
+ITEM_WEAR_TAKE|ITEM_WEAR_HOLD
+0 0 0 0 0 0 0 0
+1 10 1
+E
+eyes~
+The eyes are glazed over, the staring eyes of vicious fish.
+~
+#49
+~
+~
+~
+~
+ITEM_TYPE_TRASH
+0
+0
+0 0 0 0 0 0 0 0
+1 10 1
+#52
+eternal fire~
+an eternal fire~
+An eternal fire floats above the ground here.~
+The fire it produces burns fiercly beneath your skin.  The unearthy glow of
+mystical flames appear, licking at your very soul.  Bands from fire have been
+woven around your heart, surrounding it and leading into it.  As you close
+your eyes and listen, you can hear some ancient whispered words.
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_MAGIC|ITEM_FLAG_NODROP|ITEM_FLAG_NOREMOVE|ITEM_FLAG_INVENTORY|ITEM_FLAG_AUTO_ENGRAVE
+ITEM_WEAR_TAKE
+0 0 0 0 0 0 0 0
+1 10 10
+A APPLY_DAMROLL 5 0
+A APPLY_HITROLL 5 0
+A APPLY_AC -25 0
+P 1
+TRIG_WEAR 100
+OPROG_GOD_COMMAND
+echo {018}The sun burns brighter as the emblem of fire is scorched into $I's chest.~
+P 2
+TRIG_UNKNOWN 100 LISTEN
+OPROG_GOD_COMMAND
+help DEMISEGODCHAINCOMMANDS~
+P 3
+TRIG_TICK 30
+OPROG_OBJECT_QUEST_IF 0 10 = 0 4 5
+P 4
+TRIG_VOID
+OPROG_APPLY OAPPLY_MOVE 5
+P 4
+TRIG_VOID
+OPROG_APPLY OAPPLY_MANA 5
+P 4
+TRIG_VOID
+OPROG_APPLY OAPPLY_HIT 25
+P 5
+TRIG_VOID
+OPROG_QUEST_ADD 0 10 -1
+P 5
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 0 10 = 0 23 24
+P 6
+TRIG_UNKNOWN 100 CHECK-FIRE
+OPROG_OBJECT_QUEST_IF 0 10 = 0 10 7
+P 7
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 0 10 < 100 11 8
+P 8
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 0 10 < 200 12 9
+P 9
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 0 10 < 300 13 14
+P 10
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of fire.~
+P 11
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of fire within 1 hours.~
+P 12
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of fire within 2 hours.~
+P 13
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of fire within 3 hours.~
+P 14
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of fire within 4 hours.~
+P 15
+TRIG_UNKNOWN 101 CALL-FIRE
+OPROG_OBJECT_QUEST_IF 0 10 ! 0 16 17
+P 16
+TRIG_VOID
+OPROG_ECHO
+You cannot call upon the power of fire yet.~
+P 17
+TRIG_VOID
+OPROG_IF OIF_USER_POSITION = POS_SLEEPING 18 19
+P 18
+TRIG_VOID
+OPROG_ECHO
+In your dreams or what?~
+P 19
+TRIG_VOID
+OPROG_GOD_COMMAND
+mpmload 11801
+mpechoat M11801 fire restore please
+~
+P 19
+TRIG_VOID
+OPROG_QUEST_SET 0 10 400
+P 20
+TRIG_UNKNOWN 100 WARP
+OPROG_IF OIF_USER_FIGHTING = 1 21 22
+P 21
+TRIG_VOID
+OPROG_ECHO
+No way!  You are still fighting!
+~
+P 22
+TRIG_VOID
+OPROG_GOD_COMMAND
+mpmload 11802
+mpechoat M11802 fire warp please
+~
+P 23
+TRIG_VOID
+OPROG_GOD_COMMAND
+mpechoat self {018}You can call upon the Power of Fire again.~
+P 24
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 10 1 = 1 25 0
+P 25
+TRIG_VOID
+OPROG_GOD_COMMAND
+mpechoat self {018}You feel fire trickle down your soul.~
+P 26
+TRIG_UNKNOWN 100 SHOW-TICK
+OPROG_OBJECT_QUEST_IF 10 1 = 0 27 28
+P 27
+TRIG_VOID
+OPROG_ECHO
+You will now see your eternal fire charge.~
+P 27
+TRIG_VOID
+OPROG_QUEST_SET 10 1 1
+P 28
+TRIG_VOID
+OPROG_ECHO
+You will no longer see your eternal fire charge.~
+P 28
+TRIG_VOID
+OPROG_QUEST_SET 10 1 0
+#56
+chain platinum~
+a platinum chain~
+A platinum chain lies here.~
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_MAGIC|ITEM_FLAG_NODROP|ITEM_FLAG_NOREMOVE|ITEM_FLAG_INVENTORY|ITEM_FLAG_AUTO_ENGRAVE
+ITEM_WEAR_TAKE
+10 0 0 0 0 0 0 0
+1 10 10
+A APPLY_NONE 0 128
+#57
+chain gold~
+a gold chain~
+A gold chain lies here.~
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_NODROP|ITEM_FLAG_NOREMOVE|ITEM_FLAG_INVENTORY|ITEM_FLAG_AUTO_ENGRAVE
+ITEM_WEAR_TAKE
+0 0 0 0 0 0 0 0
+1 10 10
+P 1
+TRIG_UNKNOWN 100 test
+OPROG_GOD_COMMAND
+mpat 1 mpmset self quest 0 1 0~
+#58
+gust wind~
+a gust of wind~
+A Gust of Wind is floating trough the room~
+The gust of wind glows with pure magic, within the whirlwind you hear angel
+voices sing. Maybe you should listen to them.
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_GLOW|ITEM_FLAG_MAGIC|ITEM_FLAG_NODROP|ITEM_FLAG_NOREMOVE|ITEM_FLAG_INVENTORY|ITEM_FLAG_AUTO_ENGRAVE
+ITEM_WEAR_TAKE
+0 0 0 0 0 0 0 0
+1 10 10
+A APPLY_AC -40 0
+P 1
+TRIG_WEAR 100
+OPROG_GOD_COMMAND
+echo {158}The birds sing their brightest song as the divine wind courses through $I!~
+P 2
+TRIG_UNKNOWN 100 LISTEN
+OPROG_GOD_COMMAND
+help MANWEGODCHAINCOMMANDS~
+P 3
+TRIG_TICK 30
+OPROG_OBJECT_QUEST_IF 0 10 = 0 4 5
+P 4
+TRIG_VOID
+OPROG_APPLY OAPPLY_MOVE 15
+P 4
+TRIG_VOID
+OPROG_APPLY OAPPLY_MANA 15
+P 4
+TRIG_VOID
+OPROG_APPLY OAPPLY_HIT 15
+P 5
+TRIG_VOID
+OPROG_QUEST_ADD 0 10 -1
+P 5
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 0 10 = 0 23 24
+P 6
+TRIG_UNKNOWN 100 CHECK-WIND
+OPROG_OBJECT_QUEST_IF 0 10 = 0 10 7
+P 7
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 0 10 < 100 11 8
+P 8
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 0 10 < 200 12 9
+P 9
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 0 10 < 300 13 14
+P 10
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of wind.~
+P 11
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of wind within 1 hours.~
+P 12
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of wind within 2 hours.~
+P 13
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of wind within 3 hours.~
+P 14
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of wind within 4 hours.~
+P 15
+TRIG_UNKNOWN 101 CALL-WIND
+OPROG_OBJECT_QUEST_IF 0 10 ! 0 16 17
+P 16
+TRIG_VOID
+OPROG_ECHO
+You cannot call upon the power of wind yet.~
+P 17
+TRIG_VOID
+OPROG_IF OIF_USER_POSITION = POS_SLEEPING 18 19
+P 18
+TRIG_VOID
+OPROG_ECHO
+In your dreams or what?~
+P 19
+TRIG_VOID
+OPROG_GOD_COMMAND
+mpmload 9009 
+mpechoat M9009 wind restore please~
+P 19
+TRIG_VOID
+OPROG_QUEST_SET 0 10 400
+P 20
+TRIG_UNKNOWN 100 WARP
+OPROG_IF OIF_USER_FIGHTING = 1 21 22
+P 21
+TRIG_VOID
+OPROG_ECHO
+No way!  You are still fighting!~
+P 22
+TRIG_VOID
+OPROG_GOD_COMMAND
+mpmload 9010 
+mpechoat M9010 wind warp please~
+P 23
+TRIG_VOID
+OPROG_GOD_COMMAND
+mpechoat self {158}You can call upon the Power of Wind again.~
+P 24
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 10 1 = 1 25 0
+P 25
+TRIG_VOID
+OPROG_GOD_COMMAND
+mpechoat self {058}You feel wind blowing through your soul.~
+P 26
+TRIG_UNKNOWN 100 SHOW-TICK
+OPROG_OBJECT_QUEST_IF 10 1 = 0 27 28
+P 27
+TRIG_VOID
+OPROG_ECHO
+You will now see your gust of wind charge.~
+P 27
+TRIG_VOID
+OPROG_QUEST_SET 10 1 1
+P 28
+TRIG_VOID
+OPROG_ECHO
+You will no longer see your gust of wind charge.~
+P 28
+TRIG_VOID
+OPROG_QUEST_SET 10 1 0
+#59
+'silver chain' hypnos~
+a silver chain~
+a silver chain is lying here.~
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_MAGIC|ITEM_FLAG_NODROP|ITEM_FLAG_NOREMOVE|ITEM_FLAG_INVENTORY|ITEM_FLAG_AUTO_ENGRAVE
+ITEM_WEAR_TAKE
+0 0 0 0 0 0 0 0
+1 10 10
+A APPLY_SAVING_SPELL -10 0
+A APPLY_AC -25 0
+P 1
+TRIG_VOID
+OPROG_GOD_COMMAND
+echo {168}$I has chosen the path of Hypnos!~
+P 2
+TRIG_UNKNOWN 100 LISTEN
+OPROG_GOD_COMMAND
+help HYPNOSGODCHAINCOMMANDS~
+P 3
+TRIG_TICK 30
+OPROG_OBJECT_QUEST_IF 0 10 = 0 4 5
+P 4
+TRIG_VOID
+OPROG_APPLY OAPPLY_MOVE 5
+P 4
+TRIG_VOID
+OPROG_APPLY OAPPLY_MANA 50
+P 4
+TRIG_VOID
+OPROG_APPLY OAPPLY_HIT 5
+P 5
+TRIG_VOID
+OPROG_QUEST_ADD 0 10 -1
+P 5
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 0 10 = 0 23 24
+P 6
+TRIG_UNKNOWN 100 CHECK-SPIRIT
+OPROG_OBJECT_QUEST_IF 0 10 = 0 10 7
+P 7
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 0 10 < 100 11 8
+P 8
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 0 10 < 200 12 9
+P 9
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 0 10 < 300 13 14
+P 10
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of spirit.~
+P 11
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of spirit within 1 hours.~
+P 12
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of spirit within 2 hours.~
+P 13
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of spirit within 3 hours.~
+P 14
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of spirit within 4 hours.~
+P 15
+TRIG_UNKNOWN 101 CALL-SPIRIT
+OPROG_OBJECT_QUEST_IF 0 10 ! 0 16 17
+P 16
+TRIG_VOID
+OPROG_ECHO
+You cannot call upon the power of spirit yet.~
+P 17
+TRIG_VOID
+OPROG_IF OIF_USER_POSITION = POS_SLEEPING 18 19
+P 18
+TRIG_VOID
+OPROG_ECHO
+In your dreams or what?~
+P 19
+TRIG_VOID
+OPROG_GOD_COMMAND
+mpmload 25050 
+mpechoat M25050 spirit restore please~
+P 19
+TRIG_VOID
+OPROG_QUEST_SET 0 10 400
+P 20
+TRIG_UNKNOWN 100 WARP
+OPROG_IF OIF_USER_FIGHTING = 1 21 22
+P 21
+TRIG_VOID
+OPROG_ECHO
+No way!  You are still fighting!~
+P 22
+TRIG_VOID
+OPROG_GOD_COMMAND
+mpmload 25051 
+mpechoat M25051 spirit warp please~
+P 23
+TRIG_VOID
+OPROG_GOD_COMMAND
+mpechoat self {168}You can call upon the Power of Spirit again.~
+P 24
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 10 1 = 1 25 0
+P 25
+TRIG_VOID
+OPROG_GOD_COMMAND
+mpechoat self {168}You feel energy coursing through your soul.~
+P 26
+TRIG_UNKNOWN 100 SHOW-TICK
+OPROG_OBJECT_QUEST_IF 10 1 = 0 27 28
+P 27
+TRIG_VOID
+OPROG_ECHO
+You will now see your silver chain charge.
+~
+P 27
+TRIG_VOID
+OPROG_QUEST_SET 10 1 1
+P 28
+TRIG_VOID
+OPROG_ECHO
+You will no longer see your silver chain charge.
+~
+P 28
+TRIG_VOID
+OPROG_QUEST_SET 10 1 0
+#60
+ice cube~
+an ice cube~
+An ice cube is melting here.~
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_MAGIC|ITEM_FLAG_NODROP|ITEM_FLAG_NOREMOVE|ITEM_FLAG_INVENTORY|ITEM_FLAG_AUTO_ENGRAVE
+ITEM_WEAR_TAKE
+0 0 0 0 0 0 0 0
+1 10 10
+A APPLY_HIT 100 0
+A APPLY_AC -25 0
+P 1
+TRIG_WEAR 100
+OPROG_GOD_COMMAND
+echo {148}$I has chosen the path of Ulmo!~
+P 2
+TRIG_UNKNOWN 100 LISTEN
+OPROG_GOD_COMMAND
+help ULMOGODCHAINCOMMANDS~
+P 3
+TRIG_TICK 30
+OPROG_OBJECT_QUEST_IF 0 10 = 0 4 5
+P 4
+TRIG_VOID
+OPROG_APPLY OAPPLY_MOVE 10
+P 4
+TRIG_VOID
+OPROG_APPLY OAPPLY_MANA 30
+P 4
+TRIG_VOID
+OPROG_APPLY OAPPLY_HIT 20
+P 5
+TRIG_VOID
+OPROG_QUEST_ADD 0 10 -1
+P 5
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 0 10 = 0 23 24
+P 6
+TRIG_UNKNOWN 100 CHECK-WATER
+OPROG_OBJECT_QUEST_IF 0 10 = 0 10 7
+P 7
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 0 10 < 100 11 8
+P 8
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 0 10 < 200 12 9
+P 9
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 0 10 < 300 13 14
+P 10
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of water.~
+P 11
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of water within 1 hours.~
+P 12
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of water within 2 hours.~
+P 13
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of water within 3 hours.~
+P 14
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of water within 4 hours.~
+P 15
+TRIG_UNKNOWN 100 CALL-WATER
+OPROG_OBJECT_QUEST_IF 0 10 ! 0 16 17
+P 16
+TRIG_VOID
+OPROG_ECHO
+You cannot call upon the power of water yet.~
+P 17
+TRIG_VOID
+OPROG_IF OIF_USER_POSITION = POS_SLEEPING 18 19
+P 18
+TRIG_VOID
+OPROG_ECHO
+In your dreams or what?~
+P 19
+TRIG_VOID
+OPROG_GOD_COMMAND
+mpmload 42900 
+mpechoat M42900 water restore please~
+P 19
+TRIG_VOID
+OPROG_QUEST_SET 0 10 400
+P 20
+TRIG_UNKNOWN 100 WARP
+OPROG_IF OIF_USER_FIGHTING = 1 21 22
+P 21
+TRIG_VOID
+OPROG_ECHO
+No way!  You are still fighting!~
+P 22
+TRIG_VOID
+OPROG_GOD_COMMAND
+mpmload 42901 
+mpechoat M42901 water warp please~
+P 23
+TRIG_VOID
+OPROG_GOD_COMMAND
+mpechoat self {148}You can call upon the Power of Water again.~
+P 24
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 10 1 = 1 25 0
+P 25
+TRIG_VOID
+OPROG_GOD_COMMAND
+mpechoat self {148}You feel water gushing through your soul.~
+P 26
+TRIG_UNKNOWN 100 SHOW-TICK
+OPROG_OBJECT_QUEST_IF 10 1 = 0 27 28
+P 27
+TRIG_VOID
+OPROG_ECHO
+You will now see your ice cube charge.~
+P 27
+TRIG_VOID
+OPROG_QUEST_SET 10 1 1
+P 28
+TRIG_VOID
+OPROG_ECHO
+You will no longer see your ice cube charge.~
+P 28
+TRIG_VOID
+OPROG_QUEST_SET 10 1 0
+#61
+oak leaf~
+a golden oak leaf~
+A golden oak leaf has fallen here.~
+The oak leaf glitters with the warm light of the sun and the cool light of the
+moon.  It carries power from the ancient ones of the primieval forest.  If you
+Listen carefully, you will hear their words.
+~
+ITEM_TYPE_ARMOR
+ITEM_FLAG_GLOW|ITEM_FLAG_MAGIC|ITEM_FLAG_NODROP|ITEM_FLAG_NOREMOVE|ITEM_FLAG_INVENTORY|ITEM_FLAG_AUTO_ENGRAVE
+ITEM_WEAR_TAKE
+0 0 0 0 0 0 0 0
+1 10 10
+A APPLY_MANA 150 0
+A APPLY_AC -25 0
+P 1
+TRIG_WEAR 100
+OPROG_GOD_COMMAND
+echo {128}$I has chosen the path of Gaia!~
+P 2
+TRIG_UNKNOWN 100 listen
+OPROG_GOD_COMMAND
+help GAIAGODCHAINCOMMANDS~
+P 3
+TRIG_TICK 30
+OPROG_OBJECT_QUEST_IF 0 10 = 0 4 5
+P 4
+TRIG_VOID
+OPROG_APPLY OAPPLY_HIT 10
+P 4
+TRIG_VOID
+OPROG_APPLY OAPPLY_MOVE 5
+P 4
+TRIG_VOID
+OPROG_APPLY OAPPLY_MANA 20
+P 5
+TRIG_VOID
+OPROG_QUEST_ADD 0 10 -1
+P 5
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 0 10 = 0 23 24
+P 6
+TRIG_UNKNOWN 100 check-nature
+OPROG_OBJECT_QUEST_IF 0 10 = 0 10 7
+P 7
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 0 10 < 100 11 8
+P 8
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 0 10 < 200 12 9
+P 9
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 0 10 < 300 13 14
+P 10
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of Nature.~
+P 11
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of Nature within 1 hours.~
+P 12
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of Nature within 2 hours.~
+P 13
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of Nature within 3 hours.~
+P 14
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of Nature within 4 hours.~
+P 15
+TRIG_UNKNOWN 100 call-nature
+OPROG_OBJECT_QUEST_IF 0 10 ! 0 16 17
+P 16
+TRIG_VOID
+OPROG_ECHO
+You cannot call upon the power of Nature yet.~
+P 17
+TRIG_VOID
+OPROG_IF OIF_USER_POSITION = POS_SLEEPING 18 19
+P 18
+TRIG_VOID
+OPROG_ECHO
+In your dreams or what?~
+P 19
+TRIG_VOID
+OPROG_GOD_COMMAND
+mpmload 13550
+mpechoat natureRestoreEthereal nature restore please
+~
+P 19
+TRIG_VOID
+OPROG_QUEST_SET 0 10 400
+P 20
+TRIG_UNKNOWN 100 warp
+OPROG_IF OIF_USER_FIGHTING = 1 21 22
+P 21
+TRIG_VOID
+OPROG_ECHO
+No way!  You are still fighting!~
+P 22
+TRIG_VOID
+OPROG_GOD_COMMAND
+mpmload 13551
+mpechoat gaiaWarpEthereal gaia warp please
+~
+P 23
+TRIG_VOID
+OPROG_ECHO
+You can call upon the power of Nature again.
+~
+P 24
+TRIG_VOID
+OPROG_OBJECT_QUEST_IF 10 1 = 1 25 0
+P 25
+TRIG_VOID
+OPROG_ECHO
+{120}Your golden oak leaf rustles gently.
+~
+P 26
+TRIG_UNKNOWN 100 show-tick
+OPROG_OBJECT_QUEST_IF 10 1 = 0 27 28
+P 27
+TRIG_VOID
+OPROG_ECHO
+You will now see your Golden Oak Leaf charge.
+~
+P 27
+TRIG_VOID
+OPROG_QUEST_SET 10 1 1
+P 28
+TRIG_VOID
+OPROG_ECHO
+You will no longer see your Golden Oak Leaf charge.
+~
+P 28
+TRIG_VOID
+OPROG_QUEST_SET 10 1 0
+#0
+
+
+#ROOMS
+#1
+The Void~
+A cozy fire burns merrily in the enormous fireplace that dominates one wall of
+this "void".  Hundreds of books stand in polished bookcases, while maps and
+papers are strewn over a table.  A tall picture window provides a view of both
+day and night, and the Gods can easily peek down to see what the mortals are up
+to.  Several pieces of comfortable furniture are placed in convenient spots, and
+a gentle, beautiful golden retriever is curled up before the fire.
+~
+0 ROOM_INDOORS SECT_INSIDE
+E
+retriever~
+His tail thumps happily against the carpeting as he spots you with his soft,
+brown eyes.
+~
+S
+#2
+Limbo~
+You are floating in a formless void, detached from all sensation of physical
+matter, surrounded by swirling glowing light, which fades into the relative
+darkness around you without any trace of edges or shadow.  You realize that
+there is an exit.
+~
+0 ROOM_INDOORS|ROOM_SAFE|ROOM_NO_RECALL|ROOM_NO_SAVE SECT_INSIDE
+DDIR_NORTH
+~
+~
+0 -1 9755
+S
+#3
+The Junk Room~
+This room is filled with trash.
+{118}          ooooooooooo ooooo oooo   oooo ooooooooooo ooooo oooo   oooo     ooo         ooo
+{118}          88  888  88  888   8888o  88  88  888  88  888   8888o  88      888         888
+{118}              888      888   88 888o88      888      888   88 888o88  oooo888oooo oooo888oooo
+{118}              888      888   88   8888      888      888   88   8888      888         888
+{118}             o888o    o888o o88o    88     o888o    o888o o88o    88      888         888
+
+
+         {138}tintin++v1.90xl.tar
+~
+0 ROOM_INDOORS SECT_INSIDE
+S
+#4
+Totem Room~
+This room and the mob in it are used for the totem spell.
+~
+0 ROOM_NO_MOB|ROOM_NO_RECALL SECT_INSIDE
+S
+#0
+
+
+#RESETS
+M 1 100 2
+M 2 100 1
+M 3 100 3
+M 4 100 4
+S
+
+
+#$
+
+XXXXXXXXXX
+#Savearea
